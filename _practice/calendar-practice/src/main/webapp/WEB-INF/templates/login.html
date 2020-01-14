@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title id="pageTitle">myCalendar - Please Login</title>
+</head>
+<body>
+
+<h3> P.I.D. Login </h3>
+<p th:if="${param.error}">
+    Bad Credentials: ${param.error}
+</p>
+
+<form method="POST" th:action="@{/j_spring_security_check}">
+    User Name : <input name="j_username" type="text"/> <br/><br/>
+    Password: <input name="j_password" type="password"/> <br/><br/>
+    <input type="submit" value="Login"/>
+</form>
+
+</body>
+</html>
