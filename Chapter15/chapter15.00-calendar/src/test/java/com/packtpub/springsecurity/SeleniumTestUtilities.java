@@ -64,8 +64,7 @@ public final class SeleniumTestUtilities {
     }
 
     public static WebDriver getChromeDriver() {
-        String path = "src/test/resources/chromedriver";
-        System.setProperty("webdriver.chrome.driver", path);
+        System.setProperty("webdriver.chrome.driver", "d:/unidocu/chromedriver_79.exe");
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability("networkConnectionEnabled", true);
@@ -75,8 +74,7 @@ public final class SeleniumTestUtilities {
     }
 
     public static WebDriver getChromeDriver(String pathToChromeExecutable) {
-        String path = System.getProperty("user.dir") + "\\Drivers\\chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", path);
+        System.setProperty("webdriver.chrome.driver", "d:/unidocu/chromedriver_79.exe");
 
         Map<String, Object> chromeOptions = new HashMap<String, Object>();
         chromeOptions.put("binary", pathToChromeExecutable);

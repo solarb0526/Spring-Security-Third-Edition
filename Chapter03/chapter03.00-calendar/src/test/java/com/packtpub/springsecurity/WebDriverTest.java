@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -19,8 +20,9 @@ public class WebDriverTest {
 
     @Before
     public void setUp() throws Exception {
-//        driver = new ChromeDriver();
-        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "d:/unidocu/chromedriver_79.exe");
+        driver = new ChromeDriver();
+//        driver = new FirefoxDriver();
         baseUrl = "http://localhost:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
