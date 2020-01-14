@@ -11,7 +11,7 @@
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <p>Chapter 02.04: Below you can find some highlights about myCalendar. Each sample will have a slightly different
+    <p>Chapter 03.00: Below you can find some highlights about myCalendar. Each sample will have a slightly different
         summary depending on what has been done.</p>
     <h2>Expression based authorization</h2>
     <ul>
@@ -20,7 +20,9 @@
         <li>Try typing an invalid username/password and viewing the error message</li>
         <li>Try logging in as an admin and viewing all events. Notice we are able to view all the events</li>
         <li>Try logging in as a regular user and viewing all events (notice we get an access denied)</li>
-        <li>---</li>
+        <li>
+            <hr/>
+        </li>
         <li><a id="eventsLink" th:href="@{events/}">All Events</a> - shows all events for all users, but only allows
             administrators to access the page.
         </li>

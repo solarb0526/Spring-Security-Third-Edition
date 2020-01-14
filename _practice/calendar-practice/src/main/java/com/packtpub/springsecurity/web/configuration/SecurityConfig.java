@@ -17,7 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @see WebSecurityConfigurerAdapter
  */
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory
@@ -69,6 +69,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+
+                // H2 console:
+                .antMatchers("/admin/h2/**").permitAll()
 
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/*").permitAll()
@@ -101,6 +105,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // CSRF is enabled by default, with Java Config
                 .and().csrf().disable()
         ;
+
+//        http.authorizeRequests().antMatchers("/").permitAll()
+//                .and().authorizeRequests().antMatchers("/admin/h2/**").permitAll();
+//        http.csrf().disable();
+
+        http.headers().frameOptions().disable();
     }
 
     /**

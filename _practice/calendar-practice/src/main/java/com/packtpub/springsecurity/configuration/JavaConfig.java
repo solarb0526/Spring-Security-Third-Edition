@@ -1,10 +1,9 @@
 package com.packtpub.springsecurity.configuration;
 
 import com.packtpub.springsecurity.web.configuration.SecurityConfig;
-import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
-import org.springframework.context.annotation.*;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import java.io.IOException;
 
@@ -17,17 +16,16 @@ import java.io.IOException;
                 "com.packtpub.springsecurity.service"
         }
 )
-@PropertySource(value = {"classpath:application.properties"})
+//@PropertySource(value = {"classpath:application.properties"})
 public class JavaConfig {
 
     /**
      * Note: If you want to use @PropertySource, you must create a static
      * PropertySourcesPlaceholderConfigurer with the @Bean as seen here.
-     *
      * @return PropertySourcesPlaceholderConfigurer
-     * @throws java.io.IOException
+     * @throws IOException
      */
-    @Bean
+    /*@Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() throws IOException {
         PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
         propertySourcesPlaceholderConfigurer.setIgnoreUnresolvablePlaceholders(Boolean.TRUE);
@@ -40,5 +38,5 @@ public class JavaConfig {
         YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
         yaml.setResources(new ClassPathResource("application.yml"));
         return yaml;
-    }
+    }*/
 } // The end...
