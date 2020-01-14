@@ -14,7 +14,7 @@ buildscript {
 
 apply plugin: 'org.springframework.boot'
 
-// Spring Security 4, for chapter 3, version 0
+// Spring Security 4, for chapter 3, version 3
 version = '4.3.3-SNAPSHOT'
 
 

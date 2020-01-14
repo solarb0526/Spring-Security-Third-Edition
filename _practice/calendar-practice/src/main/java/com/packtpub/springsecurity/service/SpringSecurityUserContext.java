@@ -19,12 +19,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SpringSecurityUserContext implements UserContext {
-
     private final CalendarService calendarService;
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SpringSecurityUserContext(CalendarService calendarService, UserDetailsService userDetailsService) {
+    public SpringSecurityUserContext(final CalendarService calendarService,
+                                     final UserDetailsService userDetailsService) {
         if (calendarService == null) {
             throw new IllegalArgumentException("calendarService cannot be null");
         }
@@ -51,7 +51,6 @@ public class SpringSecurityUserContext implements UserContext {
         User user = (User) authentication.getPrincipal();
         String email = user.getUsername();
 //        String email = user.getEmail();
-
         if (email == null) {
             return null;
         }
