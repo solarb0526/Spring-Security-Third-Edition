@@ -16,7 +16,6 @@ import java.util.List;
  */
 @Repository
 public class DefaultCalendarService implements CalendarService {
-
     private final EventDao eventDao;
     private final CalendarUserDao userDao;
 

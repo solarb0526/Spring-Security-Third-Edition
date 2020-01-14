@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         <tr th:if="${events.empty}">
-            <td class="msg" colspan="4">No events.</td>
+            <td class="msg" colspan="2">No events.</td>
         </tr>
         <tr th:each="event : ${events}">
 

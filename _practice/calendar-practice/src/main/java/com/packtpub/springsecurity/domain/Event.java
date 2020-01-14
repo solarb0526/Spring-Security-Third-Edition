@@ -1,6 +1,5 @@
 package com.packtpub.springsecurity.domain;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,6 @@ import java.util.Calendar;
  * @author Rob Winch
  */
 public class Event {
-
     private Integer id;
     @NotEmpty(message = "Summary is required")
     private String summary;
@@ -51,7 +49,6 @@ public class Event {
     public void setSummary(String summary) {
         this.summary = summary;
     }
-
 
     /**
      * The detailed description of the event.
@@ -110,7 +107,6 @@ public class Event {
 
     @Override
     public int hashCode() {
-        //return HashCodeBuilder.reflectionHashCode(this);
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -119,7 +115,6 @@ public class Event {
 
     @Override
     public boolean equals(Object obj) {
-        //return EqualsBuilder.reflectionEquals(this, obj);
         if (this == obj)
             return true;
         if (obj == null)
@@ -134,10 +129,4 @@ public class Event {
             return false;
         return true;
     }
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this);
-    }
-
-} // The End...
+}

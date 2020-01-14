@@ -87,9 +87,7 @@ dependencies {
     // Selenium / WebDriver
     testCompile "org.seleniumhq.selenium:selenium-api"
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver"
-    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.141.59'
-
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver"
     testCompile "org.seleniumhq.selenium:selenium-java"
     testCompile "org.seleniumhq.selenium:selenium-support"
 

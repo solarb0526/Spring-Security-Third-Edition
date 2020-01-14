@@ -7,12 +7,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,19 +50,20 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      * how to secure the service tier which helps mitigate bypassing of the URL based security too.
      */
     // FIXME: FInd out what this is and why it is here.
-//    @Bean
-//    @Override
-//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-//        RequestMappingHandlerMapping result = super.requestMappingHandlerMapping();
-//        result.setUseSuffixPatternMatch(false);
-//        result.setUseTrailingSlashMatch(false);
-//        return result;
-//    }
+    @Bean
+    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+        RequestMappingHandlerMapping result = new RequestMappingHandlerMapping();
+        result.setUseSuffixPatternMatch(false);
+        result.setUseTrailingSlashMatch(false);
+        return result;
+    }
+
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/")
-                .setCachePeriod(0) //Set to 0 in order to send cache headers that prevent caching
+                .setCachePeriod(31_556_926)
         ;
     }
 
@@ -75,9 +80,27 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                                 put("xml", MediaType.APPLICATION_XML);
                                 put("json", MediaType.APPLICATION_JSON);
                             }
-                        });
+                        })
+        ;
     }
 
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(new MappingJackson2HttpMessageConverter());
+    }
+
+    /*@Bean
+    public ContentNegotiatingViewResolver contentNegotiatingViewResolver() {
+
+        ContentNegotiatingViewResolver result = new ContentNegotiatingViewResolver();
+        Map<String, String> mediaTypes = new HashMap<>();
+        mediaTypes.put("json", MediaType.APPLICATION_JSON_VALUE);
+//        result.setMediaTypes(mediaTypes);
+
+        result.setDefaultViews(Collections.singletonList(jacksonView()));
+
+        return result;
+    }*/
 
     @Bean
     public MappingJackson2JsonView jacksonView() {

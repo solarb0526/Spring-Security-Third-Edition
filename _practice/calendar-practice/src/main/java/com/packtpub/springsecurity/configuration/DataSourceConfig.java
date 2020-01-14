@@ -28,7 +28,8 @@ import java.sql.SQLException;
 @EnableTransactionManagement
 public class DataSourceConfig {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory
+            .getLogger(DataSourceConfig.class);
 
     private EmbeddedDatabase database = null;
 
@@ -111,23 +112,8 @@ public class DataSourceConfig {
     @PreDestroy()
     public void dataSourceDestroy() throws SQLException {
 
-        SQLException sqlException = null;
-
-        try {
-            applicationContext.getBean(DataSource.class)
-                    .getConnection()
-                    .close();
-        } catch (SQLException e) {
-            sqlException = e;
-            e.printStackTrace();
-        }
-
         if (database != null) {
             database.shutdown();
-        }
-
-        if (sqlException != null) {
-            throw sqlException;
         }
     }
 

@@ -1,8 +1,8 @@
 package com.packtpub.springsecurity.web.configuration;
 
+import com.packtpub.springsecurity.configuration.DataSourceConfig;
 import com.packtpub.springsecurity.configuration.JavaConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.packtpub.springsecurity.configuration.SecurityConfig;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -11,20 +11,23 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 /**
- * Replaces web.xml.txt in Servlet v.3.0+
+ * Replaces web.xml in Servlet v.3.0+
+ * This class replaces the web.xml in Servlet v3.0+
+ * with a {@link javax.servlet.ServletContainerInitializer},
+ * which is the preferred approach to Servlet v3.0+ initialization.
+ * <p>
+ * Spring Mvc provides {@link WebApplicationInitializer} interface leverage this mechanism.
+ * In Spring Mvc the preferred approach is to extend
+ * {@link AbstractAnnotationConfigDispatcherServletInitializer}
  *
  * @see
  */
 public class WebAppInitializer
-        extends AbstractAnnotationConfigDispatcherServletInitializer
-        implements WebApplicationInitializer {
-
-    private static final Logger logger = LoggerFactory
-            .getLogger(WebAppInitializer.class);
+        extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{JavaConfig.class};
+        return new Class[]{JavaConfig.class, SecurityConfig.class, DataSourceConfig.class};
     }
 
     @Override
@@ -34,7 +37,7 @@ public class WebAppInitializer
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"}; // or *.html
+        return new String[]{"/*"};
     }
 
     @Override
@@ -46,7 +49,7 @@ public class WebAppInitializer
 
         // Register H2 Admin console:
         ServletRegistration.Dynamic h2WebServlet = servletContext.addServlet("h2WebServlet",
-                new org.h2.server.web.WebServlet());
+                "org.h2.server.web.WebServlet");
         h2WebServlet.addMapping("/admin/h2/*");
         h2WebServlet.setInitParameter("webAllowOthers", "true");
 

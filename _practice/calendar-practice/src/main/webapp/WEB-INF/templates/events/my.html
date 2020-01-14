@@ -28,14 +28,14 @@
         </thead>
         <tbody>
         <tr th:if="${events.empty}">
-            <td class="msg" colspan="4">No events.</td>
+            <td class="msg" colspan="2">No events.</td>
         </tr>
         <tr th:each="event : ${events}">
 
             <td th:text="${#calendars.format(event.when, 'yyyy-MM-dd HH:mm')}">today</td>
             <td th:text="${event.owner.name}">Chuck Norris</td>
             <td th:text="${event.attendee.name}">Mick Knutson</td>
-            s
+
             <td><a th:href="@{'/events/{id}'(id=${event.id})}" th:text="${event.summary}">-1</a></td>
         </tr>
         </tbody>

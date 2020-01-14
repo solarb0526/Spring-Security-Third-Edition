@@ -1,14 +1,1 @@
-#------------------------------------------------------------------------------#
-# Application YAML #
-# inside ./src/main/resources/application.yml
-#------------------------------------------------------------------------------#
-
-spring:
-  ## Thymeleaf configuration:
-  thymeleaf:
-    cache: false
-    mode: HTML5
-  resources:
-    cache-period: 0
-
-##---------------------------------------------------------------------------##
+spring.thymeleaf.cache: false

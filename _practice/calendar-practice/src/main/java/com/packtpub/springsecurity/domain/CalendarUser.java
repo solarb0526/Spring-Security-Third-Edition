@@ -1,9 +1,8 @@
 package com.packtpub.springsecurity.domain;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.io.Serializable;
-import java.security.Principal;
 
 /**
  * {@link CalendarUser} is this applications notion of a user. It is good to use your own objects to interact with a
@@ -12,8 +11,7 @@ import java.security.Principal;
  *
  * @author Rob Winch
  */
-public class CalendarUser implements Principal, Serializable {
-
+public class CalendarUser implements Serializable {
     private static final long serialVersionUID = 8433999509932007961L;
     private Integer id;
     private String firstName;
@@ -80,11 +78,10 @@ public class CalendarUser implements Principal, Serializable {
      *
      * @return
      */
-    @com.fasterxml.jackson.annotation.JsonIgnore
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
-
 
     // --- convenience methods ---
 
@@ -100,14 +97,13 @@ public class CalendarUser implements Principal, Serializable {
      *
      * @return
      */
-    @com.fasterxml.jackson.annotation.JsonIgnore
+    @JsonIgnore
     public String getName() {
-        return getEmail();
+        return getLastName() + ", " + getFirstName();
     }
 
     @Override
     public int hashCode() {
-        //return HashCodeBuilder.reflectionHashCode(this);
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -116,7 +112,6 @@ public class CalendarUser implements Principal, Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        //return EqualsBuilder.reflectionEquals(this, obj);
         if (this == obj)
             return true;
         if (obj == null)
@@ -131,10 +126,4 @@ public class CalendarUser implements Principal, Serializable {
             return false;
         return true;
     }
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this);
-    }
-
-} // The End...
+}
