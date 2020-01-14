@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="container">
 
@@ -17,7 +17,7 @@
                         <li><a id="navCreateEventLink" th:href="@{/events/form}">Create Event</a></li>
                         <li><a id="navH2Link" target="_blank" th:href="@{/admin/h2}">H2</a></li>
                     </ul>
-                    <ul class="nav navbar-nav pull-right">
+                    <ul class="nav navbar-nav pull-right" sec:authorize="isAuthenticated()">
                         <li><a id="navLogoutLink" th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </div>

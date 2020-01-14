@@ -67,15 +67,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-
         http.authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/").hasAnyRole("ANONYMOUS", "USER")
-                .antMatchers("/login/*").hasAnyRole("ANONYMOUS", "USER")
-                .antMatchers("/logout/*").hasAnyRole("ANONYMOUS", "USER")
+
+                .antMatchers("/").permitAll()
+                .antMatchers("/login/*").permitAll()
+                .antMatchers("/logout/*").permitAll()
+                .antMatchers("/errors/**").permitAll()
                 .antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/events/").hasRole("ADMIN")
                 .antMatchers("/**").hasRole("USER")
+
+                .and().exceptionHandling().accessDeniedPage("/errors/403")
 
                 .and().formLogin()
                 .loginPage("/login/form")
@@ -84,12 +87,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()
+
                 .and().logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login/form?logout")
                 .permitAll()
+
                 .and().httpBasic()
+
                 .and().anonymous()
+
                 // CSRF is enabled by default, with Java Config
                 .and().csrf().disable()
         ;

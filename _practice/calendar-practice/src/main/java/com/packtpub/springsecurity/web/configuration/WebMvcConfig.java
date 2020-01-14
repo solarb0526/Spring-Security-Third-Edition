@@ -126,6 +126,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
         registry.addViewController("/login/form")
                 .setViewName("login");
+        registry.addViewController("/errors/403")
+                .setViewName("/errors/403");
+
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 

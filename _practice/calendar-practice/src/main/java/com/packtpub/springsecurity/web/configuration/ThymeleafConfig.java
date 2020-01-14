@@ -19,7 +19,7 @@ public class ThymeleafConfig {
         ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
         resolver.setPrefix("/WEB-INF/templates/");
         resolver.setSuffix(".html");
-//        resolver.setTemplateMode("HTML5");
+        resolver.setTemplateMode("HTML5");
         resolver.setCacheable(false);
         resolver.setOrder(1);
         return resolver;
