@@ -41,9 +41,10 @@ public class OAuth2ClientTest {
     }
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
 
-//    @Test
+    //    @Test
     public void testConnectDirectlyToResourceServer() throws Exception {
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
         resource.setAccessTokenUri(tokenUrl);
@@ -58,9 +59,9 @@ public class OAuth2ClientTest {
         resource.setUsername("user1@example.com");
         resource.setPassword("user1");
         OAuth2RestTemplate template = new OAuth2RestTemplate(resource);
-        logger.info(" CALLING: " + baseUrl+"/api");
+        logger.info(" CALLING: " + baseUrl + "/api");
 
-        String result = template.getForObject(baseUrl+"/api", String.class);
+        String result = template.getForObject(baseUrl + "/api", String.class);
 
         System.err.println(result);
         assertEquals("Hello, Trusted User marissa", result);

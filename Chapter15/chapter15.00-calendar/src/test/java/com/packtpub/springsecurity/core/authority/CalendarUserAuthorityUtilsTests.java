@@ -15,8 +15,8 @@ import java.util.Collection;
 @SpringBootTest
 public class CalendarUserAuthorityUtilsTests {
 
-	@Test
-	public void createAuthorities_User() {
+    @Test
+    public void createAuthorities_User() {
         Collection<? extends GrantedAuthority> roles =
                 CalendarUserAuthorityUtils.createAuthorities(CalendarStubs.user1());
 
@@ -28,8 +28,8 @@ public class CalendarUserAuthorityUtilsTests {
 //                        new SimpleGrantedAuthority("USER_ROLE")));
     }
 
-	@Test
-	public void validateUser_Admin() {
+    @Test
+    public void validateUser_Admin() {
         Collection<? extends GrantedAuthority> roles =
                 CalendarUserAuthorityUtils.createAuthorities(CalendarStubs.admin1());
 

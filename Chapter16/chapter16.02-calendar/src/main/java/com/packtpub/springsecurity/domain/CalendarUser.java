@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.security.Principal;
 import java.util.Set;
@@ -17,28 +16,25 @@ import java.util.Set;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Entity
 @Table(name = "calendar_users")
 public class CalendarUser implements Principal, Serializable {
 
+    private static final long serialVersionUID = 8433999509932007961L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-
     @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
 
     /**
      * Gets the email address for this user. When authenticating against this data directly, this is also used as the
@@ -49,6 +45,7 @@ public class CalendarUser implements Principal, Serializable {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -61,6 +58,7 @@ public class CalendarUser implements Principal, Serializable {
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -73,6 +71,7 @@ public class CalendarUser implements Principal, Serializable {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -85,6 +84,7 @@ public class CalendarUser implements Principal, Serializable {
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -99,26 +99,28 @@ public class CalendarUser implements Principal, Serializable {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
      * Get the list of Roles for this CalendarUser
+     *
      * @return
      */
     public Set<Role> getRoles() {
         return roles;
     }
+
+
+    // --- convenience methods ---
+
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-
-
-
-
-    // --- convenience methods ---
+    // --- override Object ---
 
     /**
      * Gets the full name in a formatted fashion. Note in a real application a formatter may be more appropriate, but in
@@ -131,8 +133,6 @@ public class CalendarUser implements Principal, Serializable {
 //
         return getEmail();
     }
-
-    // --- override Object ---
 
     @Override
     public int hashCode() {
@@ -160,8 +160,6 @@ public class CalendarUser implements Principal, Serializable {
             return false;
         return true;
     }
-
-    private static final long serialVersionUID = 8433999509932007961L;
 
     @Override
     public String toString() {

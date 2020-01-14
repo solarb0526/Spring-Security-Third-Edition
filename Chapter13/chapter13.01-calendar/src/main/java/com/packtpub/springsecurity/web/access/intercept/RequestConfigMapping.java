@@ -1,11 +1,11 @@
 package com.packtpub.springsecurity.web.access.intercept;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
+
+import java.util.Collection;
+import java.util.Collections;
 
 public final class RequestConfigMapping {
 

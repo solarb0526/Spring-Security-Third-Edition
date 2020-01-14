@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
 
-@SpringBootApplication(scanBasePackages={
+@SpringBootApplication(scanBasePackages = {
         "com.packtpub.springsecurity",
         "com.packtpub.springsecurity.configuration",
         "com.packtpub.springsecurity.domain",
@@ -23,14 +23,14 @@ import java.util.Arrays;
 @EntityScan("com.packtpub.springsecurity.domain")
 public class CalendarApplication extends SpringBootServletInitializer {
 
+    public static void main(String[] args) {
+        SpringApplication.run(CalendarApplication.class, args);
+    }
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(CalendarApplication.class);
     }
-
-	public static void main(String[] args) {
-		SpringApplication.run(CalendarApplication.class, args);
-	}
 
     @Profile("trace")
     @Bean

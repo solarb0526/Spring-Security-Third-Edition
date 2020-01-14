@@ -8,9 +8,9 @@ spring:
   profiles:
     active: default
 
-#  resource:
-#    chain:
-#      enabled: true
+  #  resource:
+  #    chain:
+  #      enabled: true
 
   ##---------------------------------------------------------------------------##
   ## H2 Servlet setting
@@ -44,8 +44,8 @@ spring:
               create-target: build/create.sql
 
 
-##---------------------------------------------------------------------------##
-# OAuth2 Configuration:
+      ##---------------------------------------------------------------------------##
+      # OAuth2 Configuration:
       # Basic Authentication credentials
 #      clientId: oauthClient1
 #      clientSecret: oauthClient1Password

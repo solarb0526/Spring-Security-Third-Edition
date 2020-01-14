@@ -6,12 +6,12 @@
 
 spring:
   profiles:
-#    active: TLS
+    #    active: TLS
     active: default
 
-#  resource:
-#    chain:
-#      enabled: true
+  #  resource:
+  #    chain:
+  #      enabled: true
 
   ##---------------------------------------------------------------------------##
   ## H2 Servlet setting
@@ -54,8 +54,8 @@ security:
       clientId: ${OAUTH_CLIENT_ID:oauthClient1}
       clientSecret: ${OAUTH_CLIENT_SECRET:oauthClient1Password}
 
-#      accessTokenUri: https://github.com/login/oauth/access_token
-#      userAuthorizationUri: https://github.com/login/oauth/authorize
+      #      accessTokenUri: https://github.com/login/oauth/access_token
+      #      userAuthorizationUri: https://github.com/login/oauth/authorize
 
       authorizedGrantTypes: password,refresh_token
       scope: openid

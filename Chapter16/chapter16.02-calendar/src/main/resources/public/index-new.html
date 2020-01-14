@@ -33,7 +33,7 @@ http://user1:changeme@localhost:9999/api
             "url": "http://localhost:8080/oauth/token",
             "method": "POST",
             "headers": {
-            //     "Authorization": "Basic dXNlcjFAZXhhbXBsZS5jb206dXNlcjE=",
+                //     "Authorization": "Basic dXNlcjFAZXhhbXBsZS5jb206dXNlcjE=",
                 "Authorization": "Basic " + btoa("user1@example.com:user1"),
                 // "Access-Control-Request-Method": "OPTIONS",
                 "cache-control": "no-cache"
@@ -43,7 +43,6 @@ http://user1:changeme@localhost:9999/api
             "mimeType": "multipart/form-data",
             "data": form
         };
-
 
 
         /*$(document).ready(function(){
@@ -91,7 +90,7 @@ http://user1:changeme@localhost:9999/api
         });*/
 
 
-        function oauth (uri, method, json) {
+        function oauth(uri, method, json) {
             return $.ajax({
                 url: orgProps.serverOrigin + ensurePrecedingSlash(uri),
                 type: method,
@@ -123,17 +122,18 @@ http://user1:changeme@localhost:9999/api
                     var token = jqXHR.getResponseHeader("Authorization");
                     jwt.storeToken(token);
                 });
+
         // });
 
     </script>
 
 </head>
 <body>
-    <h1>NEW Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication)</h1>
-    <div id = "resourceServerFeed">
-        <p class="message"><b>Application Message Returned:</b> </p>
-    </div>
+<h1>NEW Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication)</h1>
+<div id="resourceServerFeed">
+    <p class="message"><b>Application Message Returned:</b></p>
+</div>
 
-    <h2><a href="index.html">Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication) example</a></h2>
+<h2><a href="index.html">Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication) example</a></h2>
 </body>
 </html>

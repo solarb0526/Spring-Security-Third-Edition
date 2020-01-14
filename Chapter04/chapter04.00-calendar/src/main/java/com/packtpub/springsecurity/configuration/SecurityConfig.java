@@ -10,13 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 
 /**
  * Spring Security Config Class
+ *
  * @see {@link WebSecurityConfigurerAdapter}
  * @since chapter03.00
  */
@@ -29,23 +29,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Configure AuthenticationManager with inMemory credentials.
-     *
+     * <p>
      * NOTE:
      * Due to a known limitation with JavaConfig:
      * <a href="https://jira.spring.io/browse/SPR-13779">
-     *     https://jira.spring.io/browse/SPR-13779</a>
-     *
+     * https://jira.spring.io/browse/SPR-13779</a>
+     * <p>
      * We cannot use the following to expose a {@link UserDetailsManager}
      * <pre>
      *     http.authorizeRequests()
      * </pre>
-     *
+     * <p>
      * In order to expose {@link UserDetailsManager} as a bean, we must create  @Bean
      *
-     * @see {userDetailsService()}
-     *
-     * @param auth       AuthenticationManagerBuilder
+     * @param auth AuthenticationManagerBuilder
      * @throws Exception Authentication exception
+     * @see {userDetailsService()}
      */
     @Override
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -81,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *      <logout />
      *  </http>
      * </pre>
-     *
+     * <p>
      * Which is equivalent to the following JavaConfig:
      *
      * <pre>
@@ -92,9 +91,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *
      * @param http HttpSecurity configuration.
      * @throws Exception Authentication configuration exception
-     *
      * @see <a href="http://docs.spring.io/spring-security/site/migrate/current/3-to-4/html5/migrate-3-to-4-jc.html">
-     *     Spring Security 3 to 4 migration</a>
+     * Spring Security 3 to 4 migration</a>
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {

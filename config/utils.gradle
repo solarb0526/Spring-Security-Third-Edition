@@ -6,7 +6,7 @@
 /**
  * TODO: Need to finish
  */
-task scrub(type:Exec){
+task scrub(type: Exec) {
 
 //    dependsOn build
 //    doLast {  // or doFirst depending on the behaviour you want
@@ -55,7 +55,6 @@ rm -rf $HOME/.gradle/daemon/
     }
 
 
-
 //    workingDir "../tomcat/bin"
 //
 //    //on windows:
@@ -78,10 +77,8 @@ rm -rf $HOME/.gradle/daemon/
 //check.dependsOn projectReport
 
 
-
-
 //task hello( type: Copy ) {
-        // Taking the output from another task:
+// Taking the output from another task:
 //    from( tasks.jar )
 //    into( new File( buildDir, "${name}Outputs" ) )  // copies into build/helloOutputs
 //}
@@ -100,14 +97,14 @@ def myCopySpec = project.copySpec {
 //DuplicatesStrategy.INCLUDE
 //specPropertyName + ".duplicatesStrategy"
 
-task exportIdea( type: Copy ) {
+task exportIdea(type: Copy) {
     //./config/idea/runConfigurations
-    from( "${project.rootDir}/.idea/runConfigurations" )
-    into( "${project.rootDir}/config/idea/runConfigurations" )
+    from("${project.rootDir}/.idea/runConfigurations")
+    into("${project.rootDir}/config/idea/runConfigurations")
 }
 
-task restoreIdeaConfig( type: Copy ) {
+task restoreIdeaConfig(type: Copy) {
     //./config/idea/runConfigurations
-    from( "${project.rootDir}/config/idea/runConfigurations" )
-    into( "${project.rootDir}/.idea/runConfigurations" )
+    from("${project.rootDir}/config/idea/runConfigurations")
+    into("${project.rootDir}/.idea/runConfigurations")
 }

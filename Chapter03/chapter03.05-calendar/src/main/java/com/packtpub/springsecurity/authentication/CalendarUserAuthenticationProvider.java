@@ -1,7 +1,9 @@
 package com.packtpub.springsecurity.authentication;
 
-import java.util.Collection;
-
+import com.packtpub.springsecurity.core.authority.CalendarUserAuthorityUtils;
+import com.packtpub.springsecurity.domain.CalendarUser;
+import com.packtpub.springsecurity.service.CalendarService;
+import com.packtpub.springsecurity.userdetails.CalendarUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,10 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.packtpub.springsecurity.core.authority.CalendarUserAuthorityUtils;
-import com.packtpub.springsecurity.userdetails.CalendarUserDetailsService;
-import com.packtpub.springsecurity.domain.CalendarUser;
-import com.packtpub.springsecurity.service.CalendarService;
+import java.util.Collection;
 
 /**
  * A Spring Security {@link AuthenticationProvider} that uses our {@link CalendarService} for authentication. Compare
@@ -42,11 +41,11 @@ public class CalendarUserAuthenticationProvider implements AuthenticationProvide
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         String email = token.getName();
         CalendarUser user = email == null ? null : calendarService.findUserByEmail(email);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username/password");
         }
         String password = user.getPassword();
-        if(!password.equals(token.getCredentials())) {
+        if (!password.equals(token.getCredentials())) {
             throw new BadCredentialsException("Invalid username/password");
         }
         Collection<? extends GrantedAuthority> authorities = CalendarUserAuthorityUtils.createAuthorities(user);

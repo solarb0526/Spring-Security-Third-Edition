@@ -3,7 +3,6 @@ package com.packtpub.springsecurity.domain;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -15,11 +14,10 @@ import java.util.Calendar;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Entity
 @Table(name = "events")
-public class Event implements Serializable{
+public class Event implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,10 +32,10 @@ public class Event implements Serializable{
 
     @NotNull(message = "Owner is required")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="owner", referencedColumnName="id")
+    @JoinColumn(name = "owner", referencedColumnName = "id")
     private CalendarUser owner;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="attendee", referencedColumnName="id")
+    @JoinColumn(name = "attendee", referencedColumnName = "id")
     private CalendarUser attendee;
 
     /**
@@ -48,17 +46,20 @@ public class Event implements Serializable{
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
      * The summary of the event.
+     *
      * @return
      */
     public String getSummary() {
         return summary;
     }
+
     public void setSummary(String summary) {
         this.summary = summary;
     }
@@ -66,44 +67,52 @@ public class Event implements Serializable{
 
     /**
      * The detailed description of the event.
+     *
      * @return
      */
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
      * When this event is happening.
+     *
      * @return
      */
     public Calendar getWhen() {
         return when;
     }
+
     public void setWhen(Calendar when) {
         this.when = when;
     }
 
     /**
      * The owner (who created the Event)
+     *
      * @return
      */
     public CalendarUser getOwner() {
         return owner;
     }
+
     public void setOwner(CalendarUser owner) {
         this.owner = owner;
     }
 
     /**
      * The user that was invited to the event.
+     *
      * @return
      */
     public CalendarUser getAttendee() {
         return attendee;
     }
+
     public void setAttendee(CalendarUser attendee) {
         this.attendee = attendee;
     }

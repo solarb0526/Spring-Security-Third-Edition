@@ -12,26 +12,26 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
-#        environment:
-#          _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
-#          TEST_REPORTS: /tmp/test-reports
-#          BASE_DIR: "./"
-          # Turn off Gradle Daemon
-#          GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError" -Dorg.gradle.daemon="false" -Dorg.gradle.parallel="false" -Dorg.gradle.configureondemand="false"'
+          #        environment:
+          #          _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
+          #          TEST_REPORTS: /tmp/test-reports
+          #          BASE_DIR: "./"
+        # Turn off Gradle Daemon
+    #          GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError" -Dorg.gradle.daemon="false" -Dorg.gradle.parallel="false" -Dorg.gradle.configureondemand="false"'
 
     environment:
       _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
       BASE_DIR: "./"
       # Turn off Gradle Daemon
-#      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError" -Dorg.gradle.daemon="false" -Dorg.gradle.parallel="false" -Dorg.gradle.configureondemand="false"'
+    #      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError" -Dorg.gradle.daemon="false" -Dorg.gradle.parallel="false" -Dorg.gradle.configureondemand="false"'
 
     parallelism: 3
-#    resource_class: large
+    #    resource_class: large
     working_directory: ~/tmp/workspace
 
-##---------------------------------------------------------------------------##
-## Gradle Steps
-##---------------------------------------------------------------------------##
+    ##---------------------------------------------------------------------------##
+    ## Gradle Steps
+    ##---------------------------------------------------------------------------##
     steps:
 
       - checkout
@@ -50,9 +50,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run:
           name: Downloading Dependencies
@@ -68,8 +68,8 @@ jobs:
           name: run test, check, coverage reports and be quick about it!!! (but scan build)
           command: ./gradlew check -Pfast -Dscan
 
-#      # run check and coverage reports only
-#      - run: ./gradlew check -Pfast
+      #      # run check and coverage reports only
+      #      - run: ./gradlew check -Pfast
 
       - run:
           name: Saving test results

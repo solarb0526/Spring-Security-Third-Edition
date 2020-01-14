@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
-@SpringBootApplication(scanBasePackages={
+@SpringBootApplication(scanBasePackages = {
         "com.packtpub.springsecurity",
         "com.packtpub.springsecurity.configuration",
         "com.packtpub.springsecurity.domain",
@@ -28,16 +28,16 @@ public class CalendarApplication extends SpringBootServletInitializer {
     private static final Logger logger = LoggerFactory
             .getLogger(CalendarApplication.class);
 
+    public static void main(String[] args) {
+        SpringApplication.run(CalendarApplication.class, args);
+    }
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(CalendarApplication.class);
     }
 
-	public static void main(String[] args) {
-		SpringApplication.run(CalendarApplication.class, args);
-	}
-
-	//TODO: Find out how to use debug=true property to control this:
+    //TODO: Find out how to use debug=true property to control this:
 //    @Profile("trace")
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
@@ -48,7 +48,7 @@ public class CalendarApplication extends SpringBootServletInitializer {
             System.out.println("********************************************");
             // TODO: FIXME: Logger level not working
             logger.debug("**************************************************");
-            System.out.println("Listing the "+beanNames.length+" beans loaded by Spring Boot:");
+            System.out.println("Listing the " + beanNames.length + " beans loaded by Spring Boot:");
 //            logger.debug("Listing the {} beans loaded by Spring Boot:", beanNames.length);
 
             Arrays.stream(beanNames)

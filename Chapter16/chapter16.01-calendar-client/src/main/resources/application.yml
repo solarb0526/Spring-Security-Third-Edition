@@ -8,9 +8,9 @@ spring:
   profiles:
     active: default
 
-#  resource:
-#    chain:
-#      enabled: true
+  #  resource:
+  #    chain:
+  #      enabled: true
 
   ##---------------------------------------------------------------------------##
   ## H2 Servlet setting

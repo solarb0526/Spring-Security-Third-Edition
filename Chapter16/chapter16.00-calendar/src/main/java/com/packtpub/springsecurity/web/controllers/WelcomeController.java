@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
  * This displays the welcome screen that shows what will be happening in this chapter.
  *
  * @author Rob Winch
- *
  */
 @RestController
 public class WelcomeController {

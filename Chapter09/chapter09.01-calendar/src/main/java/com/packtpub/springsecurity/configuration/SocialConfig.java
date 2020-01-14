@@ -25,6 +25,10 @@ public class SocialConfig {
 
     @Autowired
     private ConnectionFactoryLocator connectionFactoryLocator;
+    @Autowired
+    private UsersConnectionRepository usersConnectionRepository;
+    @Autowired
+    private ProviderConnectionSignup providerConnectionSignup;
 
     /**
      * Defines callback methods to customize Java-based configuration enabled by {@code @EnableWebMvc}.
@@ -39,16 +43,11 @@ public class SocialConfig {
         return new DatabaseSocialConfigurer(dataSource);
     }
 
-    @Autowired
-    private UsersConnectionRepository usersConnectionRepository;
-
-    @Autowired
-    private ProviderConnectionSignup providerConnectionSignup;
-
     /**
      * create a custom authenticate utility method to create an
      * Authentication objet and add it to our SecurityContext based on
      * the returned provider details.
+     *
      * @return
      */
     @Bean
@@ -63,6 +62,7 @@ public class SocialConfig {
      * Configuring a {@link ProviderSignInController} to intercept OAuth2
      * requests that will be used to initiate an OAuth2 handshake with the specified
      * OAuth2 provider.
+     *
      * @return
      */
     @Bean

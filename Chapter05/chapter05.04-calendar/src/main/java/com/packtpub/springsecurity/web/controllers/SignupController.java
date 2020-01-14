@@ -1,8 +1,9 @@
 package com.packtpub.springsecurity.web.controllers;
 
-import javax.validation.Valid;
-
-import com.packtpub.springsecurity.service.SpringSecurityUserContext;
+import com.packtpub.springsecurity.domain.CalendarUser;
+import com.packtpub.springsecurity.service.CalendarService;
+import com.packtpub.springsecurity.service.UserContext;
+import com.packtpub.springsecurity.web.model.SignupForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.packtpub.springsecurity.domain.CalendarUser;
-import com.packtpub.springsecurity.service.CalendarService;
-import com.packtpub.springsecurity.service.UserContext;
-import com.packtpub.springsecurity.web.model.SignupForm;
+import javax.validation.Valid;
 
 @Controller
 public class SignupController {
@@ -44,14 +42,14 @@ public class SignupController {
         return "signup/form";
     }
 
-    @RequestMapping(value="/signup/new",method=RequestMethod.POST)
+    @RequestMapping(value = "/signup/new", method = RequestMethod.POST)
     public String signup(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return "signup/form";
         }
 
         String email = signupForm.getEmail();
-        if(calendarService.findUserByEmail(email) != null) {
+        if (calendarService.findUserByEmail(email) != null) {
             result.rejectValue("email", "errors.signup.email", "Email address is already in use.");
             return "signup/form";
         }

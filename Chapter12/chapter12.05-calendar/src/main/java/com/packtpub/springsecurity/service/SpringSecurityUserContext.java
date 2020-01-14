@@ -1,7 +1,7 @@
 package com.packtpub.springsecurity.service;
 
-import java.util.Collection;
-
+import com.packtpub.springsecurity.core.authority.CalendarUserAuthorityUtils;
+import com.packtpub.springsecurity.domain.CalendarUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,15 +9,13 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.packtpub.springsecurity.core.authority.CalendarUserAuthorityUtils;
-import com.packtpub.springsecurity.domain.CalendarUser;
+import java.util.Collection;
 
 /**
  * An implementation of {@link UserContext} that looks up the {@link CalendarUser} using the Spring Security's
  * {@link Authentication} by principal name.
  *
  * @author Rob Winch
- *
  */
 @Component
 public class SpringSecurityUserContext implements UserContext {
@@ -44,7 +42,7 @@ public class SpringSecurityUserContext implements UserContext {
         }
         Collection<? extends GrantedAuthority> authorities = CalendarUserAuthorityUtils.createAuthorities(user);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,
-                user.getPassword(),authorities);
+                user.getPassword(), authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

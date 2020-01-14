@@ -1,10 +1,8 @@
 package com.packtpub.springsecurity.domain;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- *
  * @author Mick Knutson
  */
 @Entity
@@ -22,6 +20,7 @@ public class SecurityFilterMetadata implements Serializable {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -29,6 +28,7 @@ public class SecurityFilterMetadata implements Serializable {
     public String getAntPattern() {
         return antPattern;
     }
+
     public void setAntPattern(String antPattern) {
         this.antPattern = antPattern;
     }
@@ -36,6 +36,7 @@ public class SecurityFilterMetadata implements Serializable {
     public String getExpression() {
         return expression;
     }
+
     public void setExpression(String expression) {
         this.expression = expression;
     }
@@ -43,6 +44,7 @@ public class SecurityFilterMetadata implements Serializable {
     public Integer getSortOrder() {
         return sortOrder;
     }
+
     public void setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
     }

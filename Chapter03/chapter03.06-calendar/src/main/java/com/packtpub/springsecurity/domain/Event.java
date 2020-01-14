@@ -1,12 +1,9 @@
 package com.packtpub.springsecurity.domain;
 
-import java.util.Calendar;
-
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
-import org.apache.commons.lang3.builder.*;
+import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 
 /**
  * An {@link Event} is an item on a calendar that contains an owner (the person who created it), an attendee
@@ -15,7 +12,6 @@ import org.apache.commons.lang3.builder.*;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 public class Event {
 
@@ -38,17 +34,20 @@ public class Event {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
      * The summary of the event.
+     *
      * @return
      */
     public String getSummary() {
         return summary;
     }
+
     public void setSummary(String summary) {
         this.summary = summary;
     }
@@ -56,44 +55,52 @@ public class Event {
 
     /**
      * The detailed description of the event.
+     *
      * @return
      */
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
      * When this event is happening.
+     *
      * @return
      */
     public Calendar getWhen() {
         return when;
     }
+
     public void setWhen(Calendar when) {
         this.when = when;
     }
 
     /**
      * The owner (who created the Event)
+     *
      * @return
      */
     public CalendarUser getOwner() {
         return owner;
     }
+
     public void setOwner(CalendarUser owner) {
         this.owner = owner;
     }
 
     /**
      * The user that was invited to the event.
+     *
      * @return
      */
     public CalendarUser getAttendee() {
         return attendee;
     }
+
     public void setAttendee(CalendarUser attendee) {
         this.attendee = attendee;
     }

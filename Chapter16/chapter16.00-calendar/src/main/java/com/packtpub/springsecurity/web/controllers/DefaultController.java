@@ -1,20 +1,12 @@
 package com.packtpub.springsecurity.web.controllers;
 
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.http.*;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * <p>
@@ -68,7 +60,6 @@ import java.net.URISyntaxException;
  * </pre>
  *
  * @author Rob Winch
- *
  */
 @RestController
 public class DefaultController {
@@ -82,8 +73,8 @@ public class DefaultController {
      */
     @GetMapping("/default")
     public void defaultAfterLogin(HttpServletRequest request,
-                                    final HttpServletResponse response)
-    throws IOException{
+                                  final HttpServletResponse response)
+            throws IOException {
         if (request.isUserInRole("ROLE_ADMIN")) {
             response.sendRedirect("/events/");
         }

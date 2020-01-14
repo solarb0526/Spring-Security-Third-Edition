@@ -38,7 +38,7 @@ task pmd(type: Pmd, group: 'verification') {
 
 
 task pmdReport(group: "verification",
-        description: "Generates a HTML report after executing PMD checks."){
+        description: "Generates a HTML report after executing PMD checks.") {
     doLast {
         ant.xslt(
                 in: file("${reportsOut}/pmd.xml"),

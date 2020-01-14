@@ -4,21 +4,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.webjars.RequireJS;
 
 import java.util.Arrays;
 
-@SpringBootApplication(scanBasePackages={
+@SpringBootApplication(scanBasePackages = {
         "com.packtpub.springsecurity",
         "com.packtpub.springsecurity.configuration",
         "com.packtpub.springsecurity.dataaccess",
@@ -31,20 +27,21 @@ import java.util.Arrays;
 @EntityScan("com.packtpub.springsecurity.domain")
 public class CalendarApplication extends SpringBootServletInitializer {
 
+    public static void main(String[] args) {
+        SpringApplication.run(CalendarApplication.class, args);
+    }
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(CalendarApplication.class);
     }
 
-	public static void main(String[] args) {
-		SpringApplication.run(CalendarApplication.class, args);
-	}
-
     /**
      * This RequestMapping is not needed, when using:
      * .addResourceLocations(classpath:/META-INF/resources/webjars/").resourceChain(true)
-     *
+     * <p>
      * See: http://www.webjars.org/documentation#springmvc
+     *
      * @return WebJars JavaScript Mapping
      */
     @ResponseBody
@@ -53,7 +50,7 @@ public class CalendarApplication extends SpringBootServletInitializer {
         return RequireJS.getSetupJavaScript("/webjars/");
     }
 
-//    @Profile("trace")
+    //    @Profile("trace")
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {

@@ -38,7 +38,7 @@ dependencies {
     compile("com.unboundid:unboundid-ldapsdk")
 
     // Security:
-	compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-security')
     testCompile('org.springframework.security:spring-security-test')
 
 
@@ -47,11 +47,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
     // Tools:
-	compile('org.springframework.boot:spring-boot-starter-logging')
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	runtime('org.springframework.boot:spring-boot-devtools')
+    compile('org.springframework.boot:spring-boot-starter-logging')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    runtime('org.springframework.boot:spring-boot-devtools')
 
     // Testing:
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 
 }

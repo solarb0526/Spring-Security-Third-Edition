@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Spring Security Config Class
+ *
  * @since chapter16.00
  */
 @Configuration
@@ -23,14 +24,14 @@ public class SecurityConfig {
 //    }
 
 
-
     /**
      * BCryptPasswordEncoder password encoder
+     *
      * @return
      */
     @Description("Standard PasswordEncoder")
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(4);
     }
 

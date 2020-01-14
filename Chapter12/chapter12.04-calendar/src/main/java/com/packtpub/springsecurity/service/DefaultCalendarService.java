@@ -1,26 +1,23 @@
 package com.packtpub.springsecurity.service;
 
-import java.util.List;
-
-import com.packtpub.springsecurity.repository.CalendarUserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcOperations;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
-
 import com.packtpub.springsecurity.dataaccess.CalendarUserDao;
 import com.packtpub.springsecurity.dataaccess.EventDao;
 import com.packtpub.springsecurity.domain.CalendarUser;
 import com.packtpub.springsecurity.domain.Event;
+import com.packtpub.springsecurity.repository.CalendarUserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * A default implementation of {@link CalendarService} that delegates to {@link EventDao} and {@link CalendarUserDao}.
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Repository
 public class DefaultCalendarService implements CalendarService {
@@ -96,8 +93,8 @@ public class DefaultCalendarService implements CalendarService {
 
     /**
      * Create a new Signup User
-     * @param user
-     *            the new {@link CalendarUser} to create. The {@link CalendarUser#getId()} must be null.
+     *
+     * @param user the new {@link CalendarUser} to create. The {@link CalendarUser#getId()} must be null.
      * @return
      */
     @Override

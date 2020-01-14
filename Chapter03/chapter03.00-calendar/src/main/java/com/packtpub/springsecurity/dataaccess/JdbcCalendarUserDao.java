@@ -21,16 +21,19 @@ import java.util.List;
  * A jdbc implementation of {@link CalendarUserDao}.
  *
  * @author Rob Winch
- *
  */
 @Repository
 public class JdbcCalendarUserDao implements CalendarUserDao {
 
     // --- members ---
 
-    private final JdbcOperations jdbcOperations;
+    private static final String CALENDAR_USER_QUERY = "select id, email, password, first_name, last_name from calendar_users where ";
 
     // --- constructors ---
+    private static final RowMapper<CalendarUser> CALENDAR_USER_MAPPER = new CalendarUserRowMapper("calendar_users.");
+
+    // --- CalendarUserDao methods ---
+    private final JdbcOperations jdbcOperations;
 
     @Autowired
     public JdbcCalendarUserDao(JdbcOperations jdbcOperations) {
@@ -39,8 +42,6 @@ public class JdbcCalendarUserDao implements CalendarUserDao {
         }
         this.jdbcOperations = jdbcOperations;
     }
-
-    // --- CalendarUserDao methods ---
 
     @Override
     @Transactional(readOnly = true)
@@ -61,6 +62,8 @@ public class JdbcCalendarUserDao implements CalendarUserDao {
         }
     }
 
+    // --- non-public static members ---
+
     @Override
     @Transactional(readOnly = true)
     public List<CalendarUser> findUsersByEmail(String email) {
@@ -79,14 +82,14 @@ public class JdbcCalendarUserDao implements CalendarUserDao {
             throw new IllegalArgumentException("userToAdd cannot be null");
         }
         if (userToAdd.getId() != null) {
-            throw new IllegalArgumentException("userToAdd.getId() must be null when creating a "+CalendarUser.class.getName());
+            throw new IllegalArgumentException("userToAdd.getId() must be null when creating a " + CalendarUser.class.getName());
         }
         KeyHolder keyHolder = new GeneratedKeyHolder();
         this.jdbcOperations.update(new PreparedStatementCreator() {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(
                         "insert into calendar_users (email, password, first_name, last_name) values (?, ?, ?, ?)",
-                        new String[] { "id" });
+                        new String[]{"id"});
                 ps.setString(1, userToAdd.getEmail());
                 ps.setString(2, userToAdd.getPassword());
                 ps.setString(3, userToAdd.getFirstName());
@@ -97,18 +100,11 @@ public class JdbcCalendarUserDao implements CalendarUserDao {
         return keyHolder.getKey().intValue();
     }
 
-    // --- non-public static members ---
-
-    private static final String CALENDAR_USER_QUERY = "select id, email, password, first_name, last_name from calendar_users where ";
-
-    private static final RowMapper<CalendarUser> CALENDAR_USER_MAPPER = new CalendarUserRowMapper("calendar_users.");
-
     /**
      * Create a new RowMapper that resolves {@link CalendarUser}'s given a column label prefix. By allowing the prefix
      * to be specified we can reuse the same {@link RowMapper} for joins in other tables.
      *
      * @author Rob Winch
-     *
      */
     static class CalendarUserRowMapper implements RowMapper<CalendarUser> {
         private final String columnLabelPrefix;
@@ -131,5 +127,7 @@ public class JdbcCalendarUserDao implements CalendarUserDao {
             user.setLastName(rs.getString(columnLabelPrefix + "last_name"));
             return user;
         }
-    };
+    }
+
+    ;
 }

@@ -1,11 +1,6 @@
 package com.packtpub.springsecurity.domain.acl;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /*
 create table acl_class (
@@ -14,24 +9,28 @@ create table acl_class (
   constraint uk_acl_class unique(class) );
  */
 @Entity
-@Table(name="acl_class")
+@Table(name = "acl_class")
 public class AclClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="CLASS",unique=true)
+    @Column(name = "CLASS", unique = true)
     private String clazz;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getClazz() {
         return clazz;
     }
+
     public void setClazz(String clazz) {
         this.clazz = clazz;
     }

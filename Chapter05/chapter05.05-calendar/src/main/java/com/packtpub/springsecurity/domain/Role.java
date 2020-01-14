@@ -10,17 +10,20 @@ import java.io.Serializable;
 
 
 /**
- *
  * @author Mick Knutson
  */
-@Document(collection="role")
-public class Role  implements Persistable<Integer>, Serializable {
+@Document(collection = "role")
+public class Role implements Persistable<Integer>, Serializable {
 
     @Id
     private Integer id;
     private String name;
+    private Boolean persisted = Boolean.FALSE;
 
-    public Role(){}
+    public Role() {
+    }
+
+//    private Set<CalendarUser> users;
 
     @PersistenceConstructor
     public Role(Integer id, String name) {
@@ -28,20 +31,16 @@ public class Role  implements Persistable<Integer>, Serializable {
         this.name = name;
     }
 
-//    private Set<CalendarUser> users;
-
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
 
     public String getName() {
         return name;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
 
 //    public Set<CalendarUser> getUsers() {
@@ -51,8 +50,9 @@ public class Role  implements Persistable<Integer>, Serializable {
 //        this.users = users;
 //    }
 
-
-    private Boolean persisted = Boolean.FALSE;
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public boolean isNew() {

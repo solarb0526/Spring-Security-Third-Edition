@@ -42,7 +42,7 @@ include 'chapter03:chapter03.02-calendar'
 include 'chapter03:chapter03.03-calendar'
 include 'chapter03:chapter03.04-calendar'
 include 'chapter03:chapter03.05-calendar'
-include 'chapter03:chapter03.06-calendar'
+//include 'chapter03:chapter03.06-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 4: JDBC-based Authentication
@@ -73,8 +73,8 @@ include 'chapter06:chapter06.05-calendar'
 include 'chapter06:chapter06.06-calendar'
 include 'chapter06:chapter06.07-calendar'
 include 'chapter06:chapter06.08-calendar'
-include 'chapter06:chapter06.09-calendar'
-include 'chapter06:chapter06.10-calendar'
+//include 'chapter06:chapter06.09-calendar'
+//include 'chapter06:chapter06.10-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 07: Remember-me Services
@@ -90,17 +90,17 @@ include 'chapter07:chapter07.08-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 08: Client Certificate Authentication with TLS
-include 'chapter08:chapter08.00-calendar'
-include 'chapter08:chapter08.01-calendar'
-include 'chapter08:chapter08.02-calendar'
-include 'chapter08:chapter08.03-calendar'
+//include 'chapter08:chapter08.00-calendar'
+//include 'chapter08:chapter08.01-calendar'
+//include 'chapter08:chapter08.02-calendar'
+//include 'chapter08:chapter08.03-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 09: Opening up to OAuth2
-include 'chapter09:chapter09.00-calendar'
-include 'chapter09:chapter09.01-calendar'
-include 'chapter09:chapter09.02-calendar'
-include 'chapter09:chapter09.03-calendar'
+//include 'chapter09:chapter09.00-calendar'
+//include 'chapter09:chapter09.01-calendar'
+//include 'chapter09:chapter09.02-calendar'
+//include 'chapter09:chapter09.03-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 10: Single Sign-on with Central Authentication Service
@@ -108,52 +108,52 @@ include 'chapter09:chapter09.03-calendar'
 //include 'chapter10:chapter10.00-cas-server'
 
 // Chapter 10 (CAS): Applications:
-include 'chapter10:chapter10.00-calendar'
-include 'chapter10:chapter10.01-calendar'
-include 'chapter10:chapter10.02-calendar'
-include 'chapter10:chapter10.03-calendar'
-include 'chapter10:chapter10.04-calendar'
-include 'chapter10:chapter10.05-calendar'
-include 'chapter10:chapter10.06-calendar'
+//include 'chapter10:chapter10.00-calendar'
+//include 'chapter10:chapter10.01-calendar'
+//include 'chapter10:chapter10.02-calendar'
+//include 'chapter10:chapter10.03-calendar'
+//include 'chapter10:chapter10.04-calendar'
+//include 'chapter10:chapter10.05-calendar'
+//include 'chapter10:chapter10.06-calendar'
 
 
 //---------------------------------------------------------------------------//
 // Chapter 11: Fine-grained Access Control
-include 'chapter11:chapter11.00-calendar'
-include 'chapter11:chapter11.01-calendar'
-include 'chapter11:chapter11.02-calendar'
-include 'chapter11:chapter11.03-calendar'
-include 'chapter11:chapter11.04-calendar'
-include 'chapter11:chapter11.05-calendar'
-include 'chapter11:chapter11.06-calendar'
-include 'chapter11:chapter11.07-calendar'
-include 'chapter11:chapter11.08-calendar'
+//include 'chapter11:chapter11.00-calendar'
+//include 'chapter11:chapter11.01-calendar'
+//include 'chapter11:chapter11.02-calendar'
+//include 'chapter11:chapter11.03-calendar'
+//include 'chapter11:chapter11.04-calendar'
+//include 'chapter11:chapter11.05-calendar'
+//include 'chapter11:chapter11.06-calendar'
+//include 'chapter11:chapter11.07-calendar'
+//include 'chapter11:chapter11.08-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 12: Access Control Lists
-include 'chapter12:chapter12.00-calendar'
-include 'chapter12:chapter12.01-calendar'
-include 'chapter12:chapter12.02-calendar'
-include 'chapter12:chapter12.03-calendar'
-include 'chapter12:chapter12.04-calendar'
-include 'chapter12:chapter12.05-calendar'
+//include 'chapter12:chapter12.00-calendar'
+//include 'chapter12:chapter12.01-calendar'
+//include 'chapter12:chapter12.02-calendar'
+//include 'chapter12:chapter12.03-calendar'
+//include 'chapter12:chapter12.04-calendar'
+//include 'chapter12:chapter12.05-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 13: Custom Authorization
-include 'chapter13:chapter13.00-calendar'
-include 'chapter13:chapter13.01-calendar'
-include 'chapter13:chapter13.02-calendar'
-include 'chapter13:chapter13.03-calendar'
+//include 'chapter13:chapter13.00-calendar'
+//include 'chapter13:chapter13.01-calendar'
+//include 'chapter13:chapter13.02-calendar'
+//include 'chapter13:chapter13.03-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 14: Session Management
-include 'chapter14:chapter14.00-calendar'
-include 'chapter14:chapter14.01-calendar'
-include 'chapter14:chapter14.02-calendar'
-include 'chapter14:chapter14.03-calendar'
-include 'chapter14:chapter14.04-calendar'
-include 'chapter14:chapter14.05-calendar'
-include 'chapter14:chapter14.06-calendar'
+//include 'chapter14:chapter14.00-calendar'
+//include 'chapter14:chapter14.01-calendar'
+//include 'chapter14:chapter14.02-calendar'
+//include 'chapter14:chapter14.03-calendar'
+//include 'chapter14:chapter14.04-calendar'
+//include 'chapter14:chapter14.05-calendar'
+//include 'chapter14:chapter14.06-calendar'
 
 
 //---------------------------------------------------------------------------//
@@ -164,20 +164,20 @@ include 'chapter14:chapter14.06-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 15: Additional Spring Security Features
-include 'chapter15:chapter15.00-calendar'
-include 'chapter15:chapter15.01-calendar'
-include 'chapter15:chapter15.02-calendar'
+//include 'chapter15:chapter15.00-calendar'
+//include 'chapter15:chapter15.01-calendar'
+//include 'chapter15:chapter15.02-calendar'
 
 
 //---------------------------------------------------------------------------//
 // Chapter 16: Microservice security with OAuth2 and JSON Web Tokens
-include 'chapter16:chapter16.00-calendar'
+//include 'chapter16:chapter16.00-calendar'
 
-include 'chapter16:chapter16.01-calendar'
-include 'chapter16:chapter16.01-calendar-client'
+//include 'chapter16:chapter16.01-calendar'
+//include 'chapter16:chapter16.01-calendar-client'
 
-include 'chapter16:chapter16.02-calendar'
-include 'chapter16:chapter16.02-calendar-client'
+//include 'chapter16:chapter16.02-calendar'
+//include 'chapter16:chapter16.02-calendar-client'
 
 
 //---------------------------------------------------------------------------//

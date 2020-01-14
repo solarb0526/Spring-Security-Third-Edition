@@ -1,25 +1,18 @@
 package com.packtpub.springsecurity.configuration;
 
-import com.packtpub.springsecurity.dataaccess.CalendarUserDao;
-import com.packtpub.springsecurity.userdetails.CalendarUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 
 /**
  * Spring Security Config Class
+ *
  * @see {@link WebSecurityConfigurerAdapter}
  */
 @Configuration
@@ -40,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *      <logout />
      *  </http>
      * </pre>
-     *
+     * <p>
      * Which is equivalent to the following JavaConfig:
      *
      * <pre>
@@ -51,9 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *
      * @param http HttpSecurity configuration.
      * @throws Exception Authentication configuration exception
-     *
      * @see <a href="http://docs.spring.io/spring-security/site/migrate/current/3-to-4/html5/migrate-3-to-4-jc.html">
-     *     Spring Security 3 to 4 migration</a>
+     * Spring Security 3 to 4 migration</a>
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -73,18 +65,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling().accessDeniedPage("/errors/403")
 
                 .and().formLogin()
-                    .loginPage("/login/form")
-                    .loginProcessingUrl("/login")
-                    .failureUrl("/login/form?error")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/default", true)
-                    .permitAll()
+                .loginPage("/login/form")
+                .loginProcessingUrl("/login")
+                .failureUrl("/login/form?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/default", true)
+                .permitAll()
 
                 .and().logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login/form?logout")
-                    .permitAll()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login/form?logout")
+                .permitAll()
 
                 .and().anonymous()
 

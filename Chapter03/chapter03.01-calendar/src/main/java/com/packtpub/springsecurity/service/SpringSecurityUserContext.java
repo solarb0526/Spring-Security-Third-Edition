@@ -9,14 +9,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import java.security.Principal;
-
 /**
  * An implementation of {@link UserContext} that looks up the {@link CalendarUser} using the Spring Security's
  * {@link Authentication} by principal name.
  *
  * @author Rob Winch
- *
  */
 @Component
 public class SpringSecurityUserContext implements UserContext {
@@ -52,7 +49,7 @@ public class SpringSecurityUserContext implements UserContext {
             return null;
         }
 
-        User user = (User)authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
         String email = user.getUsername();
 
         if (email == null) {

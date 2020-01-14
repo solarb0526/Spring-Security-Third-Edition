@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * Spring Security Config Class
+ *
  * @see {@link WebSecurityConfigurerAdapter}
  */
 @Configuration
@@ -35,24 +36,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Configure AuthenticationManager with inMemory credentials.
-     *
+     * <p>
      * NOTE:
      * Due to a known limitation with JavaConfig:
      * <a href="https://jira.spring.io/browse/SPR-13779">
-     *     https://jira.spring.io/browse/SPR-13779</a>
-     *
+     * https://jira.spring.io/browse/SPR-13779</a>
+     * <p>
      * We cannot use the following to expose a {@link UserDetailsManager}
      * <pre>
      *     http.authorizeRequests()
      * </pre>
-     *
+     * <p>
      * In order to expose {@link UserDetailsManager} as a bean, we must create  @Bean
      *
+     * @param auth AuthenticationManagerBuilder
+     * @throws Exception Authentication exception
      * @see {SecurityConfig.userDetailsService()}
      * @see {@link com.packtpub.springsecurity.service.DefaultCalendarService}
-     *
-     * @param auth       AuthenticationManagerBuilder
-     * @throws Exception Authentication exception
      */
     @Override
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *      <logout />
      *  </http>
      * </pre>
-     *
+     * <p>
      * Which is equivalent to the following JavaConfig:
      *
      * <pre>
@@ -82,9 +82,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *
      * @param http HttpSecurity configuration.
      * @throws Exception Authentication configuration exception
-     *
      * @see <a href="http://docs.spring.io/spring-security/site/migrate/current/3-to-4/html5/migrate-3-to-4-jc.html">
-     *     Spring Security 3 to 4 migration</a>
+     * Spring Security 3 to 4 migration</a>
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -102,13 +101,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").hasRole("USER")
 
                 .and().exceptionHandling()
-                        .accessDeniedPage("/errors/403")
-                        .authenticationEntryPoint(loginUrlAuthenticationEntryPoint())
+                .accessDeniedPage("/errors/403")
+                .authenticationEntryPoint(loginUrlAuthenticationEntryPoint())
 
                 .and().logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login/form?logout")
-                    .permitAll()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login/form?logout")
+                .permitAll()
 
                 .and().anonymous()
 
@@ -117,7 +116,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // Add custom DomainUsernamePasswordAuthenticationFilter
                 .addFilterAt(domainUsernamePasswordAuthenticationFilter(),
-                    UsernamePasswordAuthenticationFilter.class)
+                        UsernamePasswordAuthenticationFilter.class)
         ;
 
         // Enable <frameset> in order to use H2 web console
@@ -148,7 +147,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     *
      * @return
      * @throws Exception
      */
@@ -156,19 +154,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public DomainUsernamePasswordAuthenticationFilter domainUsernamePasswordAuthenticationFilter()
             throws Exception {
         DomainUsernamePasswordAuthenticationFilter dupaf = new DomainUsernamePasswordAuthenticationFilter(
-                                                                super.authenticationManagerBean());
+                super.authenticationManagerBean());
         dupaf.setFilterProcessesUrl("/login");
         dupaf.setUsernameParameter("username");
         dupaf.setPasswordParameter("password");
 
         dupaf.setAuthenticationSuccessHandler(
-                new SavedRequestAwareAuthenticationSuccessHandler(){{
+                new SavedRequestAwareAuthenticationSuccessHandler() {{
                     setDefaultTargetUrl("/default");
                 }}
         );
 
         dupaf.setAuthenticationFailureHandler(
-                new SimpleUrlAuthenticationFailureHandler(){{
+                new SimpleUrlAuthenticationFailureHandler() {{
                     setDefaultFailureUrl("/login/form?error");
                 }}
         );
@@ -179,7 +177,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public LoginUrlAuthenticationEntryPoint loginUrlAuthenticationEntryPoint(){
+    public LoginUrlAuthenticationEntryPoint loginUrlAuthenticationEntryPoint() {
         return new LoginUrlAuthenticationEntryPoint("/login/form");
     }
 

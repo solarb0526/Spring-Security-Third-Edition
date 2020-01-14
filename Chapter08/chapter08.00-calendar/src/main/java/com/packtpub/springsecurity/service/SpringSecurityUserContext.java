@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
  * {@link Authentication} by principal name.
  *
  * @author Rob Winch
- *
  */
 @Component
 public class SpringSecurityUserContext implements UserContext {
@@ -29,7 +28,7 @@ public class SpringSecurityUserContext implements UserContext {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SpringSecurityUserContext(CalendarService calendarService,UserDetailsService userDetailsService) {
+    public SpringSecurityUserContext(CalendarService calendarService, UserDetailsService userDetailsService) {
         if (calendarService == null) {
             throw new IllegalArgumentException("calendarService cannot be null");
         }
@@ -53,7 +52,8 @@ public class SpringSecurityUserContext implements UserContext {
             return null;
         }
         CalendarUser user = (CalendarUser) authentication.getPrincipal();
-        String email = user.getEmail();        if (email == null) {
+        String email = user.getEmail();
+        if (email == null) {
             return null;
         }
         CalendarUser result = calendarService.findUserByEmail(email);

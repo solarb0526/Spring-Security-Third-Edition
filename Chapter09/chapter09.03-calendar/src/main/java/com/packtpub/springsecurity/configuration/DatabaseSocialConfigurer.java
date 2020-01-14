@@ -9,9 +9,6 @@ import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.social.facebook.connect.FacebookConnectionFactory;
-import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
-import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 
@@ -53,13 +50,13 @@ public class DatabaseSocialConfigurer extends SocialConfigurerAdapter {
 
         // Adding GitHub Connection with properties from application.yml
         config.addConnectionFactory(new GitHubConnectionFactory(
-            env.getProperty("spring.social.github.appId"),
-            env.getProperty("spring.social.github.appSecret")));
+                env.getProperty("spring.social.github.appId"),
+                env.getProperty("spring.social.github.appSecret")));
 
         // Adding Google Connection with properties from application.yml
         config.addConnectionFactory(new GoogleConnectionFactory(
-            env.getProperty("spring.social.google.appId"),
-            env.getProperty("spring.social.google.appSecret")));
+                env.getProperty("spring.social.google.appId"),
+                env.getProperty("spring.social.google.appSecret")));
     }
 
 } // The End...

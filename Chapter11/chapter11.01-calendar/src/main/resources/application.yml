@@ -6,10 +6,10 @@ debug: false
 
 spring:
   ## Thymeleaf configuration:
-#  thymeleaf:
-#    cache: false
-#    mode: HTML5
-#    encoding: UTF-8
+  #  thymeleaf:
+  #    cache: false
+  #    mode: HTML5
+  #    encoding: UTF-8
 
   resources:
     cache-period: 0

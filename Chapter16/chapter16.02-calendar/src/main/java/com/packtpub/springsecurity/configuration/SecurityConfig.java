@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 
 /**
  * Spring Security Config Class
+ *
  * @see {@link ResourceServerConfigurerAdapter}
  * @since chapter17.00
  */
@@ -31,11 +32,12 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
 
     /**
      * BCryptPasswordEncoder password encoder
+     *
      * @return
      */
     @Description("Standard PasswordEncoder")
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(4);
     }
 

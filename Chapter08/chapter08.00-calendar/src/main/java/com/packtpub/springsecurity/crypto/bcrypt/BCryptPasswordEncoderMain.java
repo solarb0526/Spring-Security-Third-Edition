@@ -35,10 +35,9 @@ public class BCryptPasswordEncoderMain {
 
         if (args.length == 1) {
             logger.info(encode(args[0]));
-        }
-        else {
+        } else {
             logger.info("Encoding passwords: {}", Arrays.toString(passwords));
-            for(String psswd: passwords){
+            for (String psswd : passwords) {
                 logger.info("[{}]", encode(psswd));
             }
         }

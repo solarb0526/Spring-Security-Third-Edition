@@ -1,38 +1,24 @@
 package com.packtpub.springsecurity.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.NoResultException;
-
 import com.packtpub.springsecurity.dataaccess.AclDao;
 import com.packtpub.springsecurity.domain.acl.AclClass;
 import com.packtpub.springsecurity.domain.acl.AclEntry;
 import com.packtpub.springsecurity.domain.acl.AclObjectIdentity;
 import com.packtpub.springsecurity.domain.acl.AclSid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.acls.domain.AccessControlEntryImpl;
-import org.springframework.security.acls.domain.AclImpl;
-import org.springframework.security.acls.domain.GrantedAuthoritySid;
-import org.springframework.security.acls.domain.ObjectIdentityImpl;
-import org.springframework.security.acls.domain.PrincipalSid;
+import org.springframework.security.acls.domain.*;
 import org.springframework.security.acls.jdbc.LookupStrategy;
-import org.springframework.security.acls.model.Acl;
-import org.springframework.security.acls.model.AclCache;
-import org.springframework.security.acls.model.AlreadyExistsException;
-import org.springframework.security.acls.model.ChildrenExistException;
-import org.springframework.security.acls.model.MutableAcl;
-import org.springframework.security.acls.model.MutableAclService;
-import org.springframework.security.acls.model.NotFoundException;
-import org.springframework.security.acls.model.ObjectIdentity;
-import org.springframework.security.acls.model.Sid;
+import org.springframework.security.acls.model.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.Assert;
+
+import javax.persistence.NoResultException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 //@Service("aclService")
 public class JpaMutableAclService implements MutableAclService {
@@ -121,7 +107,6 @@ public class JpaMutableAclService implements MutableAclService {
      * #createObjectIdentity(ObjectIdentity, Sid)} instead).
      *
      * @param oid to find
-     *
      * @return the object identity or null if not found
      */
     protected AclObjectIdentity retrieveObjectIdentityPrimaryKey(ObjectIdentity oid) {
@@ -137,7 +122,7 @@ public class JpaMutableAclService implements MutableAclService {
      * necessary, as acl_object_identity has defined the sid column as non-null.
      *
      * @param object to represent an acl_object_identity for
-     * @param owner for the SID column (will be created if there is no acl_sid entry for this particular Sid already)
+     * @param owner  for the SID column (will be created if there is no acl_sid entry for this particular Sid already)
      * @return
      */
     protected void createObjectIdentity(ObjectIdentity object, Sid owner) {
@@ -156,11 +141,9 @@ public class JpaMutableAclService implements MutableAclService {
      * Retrieves the primary key from acl_sid, creating a new row if needed and the allowCreate property is
      * true.
      *
-     * @param sid to find or create
+     * @param sid         to find or create
      * @param allowCreate true if creation is permitted if not found
-     *
      * @return the primary key or null if not found
-     *
      * @throws IllegalArgumentException if the <tt>Sid</tt> is not a recognized implementation.
      */
     protected AclSid createOrRetrieveSidPrimaryKey(Sid sid, boolean allowCreate) {
@@ -198,9 +181,8 @@ public class JpaMutableAclService implements MutableAclService {
      * Retrieves the primary key from {@code acl_class}, creating a new row if needed and the
      * {@code allowCreate} property is {@code true}.
      *
-     * @param type to find or create an entry for (often the fully-qualified class name)
+     * @param type        to find or create an entry for (often the fully-qualified class name)
      * @param allowCreate true if creation is permitted if not found
-     *
      * @return the primary key or null if not found
      */
     protected AclClass createOrRetrieveClassPrimaryKey(String type, boolean allowCreate) {
@@ -291,20 +273,20 @@ public class JpaMutableAclService implements MutableAclService {
      * @param acl containing the ACEs to insert
      */
     protected void createEntries(final MutableAcl acl) {
-        if(acl.getEntries().isEmpty()) {
+        if (acl.getEntries().isEmpty()) {
             return;
         }
-        AclImpl aclImpl = (AclImpl)acl;
+        AclImpl aclImpl = (AclImpl) acl;
         ObjectIdentityImpl objIdentity = (ObjectIdentityImpl) aclImpl.getObjectIdentity();
         List<AclEntry> entries = new ArrayList<>();
-        for(int i=0;i<acl.getEntries().size();i++) {
+        for (int i = 0; i < acl.getEntries().size(); i++) {
             AccessControlEntryImpl entry = (AccessControlEntryImpl) acl.getEntries().get(i);
             AclEntry aclEntry = new AclEntry();
             aclEntry.setAclObjectIdentity(aclDao.getObjectIdentity(objIdentity.getType(), objIdentity.getIdentifier()));
             aclEntry.setAceOrder(i);
             PrincipalSid sid = (PrincipalSid) entry.getSid();
             AclSid aclSid = aclDao.findAclSid(sid.getPrincipal());
-            if(aclSid==null) {
+            if (aclSid == null) {
                 aclSid = new AclSid();
                 aclSid.setSid(sid.getPrincipal());
                 aclSid.setPrincipal(true);
@@ -327,7 +309,6 @@ public class JpaMutableAclService implements MutableAclService {
      * object. Also will create an acl_sid entry if needed for the Sid that owns the MutableAcl.
      *
      * @param acl to modify (a row must already exist in acl_object_identity)
-     *
      * @throws NotFoundException if the ACL could not be found to update.
      */
     protected void updateObjectIdentity(MutableAcl acl) {

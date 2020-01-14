@@ -12,9 +12,8 @@ import java.util.Map;
 /**
  * http://localhost:8888/
  * http://localhost:8888/
- *
+ * <p>
  * http://localhost:8888/beans
- *
  */
 @RestController
 public class RestEndpoint {
@@ -27,14 +26,14 @@ public class RestEndpoint {
 
 
     @GetMapping("/beans")
-    public  List<Map<String, ?>> home() {
+    public List<Map<String, ?>> home() {
         @SuppressWarnings("unchecked")
         List<Map<String, ?>> result = template.getForObject("http://localhost:8080/admin/beans", List.class);
         return result;
     }
 
     @GetMapping("/")
-    public  String apiCheck() {
+    public String apiCheck() {
         @SuppressWarnings("unchecked")
         String result = template.getForObject(baseUrl, String.class);
         return result;

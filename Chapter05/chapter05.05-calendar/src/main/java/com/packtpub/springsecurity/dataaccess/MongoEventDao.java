@@ -17,7 +17,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Repository
 public class MongoEventDao implements EventDao {
@@ -65,7 +64,7 @@ public class MongoEventDao implements EventDao {
             throw new IllegalArgumentException("attendee.getOwner() cannot be null");
         }
         final Calendar when = event.getWhen();
-        if(when == null) {
+        if (when == null) {
             throw new IllegalArgumentException("event.getWhen() cannot be null");
         }
 

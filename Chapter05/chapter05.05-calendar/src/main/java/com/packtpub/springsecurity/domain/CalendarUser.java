@@ -6,7 +6,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
-
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,23 +21,23 @@ import java.util.Set;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
-@Document(collection="calendar_users")
+@Document(collection = "calendar_users")
 public class CalendarUser implements Persistable<Integer>, Serializable {
 
+    private static final long serialVersionUID = 8433999509932007961L;
     @Id
     private Integer id;
-
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-
     @DBRef(lazy = false)
     private Set<Role> roles = new HashSet<>(5);
+    private Boolean persisted = Boolean.FALSE;
 
-    public CalendarUser() {}
+    public CalendarUser() {
+    }
 
     @PersistenceConstructor
     public CalendarUser(Integer id, String email, String password, String firstName, String lastName) {
@@ -58,6 +57,7 @@ public class CalendarUser implements Persistable<Integer>, Serializable {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -70,6 +70,7 @@ public class CalendarUser implements Persistable<Integer>, Serializable {
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -82,6 +83,7 @@ public class CalendarUser implements Persistable<Integer>, Serializable {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -94,6 +96,7 @@ public class CalendarUser implements Persistable<Integer>, Serializable {
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -108,26 +111,26 @@ public class CalendarUser implements Persistable<Integer>, Serializable {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
+
+    // --- convenience methods ----------------------------------------------//
+
     /**
      * Get the list of Roles for this CalendarUser
+     *
      * @return
      */
     public Set<Role> getRoles() {
         return roles;
     }
+
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-
-
-
-
-    // --- convenience methods ----------------------------------------------//
 
     /**
      * Gets the full name in a formatted fashion. Note in a real application a formatter may be more appropriate, but in
@@ -143,18 +146,16 @@ public class CalendarUser implements Persistable<Integer>, Serializable {
 
     @JsonIgnore
     @Transient
-    public void addRole(Role role){
+    public void addRole(Role role) {
         this.roles.add(role);
     }
 
-    private Boolean persisted = Boolean.FALSE;
+    // --- override Object --------------------------------------------------//
 
     @Override
     public boolean isNew() {
         return !persisted;
     }
-
-    // --- override Object --------------------------------------------------//
 
     @Override
     public int hashCode() {
@@ -183,12 +184,9 @@ public class CalendarUser implements Persistable<Integer>, Serializable {
         return true;
     }
 
-
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
-
-    private static final long serialVersionUID = 8433999509932007961L;
 
 } // The End...

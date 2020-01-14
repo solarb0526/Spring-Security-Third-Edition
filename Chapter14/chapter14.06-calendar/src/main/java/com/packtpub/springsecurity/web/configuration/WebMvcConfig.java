@@ -33,12 +33,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
         "com.packtpub.springsecurity.web.model"
 })
 @Import(SessionConfig.class)
-public class WebMvcConfig extends WebMvcConfigurerAdapter
-{
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/" };
+            "classpath:/static/", "classpath:/public/"};
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
@@ -87,13 +86,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
 
     /**
      * Register a {@link OrderedHiddenHttpMethodFilter} to handle {RequestMethod.DELETE} requests
+     *
      * @return
      */
     @Bean
-    public OrderedHiddenHttpMethodFilter hiddenHttpMethodFilter(){
+    public OrderedHiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new OrderedHiddenHttpMethodFilter();
     }
-
 
 
 } // The End...

@@ -1,13 +1,12 @@
 package com.packtpub.springsecurity.web.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 
-import static com.packtpub.springsecurity.web.controllers.ControllerHelper.*;
+import static com.packtpub.springsecurity.web.controllers.ControllerHelper.redirect;
 
 /**
  * <p>
@@ -61,7 +60,6 @@ import static com.packtpub.springsecurity.web.controllers.ControllerHelper.*;
  * </pre>
  *
  * @author Rob Winch
- *
  */
 @Controller
 public class DefaultController {

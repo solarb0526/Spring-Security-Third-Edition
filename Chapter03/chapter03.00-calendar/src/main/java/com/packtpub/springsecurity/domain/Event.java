@@ -11,7 +11,6 @@ import java.util.Calendar;
  * fields are required.
  *
  * @author Rob Winch
- *
  */
 public class Event {
     private Integer id;
@@ -34,8 +33,13 @@ public class Event {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     /**
      * The summary of the event.
+     *
      * @return
      */
     public String getSummary() {
@@ -46,12 +50,9 @@ public class Event {
         this.summary = summary;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     /**
      * The detailed description of the event.
+     *
      * @return
      */
     public String getDescription() {
@@ -64,6 +65,7 @@ public class Event {
 
     /**
      * When this event is happening.
+     *
      * @return
      */
     public Calendar getWhen() {
@@ -76,6 +78,7 @@ public class Event {
 
     /**
      * The owner (who created the Event)
+     *
      * @return
      */
     public CalendarUser getOwner() {
@@ -88,6 +91,7 @@ public class Event {
 
     /**
      * The user that was invited to the event.
+     *
      * @return
      */
     public CalendarUser getAttendee() {

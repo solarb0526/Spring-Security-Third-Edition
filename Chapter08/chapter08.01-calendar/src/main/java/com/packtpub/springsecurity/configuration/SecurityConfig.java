@@ -1,16 +1,11 @@
 package com.packtpub.springsecurity.configuration;
 
-import com.packtpub.springsecurity.repository.RememberMeTokenRepository;
 import com.packtpub.springsecurity.service.UserDetailsServiceImpl;
-import com.packtpub.springsecurity.web.authentication.rememberme.IpAwarePersistentTokenRepository;
-import com.packtpub.springsecurity.web.authentication.rememberme.JpaPersistentTokenRepository;
-import com.packtpub.springsecurity.web.authentication.rememberme.JpaTokenRepositoryCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,6 +22,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 /**
  * Spring Security Config Class
+ *
  * @see {@link WebSecurityConfigurerAdapter}
  * @since chapter08.01
  */
@@ -48,24 +44,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Configure AuthenticationManager.
-     *
+     * <p>
      * NOTE:
      * Due to a known limitation with JavaConfig:
      * <a href="https://jira.spring.io/browse/SPR-13779">
-     *     https://jira.spring.io/browse/SPR-13779</a>
-     *
+     * https://jira.spring.io/browse/SPR-13779</a>
+     * <p>
      * We cannot use the following to expose a {@link UserDetailsManager}
      * <pre>
      *     http.authorizeRequests()
      * </pre>
-     *
+     * <p>
      * In order to expose {@link UserDetailsManager} as a bean, we must create  @Bean
      *
+     * @param auth AuthenticationManagerBuilder
+     * @throws Exception Authentication exception
      * @see {@link super.userDetailsService()}
      * @see {@link com.packtpub.springsecurity.service.DefaultCalendarService}
-     *
-     * @param auth       AuthenticationManagerBuilder
-     * @throws Exception Authentication exception
      */
     @Override
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -88,10 +83,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * BCryptPasswordEncoder password encoder
+     *
      * @return
      */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(4);
     }
 
@@ -107,7 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *      <logout />
      *  </http>
      * </pre>
-     *
+     * <p>
      * Which is equivalent to the following JavaConfig:
      *
      * <pre>
@@ -118,9 +114,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *
      * @param http HttpSecurity configuration.
      * @throws Exception Authentication configuration exception
-     *
      * @see <a href="http://docs.spring.io/spring-security/site/migrate/current/3-to-4/html5/migrate-3-to-4-jc.html">
-     *     Spring Security 3 to 4 migration</a>
+     * Spring Security 3 to 4 migration</a>
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -178,7 +173,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public RememberMeServices rememberMeServices(PersistentTokenRepository ptr){
+    public RememberMeServices rememberMeServices(PersistentTokenRepository ptr) {
         PersistentTokenBasedRememberMeServices rememberMeServices =
                 new PersistentTokenBasedRememberMeServices(
                         "jbcpCalendar",

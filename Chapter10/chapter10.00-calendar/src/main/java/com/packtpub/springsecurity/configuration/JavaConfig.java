@@ -4,7 +4,6 @@ import com.packtpub.springsecurity.repository.RememberMeTokenRepository;
 import com.packtpub.springsecurity.web.authentication.rememberme.JpaTokenRepositoryCleaner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.*;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -13,7 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
  * @since chapter 01.00
  */
 @Configuration
-@SpringBootApplication(scanBasePackages={
+@SpringBootApplication(scanBasePackages = {
         "com.packtpub.springsecurity",
         "com.packtpub.springsecurity.configuration",
         "com.packtpub.springsecurity.dataaccess",
@@ -29,7 +28,7 @@ public class JavaConfig {
     private RememberMeTokenRepository rememberMeTokenRepository;
 
     @Scheduled(fixedRate = 600_000)
-    public void tokenRepositoryCleaner(){
+    public void tokenRepositoryCleaner() {
         Thread trct = new Thread(
                 new JpaTokenRepositoryCleaner(
                         rememberMeTokenRepository,

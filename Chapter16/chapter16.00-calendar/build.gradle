@@ -26,7 +26,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
     // Security:
-	compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-security')
 
     // Web
     compile('org.springframework.boot:spring-boot-starter-web')
@@ -35,7 +35,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-undertow')
 
     // JAX-RS Support
-    compile ("org.springframework.boot:spring-boot-starter-jersey")
+    compile("org.springframework.boot:spring-boot-starter-jersey")
 
     // Tools:
     compile('org.springframework.boot:spring-boot-starter-logging')
@@ -44,12 +44,12 @@ dependencies {
     compile('org.springframework.boot:spring-boot-configuration-processor')
 
     // Testing
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
 
     // Required for JSR-250 based security:
     // JSR-250 Annotations
     //OLD: compile ('javax.annotation:jsr250-api:1.0')
-    compile ("javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}")
+    compile("javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}")
 
 } // The End...

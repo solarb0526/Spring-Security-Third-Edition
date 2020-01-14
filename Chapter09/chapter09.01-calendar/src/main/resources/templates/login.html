@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title id="pageTitle">myCalendar - Please Login</title>
@@ -11,43 +11,43 @@
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <form th:action="@{/login}" method="POST" class="form-horizontal">
+    <form class="form-horizontal" method="POST" th:action="@{/login}">
 
-        <div th:if="${param.error != null}" class="alert alert-danger">
+        <div class="alert alert-danger" th:if="${param.error != null}">
             <strong>Failed to login.</strong>
 
             <span th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
                 <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}">Invalid credentials</span>
             </span>
         </div>
-        <div th:if="${param.logout != null}" class="alert alert-success">
+        <div class="alert alert-success" th:if="${param.logout != null}">
             You have been logged out.
         </div>
 
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" autofocus="autofocus"/>
+        <input autofocus="autofocus" id="username" name="username" type="text"/>
         <label for="password">Password</label>
-        <input type="password" id="password" name="password"/>
+        <input id="password" name="password" type="password"/>
         <label for="remember-me">Remember Me?</label>
-        <input type="checkbox" id="remember-me" name="obscure-remember-me" th:checked="true" />
+        <input id="remember-me" name="obscure-remember-me" th:checked="true" type="checkbox"/>
 
         <div class="control-group">
             <div class="controls">
-                <input id="submit" type="submit" name="submit" value="Login"/>
+                <input id="submit" name="submit" type="submit" value="Login"/>
             </div>
         </div>
     </form>
 
-    <br />
+    <br/>
     <h3>Social Login</h3>
-    <br />
-    <form th:action="@{/signin/twitter}" method="POST" class="form-horizontal">
-        <input type="hidden" name="scope" value="public_profile" />
+    <br/>
+    <form class="form-horizontal" method="POST" th:action="@{/signin/twitter}">
+        <input name="scope" type="hidden" value="public_profile"/>
         <div class="form-actions">
-            <input id="twitter-submit" class="btn" type="submit" value="Login using Twitter"/>
+            <input class="btn" id="twitter-submit" type="submit" value="Login using Twitter"/>
         </div>
     </form>
-    <br />
+    <br/>
 </div>
 
 <!--/*/ <th:block th:include="fragments/footer :: foot"></th:block> /*/-->

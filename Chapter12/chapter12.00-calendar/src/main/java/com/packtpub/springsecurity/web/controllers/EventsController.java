@@ -1,22 +1,19 @@
 package com.packtpub.springsecurity.web.controllers;
 
-import java.util.Calendar;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.packtpub.springsecurity.domain.CalendarUser;
 import com.packtpub.springsecurity.domain.Event;
 import com.packtpub.springsecurity.service.CalendarService;
 import com.packtpub.springsecurity.service.UserContext;
 import com.packtpub.springsecurity.web.model.CreateEventForm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
+import java.util.Calendar;
 
 @Controller
 @RequestMapping("/events")
@@ -43,18 +40,18 @@ public class EventsController {
      * @param userId
      * @return
      */
-    @GetMapping(value= "/my", params="userId")
+    @GetMapping(value = "/my", params = "userId")
     public ModelAndView userEvents(@RequestParam int userId) {
         CalendarUser user = calendarService.getUser(userId);
         return myEvents(user);
     }
+
     private ModelAndView myEvents(CalendarUser user) {
         Integer userId = user.getId();
         ModelAndView result = new ModelAndView("events/my", "events", calendarService.findForUser(userId));
         result.addObject("currentUser", user);
         return result;
     }
-
 
 
     /**
@@ -64,11 +61,12 @@ public class EventsController {
      * @param email
      * @return
      */
-    @GetMapping(value= "/my", params="email")
+    @GetMapping(value = "/my", params = "email")
     public ModelAndView userEvents(@RequestParam String email) {
         CalendarUser user = calendarService.findUserByEmail(email);
         return myEventsByEmail(user);
     }
+
     private ModelAndView myEventsByEmail(CalendarUser user) {
         String email = user.getEmail();
         ModelAndView result = new ModelAndView("events/my", "events", calendarService.findForUser(email));
@@ -122,7 +120,7 @@ public class EventsController {
 
     @PostMapping(value = "/new")
     public String createEvent(@Valid CreateEventForm createEventForm, BindingResult result,
-            RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "events/create";
         }

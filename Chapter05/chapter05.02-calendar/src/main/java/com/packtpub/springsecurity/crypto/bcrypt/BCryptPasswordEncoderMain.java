@@ -1,12 +1,8 @@
 package com.packtpub.springsecurity.crypto.bcrypt;
 
-import com.packtpub.springsecurity.configuration.SecurityConfig;
-import com.packtpub.springsecurity.crypto.password.CryptoSha256PasswordEncoderMain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 
@@ -40,10 +36,9 @@ public class BCryptPasswordEncoderMain {
 
         if (args.length == 1) {
             logger.info(encode(args[0]));
-        }
-        else {
+        } else {
             logger.info("Encoding passwords: {}", Arrays.toString(passwords));
-            for(String psswd: passwords){
+            for (String psswd : passwords) {
                 logger.info("[{}]", encode(psswd));
             }
         }

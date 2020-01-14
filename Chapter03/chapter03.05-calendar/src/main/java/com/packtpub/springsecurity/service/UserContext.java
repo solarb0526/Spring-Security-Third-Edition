@@ -8,7 +8,6 @@ import com.packtpub.springsecurity.domain.CalendarUser;
  * classes directly.
  *
  * @author Rob Winch
- *
  */
 public interface UserContext {
 
@@ -21,6 +20,7 @@ public interface UserContext {
 
     /**
      * Sets the currently logged in {@link CalendarUser}.
+     *
      * @param user the logged in {@link CalendarUser}. Cannot be null.
      * @throws IllegalArgumentException if the {@link CalendarUser} is null.
      */

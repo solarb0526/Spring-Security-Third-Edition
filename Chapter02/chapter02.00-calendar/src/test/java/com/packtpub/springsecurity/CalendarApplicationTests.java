@@ -24,7 +24,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
  * https://docs.spring.io/spring-security/site/docs/current/reference/html/test-method.html
@@ -47,12 +46,12 @@ public class CalendarApplicationTests {
 
     WebDriver driver;
 
-//    @Autowired
+    //    @Autowired
 //    private MockMvc mvc;
     private MockMvc mvc = MockMvcBuilders
-        .webAppContextSetup(context)
+            .webAppContextSetup(context)
 //        .apply(springSecurity())
-        .build();
+            .build();
 
     @Before
     public void setup() {
@@ -64,7 +63,7 @@ public class CalendarApplicationTests {
                 .contextPath("")
                 // By default MockMvc is used for localhost only;
                 // the following will use MockMvc for example.com and example.org as well
-                .useMockMvcForHosts("example.com","example.org")
+                .useMockMvcForHosts("example.com", "example.org")
                 .build();
 
         driver = MockMvcHtmlUnitDriverBuilder
@@ -118,7 +117,6 @@ public class CalendarApplicationTests {
         assertThat(text).isEqualTo("In case you didn't know, Spring Rocks!");
 
 
-
     }
 
 
@@ -131,14 +129,14 @@ public class CalendarApplicationTests {
                 .andExpect(status().isUnauthorized());
     }
 
-//    @Test
+    //    @Test
     public void test_failed_Login() throws Exception {
         mvc.perform(post("/login")
-                .accept(MediaType.TEXT_HTML)
-                .contentType(
-                        MediaType.APPLICATION_FORM_URLENCODED)
-                .param("username", "bob@example.com")
-                .param("password", "bob1")
+                        .accept(MediaType.TEXT_HTML)
+                        .contentType(
+                                MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("username", "bob@example.com")
+                        .param("password", "bob1")
 //                .with(csrf())
         )
                 .andExpect(status().is3xxRedirection())
@@ -148,7 +146,7 @@ public class CalendarApplicationTests {
     }
 
 
-//    @Test
+    //    @Test
     public void test_login_user1() throws Exception {
         mvc.perform(post("/login")
                 .accept(MediaType.TEXT_HTML)
@@ -162,14 +160,14 @@ public class CalendarApplicationTests {
         ;
     }
 
-//    @Test
+    //    @Test
     public void test_login_admin1() throws Exception {
         mvc.perform(post("/login")
-                .accept(MediaType.TEXT_HTML)
-                .contentType(
-                        MediaType.APPLICATION_FORM_URLENCODED)
-                .param("username", "admin1@example.com")
-                .param("password", "admin1")
+                        .accept(MediaType.TEXT_HTML)
+                        .contentType(
+                                MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("username", "admin1@example.com")
+                        .param("password", "admin1")
 //                .with(csrf())
         )
                 .andExpect(status().is3xxRedirection())
@@ -177,7 +175,6 @@ public class CalendarApplicationTests {
                 .andDo(print())
         ;
     }
-
 
 
     @Test
@@ -190,7 +187,7 @@ public class CalendarApplicationTests {
         ;
     }
 
-//    @Test
+    //    @Test
 //    @WithMockUser
     public void test_events_WithMockUser() throws Exception {
         mvc.perform(get("/events/"))

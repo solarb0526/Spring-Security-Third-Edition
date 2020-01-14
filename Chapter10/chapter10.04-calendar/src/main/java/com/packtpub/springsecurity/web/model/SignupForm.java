@@ -11,14 +11,14 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class SignupForm {
 
-    @NotEmpty(message="First Name is required")
+    @NotEmpty(message = "First Name is required")
     private String firstName;
-    @NotEmpty(message="Last Name is required")
+    @NotEmpty(message = "Last Name is required")
     private String lastName;
-    @Email(message="Please provide a valid email address")
-    @NotEmpty(message="Email is required")
+    @Email(message = "Please provide a valid email address")
+    @NotEmpty(message = "Email is required")
     private String email;
-    @NotEmpty(message="Password is required")
+    @NotEmpty(message = "Password is required")
     private String password;
 
     /**
@@ -30,6 +30,10 @@ public class SignupForm {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     /**
      * Gets the first name of the user.
      *
@@ -37,6 +41,10 @@ public class SignupForm {
      */
     public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
@@ -48,6 +56,10 @@ public class SignupForm {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     /**
      * Gets the password for this user.
      *
@@ -57,15 +69,6 @@ public class SignupForm {
         return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
     public void setPassword(String password) {
         this.password = password;
     }

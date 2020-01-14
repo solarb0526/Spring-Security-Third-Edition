@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title id="pageTitle">All Events</title>
 
@@ -12,7 +12,7 @@
     <!--/*/ <th:block th:include="fragments/messages :: messages"></th:block> /*/-->
 
     <p>This shows all events for all users. Once security is applied it will only be viewable to administrators.</p>
-    <div id="create" class="pull-right"><a th:href="@{/events/form}">Create Event</a></div>
+    <div class="pull-right" id="create"><a th:href="@{/events/form}">Create Event</a></div>
     <table class="table table-bordered table-striped table-condensed">
         <thead>
         <tr>
@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         <tr th:if="${events.empty}">
-            <td colspan="4" class="msg">No events.</td>
+            <td class="msg" colspan="4">No events.</td>
         </tr>
         <!--
         ACL Codes:
@@ -33,7 +33,7 @@
             16 == ADMININSTRATION
             32 == ADMIN_READ ?***
         -->
-        <tr th:each="event : ${events}" sec:authorize-acl="${event} :: '1,32'">
+        <tr sec:authorize-acl="${event} :: '1,32'" th:each="event : ${events}">
             <td th:text="${#calendars.format(event.when, 'yyyy-MM-dd HH:mm')}">today</td>
             <td th:text="${event.owner.name}">Chuck Norris</td>
             <td th:text="${event.attendee.name}">Mick Knutson</td>

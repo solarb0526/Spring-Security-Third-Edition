@@ -2,7 +2,6 @@ package com.packtpub.springsecurity.oauth2;
 
 import com.packtpub.springsecurity.configuration.SecurityConfig;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.junit.Assert;
@@ -15,14 +14,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
@@ -31,33 +28,16 @@ import java.util.Arrays;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
 
 @ContextConfiguration(initializers = ConfigFileApplicationContextInitializer.class)
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations = {
         "classpath:test.yml",
-        "classpath:application.yml" })
+        "classpath:application.yml"})
 public class OAuth2ClientTest {
 
     private static final Logger logger = LoggerFactory
             .getLogger(SecurityConfig.class);
-
-    @Value("${oauth.resource:https://localhost:8443}")
-    private String baseUrl;
-
-    @Value("${oauth.token:https://localhost:8443/oauth/token}")
-    private String tokenUrl;
-
-    @Value("${oauth.resource.id:microservice-test}")
-    private String resourceId;
-
-    @Value("${oauth.resource.client.id:oauthClient1}")
-    private String resourceClientId;
-
-    @Value("${oauth.resource.client.secret:oauthClient1Password}")
-    private String resourceClientSecret;
-
 
     static {
 //        System.setProperty("javax.net.ssl.trustStore", "classpath:keys/jbcp_clientauth.p12");
@@ -67,7 +47,7 @@ public class OAuth2ClientTest {
 
         //for localhost testing only
         javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
-                new javax.net.ssl.HostnameVerifier(){
+                new javax.net.ssl.HostnameVerifier() {
 
                     public boolean verify(String hostname,
                                           javax.net.ssl.SSLSession sslSession) {
@@ -80,6 +60,17 @@ public class OAuth2ClientTest {
 //        HttpsURLConnection.setDefaultHostnameVerifier ((hostname, session) -> true);
     }
 
+    @Value("${oauth.resource:https://localhost:8443}")
+    private String baseUrl;
+    @Value("${oauth.token:https://localhost:8443/oauth/token}")
+    private String tokenUrl;
+    @Value("${oauth.resource.id:microservice-test}")
+    private String resourceId;
+    @Value("${oauth.resource.client.id:oauthClient1}")
+    private String resourceClientId;
+    @Value("${oauth.resource.client.secret:oauthClient1Password}")
+    private String resourceClientSecret;
+
     //-----------------------------------------------------------------------//
 
     @Before
@@ -88,17 +79,18 @@ public class OAuth2ClientTest {
     }
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
 
 
     //-----------------------------------------------------------------------//
 
-//    @Test
+    //    @Test
     public void test_rootContext() throws Exception {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/";
+        String url = baseUrl + "/";
         String expected = "{'message': 'welcome to the JBCP Calendar Application'}";
 
         logger.info(" CALLING: {}", url);
@@ -109,12 +101,12 @@ public class OAuth2ClientTest {
 
     }
 
-//    @Test
+    //    @Test
     public void test_api() throws Exception {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/api";
+        String url = baseUrl + "/api";
         String expected = "{'message': 'welcome to the JBCP Calendar Application API'}";
 
         logger.info(" CALLING: {}", url);
@@ -130,7 +122,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/signup/new";
+        String url = baseUrl + "/signup/new";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -146,7 +138,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/signup/new";
+        String url = baseUrl + "/signup/new";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -206,7 +198,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/events/my/0";
+        String url = baseUrl + "/events/my/0";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -217,12 +209,12 @@ public class OAuth2ClientTest {
 
     }
 
-//    @Test
+    //    @Test
     public void test_myEvents() throws Exception {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/events/my";
+        String url = baseUrl + "/events/my";
         String expected = "{\"currentUser\":[{\"id\":100,\"summary\":\"Birthday Party\",\"description\":\"This is going to be a great birthday\",\"when\":1499135400000}]}";
 
         logger.info(" CALLING: {}", url);
@@ -233,12 +225,12 @@ public class OAuth2ClientTest {
 
     }
 
-//    @Test
+    //    @Test
     public void test_show() throws Exception {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/events/101";
+        String url = baseUrl + "/events/101";
         String expected = "{\"id\":101,\"summary\":\"Conference Call\",\"description\":\"Call with the client\",\"when\":1514059200000}";
 
         logger.info(" CALLING: {}", url);
@@ -254,7 +246,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/events/new?auto";
+        String url = baseUrl + "/events/new?auto";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -271,7 +263,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/events/new";
+        String url = baseUrl + "/events/new";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -282,12 +274,12 @@ public class OAuth2ClientTest {
 
     }
 
-//    @Test
+    //    @Test
     public void test_default() throws Exception {
 
         OAuth2RestTemplate template = template();
 
-        String url = baseUrl+"/default";
+        String url = baseUrl + "/default";
         String expected = "{'message': 'welcome to the JBCP Calendar Application'}";
 
         logger.info(" CALLING: {}", url);
@@ -300,7 +292,7 @@ public class OAuth2ClientTest {
 
     //-----------------------------------------------------------------------//
 
-//    @Test
+    //    @Test
     public void execute_post_to_tokenUrl()
             throws ClientProtocolException, IOException {
 
@@ -315,7 +307,7 @@ public class OAuth2ClientTest {
         assertThat(response.getStatusCode().value(), equalTo(200));
     }
 
-    private OAuth2RestTemplate template(){
+    private OAuth2RestTemplate template() {
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
         resource.setAccessTokenUri(tokenUrl);
         resource.setId(resourceId);
@@ -338,7 +330,7 @@ public class OAuth2ClientTest {
         return template;
     }
 
-    private HttpComponentsClientHttpRequestFactory requestFactory(){
+    private HttpComponentsClientHttpRequestFactory requestFactory() {
 
         CloseableHttpClient httpClient
                 = HttpClients.custom()

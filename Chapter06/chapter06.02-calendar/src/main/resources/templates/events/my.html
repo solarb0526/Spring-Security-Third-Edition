@@ -20,7 +20,7 @@
         <strong th:text="${currentUser.email}"></strong>.
         Once security is applied this will be the events for the currently logged in user.
     </p>
-    <div id="create" class="pull-right"><a th:href="@{/events/form}">Create Event</a></div>
+    <div class="pull-right" id="create"><a th:href="@{/events/form}">Create Event</a></div>
     <table class="table table-bordered table-striped table-condensed">
         <thead>
         <tr>
@@ -32,7 +32,7 @@
         </thead>
         <tbody>
         <tr th:if="${events.empty}">
-            <td colspan="4" class="msg">No events.</td>
+            <td class="msg" colspan="4">No events.</td>
         </tr>
         <tr th:each="event : ${events}">
 

@@ -18,14 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
- *
  * @author Mick Knutson
- *
  */
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -73,10 +70,7 @@ public class WelcomeControllerTests {
     }
 
 
-
-
-
-    private Authentication userAuth(){
+    private Authentication userAuth() {
         String username = "user1@example.com";
         String password = "user1";
 
@@ -85,7 +79,7 @@ public class WelcomeControllerTests {
         return authenticationProvider.authenticate(authRequest);
     }
 
-    private Authentication adminAuth(){
+    private Authentication adminAuth() {
         String username = "admin@example.com";
         String password = "admin";
 

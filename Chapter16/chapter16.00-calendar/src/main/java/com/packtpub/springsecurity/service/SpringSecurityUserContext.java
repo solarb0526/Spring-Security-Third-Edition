@@ -15,11 +15,10 @@ import org.springframework.stereotype.Component;
 /**
  * An implementation of {@link UserContext} that looks up the {@link CalendarUser} using the Spring Security's
  * {@link Authentication} by principal name.
- *
+ * <p>
  * TODO: How and when does this get called?
  *
  * @author Rob Winch
- *
  */
 @Component
 public class SpringSecurityUserContext implements UserContext {
@@ -58,16 +57,14 @@ public class SpringSecurityUserContext implements UserContext {
 
         String email = null;
 
-        if(authentication.getPrincipal() instanceof CalendarUser){
+        if (authentication.getPrincipal() instanceof CalendarUser) {
             logger.debug("Principal is CalendarUser: [{}]", authentication.getPrincipal());
             CalendarUser user = (CalendarUser) authentication.getPrincipal();
             email = user.getEmail();
-        }
-        else if(authentication.getPrincipal() instanceof String){
+        } else if (authentication.getPrincipal() instanceof String) {
             logger.debug("Principal is String: [{}]", authentication.getPrincipal());
             email = (String) authentication.getPrincipal();
-        }
-        else {
+        } else {
             logger.debug("Principal is NOT CalendarUser / String: [{}]", authentication.getPrincipal());
             email = (String) authentication.getPrincipal();
         }

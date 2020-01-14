@@ -13,11 +13,11 @@ import javax.servlet.ServletRegistration;
 /**
  * Replaces web.xml in Servlet v.3.0+
  * This class replaces the web.xml in Servlet v3.0+
- * with a {@link javax.servlet.ServletContainerInitializer}, 
- * which is the preferred approach to Servlet v3.0+ initialization. 
- * 
- * Spring Mvc provides {@link WebApplicationInitializer} interface leverage this mechanism. 
- * In Spring Mvc the preferred approach is to extend 
+ * with a {@link javax.servlet.ServletContainerInitializer},
+ * which is the preferred approach to Servlet v3.0+ initialization.
+ * <p>
+ * Spring Mvc provides {@link WebApplicationInitializer} interface leverage this mechanism.
+ * In Spring Mvc the preferred approach is to extend
  * {@link AbstractAnnotationConfigDispatcherServletInitializer}
  *
  * @see
@@ -27,17 +27,17 @@ public class WebAppInitializer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { JavaConfig.class, SecurityConfig.class, DataSourceConfig.class };
+        return new Class[]{JavaConfig.class, SecurityConfig.class, DataSourceConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { WebMvcConfig.class };
+        return new Class[]{WebMvcConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] { "/*" };
+        return new String[]{"/*"};
     }
 
     @Override

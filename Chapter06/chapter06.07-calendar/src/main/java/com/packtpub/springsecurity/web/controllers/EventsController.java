@@ -81,7 +81,7 @@ public class EventsController {
 
     @PostMapping(value = "/new")
     public String createEvent(@Valid CreateEventForm createEventForm, BindingResult result,
-            RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "events/create";
         }

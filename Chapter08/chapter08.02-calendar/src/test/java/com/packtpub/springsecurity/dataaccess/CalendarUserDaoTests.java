@@ -16,41 +16,41 @@ public class CalendarUserDaoTests {
     @Autowired
     private CalendarUserDao dao;
 
-	@Test
-	public void validateUser_User() {
+    @Test
+    public void validateUser_User() {
         String email = "user1@example.com";
         CalendarUser user = dao.findUserByEmail(email);
         assertThat(user.getEmail()).isEqualTo(email);
         assertThat(user.getRoles().size()).isEqualTo(1);
 //        assertThat(user.getFirstName()).as("check %s's username", user.getEmail()).isEqualTo("foo@bar.com");
-	}
+    }
 
-	@Test
-	public void validateUser_Admin() {
-	    String email = "admin1@example.com";
+    @Test
+    public void validateUser_Admin() {
+        String email = "admin1@example.com";
         CalendarUser user = dao.findUserByEmail(email);
         assertThat(user.getEmail()).isEqualTo(email);
         assertThat(user.getRoles().size()).isEqualTo(2);
-	}
+    }
 
-	@Test
-	public void test_getUser() {
-	    //
-	}
+    @Test
+    public void test_getUser() {
+        //
+    }
 
-	@Test
-	public void test_findUserByEmail() {
-	    //
-	}
+    @Test
+    public void test_findUserByEmail() {
+        //
+    }
 
-	@Test
-	public void test_findUsersByEmail() {
-	    //
-	}
+    @Test
+    public void test_findUsersByEmail() {
+        //
+    }
 
-	@Test
-	public void test_createUser() {
-	    //
-	}
+    @Test
+    public void test_createUser() {
+        //
+    }
 
 }

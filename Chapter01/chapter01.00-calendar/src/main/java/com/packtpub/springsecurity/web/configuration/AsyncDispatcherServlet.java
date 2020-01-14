@@ -1,22 +1,18 @@
 package com.packtpub.springsecurity.web.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.DispatcherServlet;
+
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-import javax.servlet.AsyncContext;
-import javax.servlet.AsyncEvent;
-import javax.servlet.AsyncListener;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.DispatcherServlet;
 
 /**
  * http://localhost:8080/calendar/async/events
@@ -25,12 +21,11 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 public class AsyncDispatcherServlet extends DispatcherServlet {
 
-    private ExecutorService exececutor;
     private static final int NUM_ASYNC_TASKS = 15;
     private static final long TIME_OUT = 10 * 1_000;
-
     private static final Logger logger = LoggerFactory
             .getLogger(AsyncDispatcherServlet.class);
+    private ExecutorService exececutor;
 
     @Override
     public void init(ServletConfig config) throws ServletException {

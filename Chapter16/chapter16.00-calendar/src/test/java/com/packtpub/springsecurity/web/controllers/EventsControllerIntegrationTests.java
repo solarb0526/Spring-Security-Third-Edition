@@ -1,7 +1,6 @@
 package com.packtpub.springsecurity.web.controllers;
 
 import com.packtpub.springsecurity.CalendarUserStub;
-import com.packtpub.springsecurity.configuration.SecurityConfig;
 import com.packtpub.springsecurity.domain.Event;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,17 +18,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 //@DirtiesContext
 
 @WithUserDetails("user1@example.com")
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EventsControllerIntegrationTests {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -57,7 +54,8 @@ public class EventsControllerIntegrationTests {
 
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
 
 /*
 

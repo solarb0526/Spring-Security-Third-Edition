@@ -4,8 +4,8 @@
  * @author Mick Knutson
  */
 buildscript {
-	ext {}
-	repositories {
+    ext {}
+    repositories {
         jcenter()
 
         maven { url 'https://plugins.gradle.org/m2/' }
@@ -14,10 +14,10 @@ buildscript {
         maven { url 'https://repo.spring.io/snapshot' }
         maven { url 'https://repo.spring.io/milestone' }
         maven { url 'https://repo.spring.io/libs-milestone' }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'org.springframework.boot'
@@ -28,7 +28,7 @@ version = '4.6.03-SNAPSHOT'
 dependencies {
 
     // Spring Aspect Oriented Programming:
-	compile('org.springframework.boot:spring-boot-starter-aop')
+    compile('org.springframework.boot:spring-boot-starter-aop')
 
     // JPA / ORM / Hibernate:
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -48,7 +48,7 @@ dependencies {
     compile("com.unboundid:unboundid-ldapsdk")
 
     // Security:
-	compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-security')
     testCompile('org.springframework.security:spring-security-test')
 
 
@@ -57,16 +57,16 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
     // Tools:
-	compile('org.springframework.boot:spring-boot-starter-logging')
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	//compile('org.springframework.boot:spring-boot-actuator-docs')
-	runtime('org.springframework.boot:spring-boot-devtools')
+    compile('org.springframework.boot:spring-boot-starter-logging')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    //compile('org.springframework.boot:spring-boot-actuator-docs')
+    runtime('org.springframework.boot:spring-boot-devtools')
 
     // Testing:
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 
     // JSON Support:
-    compile ('com.fasterxml.jackson.core:jackson-core')
-    compile ('com.fasterxml.jackson.core:jackson-databind')
+    compile('com.fasterxml.jackson.core:jackson-core')
+    compile('com.fasterxml.jackson.core:jackson-databind')
 
 }

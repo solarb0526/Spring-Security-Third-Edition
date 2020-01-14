@@ -7,7 +7,6 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.session.ConcurrentSessionFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
@@ -28,18 +27,19 @@ public class SessionConfig {
 
     /**
      * sessionAuthenticationStrategy does not work in JavaConfig
+     *
      * @param sessionRegistry
      * @return
      */
     @Bean
-    public SessionAuthenticationStrategy sessionAuthenticationStrategy(SessionRegistry sessionRegistry){
-        return new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry){{
+    public SessionAuthenticationStrategy sessionAuthenticationStrategy(SessionRegistry sessionRegistry) {
+        return new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry) {{
             setMaximumSessions(-1);
         }};
     }
 
     @Bean
-    public ConcurrentSessionFilter concurrentSessionFilter(){
+    public ConcurrentSessionFilter concurrentSessionFilter() {
         SimpleRedirectSessionInformationExpiredStrategy expiredSessionStrategy =
                 new SimpleRedirectSessionInformationExpiredStrategy("/login/form?expired");
         return new ConcurrentSessionFilter(sessionRegistry(), expiredSessionStrategy);
@@ -47,7 +47,7 @@ public class SessionConfig {
 
 
     @Bean
-    public SessionRegistry sessionRegistry(){
+    public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
 
@@ -55,13 +55,13 @@ public class SessionConfig {
     // Trying to fix:
     // FIXME: TODO: With running STATELESS, login token is not saved.
     @Bean
-    public SecurityContextRepository securityContextRepository(){
+    public SecurityContextRepository securityContextRepository() {
         return new HttpSessionSecurityContextRepository();
     }
 
     @Bean
     public SessionManagementFilter sessionManagementFilter(SecurityContextRepository securityContextRepository,
-                                                           SessionAuthenticationStrategy sessionAuthenticationStrategy){
+                                                           SessionAuthenticationStrategy sessionAuthenticationStrategy) {
         return new SessionManagementFilter(securityContextRepository, sessionAuthenticationStrategy);
     }
 

@@ -16,8 +16,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 /**
  * https://dzone.com/articles/testing-improvements-in-spring-boot-14
- * @author Mick Knutson
  *
+ * @author Mick Knutson
  */
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,7 +37,8 @@ public class SignupControllerTests {
      */
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
 
 
     /*@Test

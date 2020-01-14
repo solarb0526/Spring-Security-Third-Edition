@@ -9,9 +9,9 @@ http://user1:changeme@localhost:9999/api
 <head>
     <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3/dist/jquery.min.js"></script>
     <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-          crossorigin="anonymous">
+          rel="stylesheet">
     <style>
         table, th, td {
             border: 1px solid black;
@@ -49,14 +49,14 @@ http://user1:changeme@localhost:9999/api
                 $('.message').append(
                     "<div class=\"alert alert-success\">" + response + "</div>");
 
-                $('.name').append( response.name);
+                $('.name').append(response.name);
             });
     </script>
 
 </head>
 <body>
 <h1>Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication)</h1>
-<div id = 'bootFeed'>
+<div id='bootFeed'>
     <p class="name">Application Message Returned: </p>
     <p class="result"></p>
 </div>

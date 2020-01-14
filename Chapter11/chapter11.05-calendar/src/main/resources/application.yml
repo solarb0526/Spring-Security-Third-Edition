@@ -6,11 +6,11 @@ debug: false
 
 spring:
   ## Thymeleaf configuration:
-#  thymeleaf:
-#    cache: false
-#    mode: HTML5
-#  resources:
-#    cache-period: 0
+  #  thymeleaf:
+  #    cache: false
+  #    mode: HTML5
+  #  resources:
+  #    cache-period: 0
 
   ## H2 Servlet setting
   h2:

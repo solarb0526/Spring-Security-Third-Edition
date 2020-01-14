@@ -1,13 +1,10 @@
 package com.packtpub.springsecurity.configuration;
 
-import com.packtpub.springsecurity.core.userdetails.CalendarUserDetailsService;
-import com.packtpub.springsecurity.service.UserDetailsServiceImpl;
+import net.sf.ehcache.Cache;
 import org.jasig.cas.client.proxy.ProxyGrantingTicketStorage;
 import org.jasig.cas.client.proxy.ProxyGrantingTicketStorageImpl;
 import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
-import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
-import org.jasig.cas.client.validation.Cas30ProxyTicketValidator;
 import org.jasig.cas.client.validation.Saml11TicketValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
-import org.springframework.context.annotation.*;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,14 +24,11 @@ import org.springframework.security.cas.web.CasAuthenticationFilter;
 import org.springframework.security.cas.web.authentication.ServiceAuthenticationDetailsSource;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.time.LocalDateTime;
-
-import net.sf.ehcache.Cache;
 
 /**
  * @author Mick Knutson
@@ -47,17 +40,15 @@ public class CasConfig {
 
     private static final Logger logger = LoggerFactory
             .getLogger(CasConfig.class);
+    @Value("#{systemProperties['cas.server']}")
+    private static String casServer;
+    @Value("#{systemProperties['cas.calendar.service']}")
+    private static String casService;
 
-    static{
+    static {
         System.setProperty("cas.server", "https://localhost:9443/cas");
         System.setProperty("cas.calendar.service", "https://localhost:8443");
     }
-
-    @Value("#{systemProperties['cas.server']}")
-    private static String casServer;
-
-    @Value("#{systemProperties['cas.calendar.service']}")
-    private static String casService;
 
     @Value("#{systemProperties['cas.server']}/login")
     private String casServerLogin;
@@ -70,27 +61,22 @@ public class CasConfig {
 
     @Value("#{systemProperties['cas.calendar.service']}/pgtUrl")
     private String calendarServiceProxyCallbackUrl;
-
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserDetailsByNameServiceWrapper userDetailsByNameServiceWrapper;
 
     @Bean
-    public ServiceProperties serviceProperties(){
-        return new ServiceProperties(){{
+    public ServiceProperties serviceProperties() {
+        return new ServiceProperties() {{
             setService(calendarServiceLogin);
             setAuthenticateAllArtifacts(true);
         }};
     }
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserDetailsByNameServiceWrapper userDetailsByNameServiceWrapper;
-
-
     @Bean
     public CasAuthenticationEntryPoint casAuthenticationEntryPoint()
-    throws Exception
-    {
+            throws Exception {
         CasAuthenticationEntryPoint entryPoint = new CasAuthenticationEntryPoint();
         entryPoint.setServiceProperties(serviceProperties());
         entryPoint.setLoginUrl(casServerLogin);
@@ -161,11 +147,9 @@ public class CasConfig {
 //    }
 
     @Bean
-    public Saml11TicketValidator ticketValidator(){
+    public Saml11TicketValidator ticketValidator() {
         return new Saml11TicketValidator(casServer);
     }
-
-
 
 
     /**
@@ -189,7 +173,7 @@ public class CasConfig {
     }
 
     /**
-     *  For single point logout
+     * For single point logout
      */
     @Bean
     public ServletListenerRegistrationBean<SingleSignOutHttpSessionListener> singleSignOutHttpSessionListener() {
@@ -232,7 +216,7 @@ public class CasConfig {
 
 
     @Scheduled(fixedRate = 300_000)
-    public void proxyGrantingTicketStorageCleaner(){
+    public void proxyGrantingTicketStorageCleaner() {
         logger.info("Running ProxyGrantingTicketStorage#cleanup() at {}",
                 LocalDateTime.now());
         pgtStorage().cleanUp();
@@ -240,14 +224,13 @@ public class CasConfig {
 
 
     @Bean
-    public AuthenticationUserDetailsService userDetailsService(){
+    public AuthenticationUserDetailsService userDetailsService() {
         GrantedAuthorityFromAssertionAttributesUserDetailsService uds =
                 new GrantedAuthorityFromAssertionAttributesUserDetailsService(
                         new String[]{"role"}
-                        );
+                );
         return uds;
     }
-
 
 
 } // The End...

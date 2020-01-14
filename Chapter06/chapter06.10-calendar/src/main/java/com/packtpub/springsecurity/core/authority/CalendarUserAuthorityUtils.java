@@ -19,15 +19,15 @@ public final class CalendarUserAuthorityUtils {
             "ROLE_USER");
     protected static final List<GrantedAuthority> USER_ROLES = AuthorityUtils.createAuthorityList("ROLE_USER");
 
+    private CalendarUserAuthorityUtils() {
+    }
+
     public static Collection<? extends GrantedAuthority> createAuthorities(CalendarUser calendarUser) {
         String username = calendarUser.getEmail();
         if (username.startsWith("admin")) {
             return ADMIN_ROLES;
         }
         return USER_ROLES;
-    }
-
-    private CalendarUserAuthorityUtils() {
     }
 
 } // The End...

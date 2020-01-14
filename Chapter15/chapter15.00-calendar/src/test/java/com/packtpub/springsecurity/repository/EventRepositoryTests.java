@@ -31,11 +31,11 @@ public class EventRepositoryTests {
     @Autowired
     private EventRepository repository;
 
-	@Test
-	public void validateUser_Event() {
+    @Test
+    public void validateUser_Event() {
         int userId = 0;
 //        List<Event> events = repository.findForUser(userId);
 //        assertThat(events.get(0).getSummary()).isEqualTo("Birthday Party");
-	}
+    }
 
 }

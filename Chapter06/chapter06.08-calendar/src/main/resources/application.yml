@@ -36,7 +36,7 @@ spring:
   ## LDAP
   ldap:
     embedded:
-#      ldif: classpath:/ldif/example.ldif
+      #      ldif: classpath:/ldif/example.ldif
       ldif: classpath:/ldif/calendar.ldif
       baseDn: dc=jbcpcalendar,dc=com
       port: ${LDAP_PORT:33389}

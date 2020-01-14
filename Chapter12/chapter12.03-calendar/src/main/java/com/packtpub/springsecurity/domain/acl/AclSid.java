@@ -1,13 +1,8 @@
 package com.packtpub.springsecurity.domain.acl;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.springframework.security.acls.model.Sid;
+
+import javax.persistence.*;
 
 /*
 create table acl_sid (
@@ -17,8 +12,8 @@ create table acl_sid (
   constraint uk_acl_sid unique(sid,principal) );
  */
 @Entity
-@Table(name="acl_sid")
-public class AclSid implements Sid{
+@Table(name = "acl_sid")
+public class AclSid implements Sid {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,7 +21,7 @@ public class AclSid implements Sid{
     @Column
     private Boolean principal;
 
-    @Column(name="SID")
+    @Column(name = "SID")
     private String sid;
 
     public Long getId() {

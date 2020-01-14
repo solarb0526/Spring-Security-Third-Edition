@@ -20,7 +20,6 @@ import java.util.Set;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Repository
 public class JpaCalendarUserDao implements CalendarUserDao {
@@ -88,7 +87,7 @@ public class JpaCalendarUserDao implements CalendarUserDao {
             throw new IllegalArgumentException("userToAdd cannot be null");
         }
         if (userToAdd.getId() != null) {
-            throw new IllegalArgumentException("userToAdd.getId() must be null when creating a "+CalendarUser.class.getName());
+            throw new IllegalArgumentException("userToAdd.getId() must be null when creating a " + CalendarUser.class.getName());
         }
 
         Set<Role> roles = new HashSet<>();

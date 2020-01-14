@@ -24,11 +24,11 @@ task checkAllSource(type: Checkstyle) {
     classpath = project.configurations.compile
 
     reports {
-        xml{
+        xml {
             enabled = true
             destination = file("${reportOut}/checkstyle.xml")
         }
-        html{
+        html {
             enabled = true
             destination = file("${reportOut}/checkstyle.html")
             stylesheet = resources.text.fromFile("${configDir}/checkstyle-frames.xsl")

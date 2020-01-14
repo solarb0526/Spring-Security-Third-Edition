@@ -5,14 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 /**
  *
  */
-@SpringBootApplication(scanBasePackages={
+@SpringBootApplication(scanBasePackages = {
         "com.packtpub.springsecurity",
         "com.packtpub.springsecurity.configuration",
         "com.packtpub.springsecurity.domain",
@@ -23,13 +20,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EntityScan("com.packtpub.springsecurity.domain")
 public class CalendarApplication extends SpringBootServletInitializer {
 
+    public static void main(String[] args) {
+        SpringApplication.run(CalendarApplication.class, args);
+    }
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(CalendarApplication.class);
     }
-
-	public static void main(String[] args) {
-		SpringApplication.run(CalendarApplication.class, args);
-	}
 
 } // The End...

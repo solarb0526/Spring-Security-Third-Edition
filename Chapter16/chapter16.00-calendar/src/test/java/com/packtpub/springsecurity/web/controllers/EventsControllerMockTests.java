@@ -1,8 +1,5 @@
 package com.packtpub.springsecurity.web.controllers;
 
-import com.packtpub.springsecurity.CalendarUserStub;
-import com.packtpub.springsecurity.core.userdetails.CalendarUserDetailsService;
-import com.packtpub.springsecurity.domain.Event;
 import com.packtpub.springsecurity.service.CalendarService;
 import com.packtpub.springsecurity.service.UserContext;
 import org.junit.Test;
@@ -11,19 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.test.context.support.WithAnonymousUser;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.transaction.Transactional;
-import java.util.Calendar;
-
 /**
- *
  * @author Mick Knutson
- *
  */
 //@WithUserDetails(value="user1@example.com", userDetailsServiceBeanName="calendarUserDetailsService")
 //@WithUserDetails("user1@example.com")
@@ -51,7 +40,8 @@ public class EventsControllerMockTests {
     private UserContext userContext;
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
 
     /*
 

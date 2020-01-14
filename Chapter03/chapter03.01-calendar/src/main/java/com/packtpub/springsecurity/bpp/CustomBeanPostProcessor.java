@@ -25,7 +25,6 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
     }
 
     /**
-     *
      * @param bean
      * @param beanName
      * @return
@@ -41,7 +40,6 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
     }
 
     /**
-     *
      * @param bean
      * @param beanName
      * @return

@@ -12,9 +12,9 @@ http://user1:changeme@localhost:9999/api
 <head>
     <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3/dist/jquery.min.js"></script>
     <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
-          crossorigin="anonymous">
+          rel="stylesheet">
     <style>
         table, th, td {
             border: 1px solid black;
@@ -35,7 +35,7 @@ http://user1:changeme@localhost:9999/api
             "url": "http://localhost:8080/oauth/token",
             "method": "POST",
             "headers": {
-            //     "Authorization": "Basic dXNlcjFAZXhhbXBsZS5jb206dXNlcjE=",
+                //     "Authorization": "Basic dXNlcjFAZXhhbXBsZS5jb206dXNlcjE=",
                 "Authorization": "Basic " + btoa("user1@example.com:user1"),
                 // "Access-Control-Request-Method": "OPTIONS",
                 "cache-control": "no-cache"
@@ -45,7 +45,6 @@ http://user1:changeme@localhost:9999/api
             "mimeType": "multipart/form-data",
             "data": form
         };
-
 
 
         /*$(document).ready(function(){
@@ -93,7 +92,7 @@ http://user1:changeme@localhost:9999/api
         });*/
 
 
-        function oauth (uri, method, json) {
+        function oauth(uri, method, json) {
             return $.ajax({
                 url: orgProps.serverOrigin + ensurePrecedingSlash(uri),
                 type: method,
@@ -125,17 +124,18 @@ http://user1:changeme@localhost:9999/api
                     var token = jqXHR.getResponseHeader("Authorization");
                     jwt.storeToken(token);
                 });
+
         // });
 
     </script>
 
 </head>
 <body>
-    <h1>NEW Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication)</h1>
-    <div id = "resourceServerFeed">
-        <p class="message"><b>Application Message Returned:</b> </p>
-    </div>
+<h1>NEW Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication)</h1>
+<div id="resourceServerFeed">
+    <p class="message"><b>Application Message Returned:</b></p>
+</div>
 
-    <h2><a href="index.html">Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication) example</a></h2>
+<h2><a href="index.html">Spring Boot Ajax OAuth2 Test (w/ BASIC Authentication) example</a></h2>
 </body>
 </html>

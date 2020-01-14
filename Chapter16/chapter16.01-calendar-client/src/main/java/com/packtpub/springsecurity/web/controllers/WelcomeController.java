@@ -16,16 +16,23 @@ import java.util.Map;
  * This displays the welcome screen that shows what will be happening in this chapter.
  *
  * @author Mick Knutson
- *
+ * <p>
  * http://localhost:8888/
  * http://localhost:8888/api
  * http://localhost:8888/beans
- *
+ * <p>
  * http://localhost:8888/events/
  * http://localhost:8888/events/my
  */
 @RestController
 public class WelcomeController {
+
+    @Autowired
+    private OAuth2RestOperations template;
+    @Value("${base.url:http://localhost:8888}")
+    private String baseUrl;
+    @Value("${oauth.url:http://localhost:8080}")
+    private String baseOauthUrl;
 
     @GetMapping("/")
     public String welcome(HttpServletRequest request) {
@@ -64,27 +71,17 @@ public class WelcomeController {
         return sb.toString();
     }
 
-    @Autowired
-    private OAuth2RestOperations template;
-
-    @Value("${base.url:http://localhost:8888}")
-    private String baseUrl;
-
-    @Value("${oauth.url:http://localhost:8080}")
-    private String baseOauthUrl;
-
-
     @GetMapping("/beans")
     public List<Map<String, ?>> home() {
         @SuppressWarnings("unchecked")
-        List<Map<String, ?>> result = template.getForObject(baseOauthUrl+"/admin/beans", List.class);
+        List<Map<String, ?>> result = template.getForObject(baseOauthUrl + "/admin/beans", List.class);
         return result;
     }
 
     @GetMapping("/api")
-    public  String apiCheck() {
+    public String apiCheck() {
         @SuppressWarnings("unchecked")
-        String result = template.getForObject(baseOauthUrl+"/api", String.class);
+        String result = template.getForObject(baseOauthUrl + "/api", String.class);
         return result;
     }
 

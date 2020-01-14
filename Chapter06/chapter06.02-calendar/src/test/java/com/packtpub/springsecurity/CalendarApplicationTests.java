@@ -30,11 +30,11 @@ public class CalendarApplicationTests {
     @Test
     public void test_user1_Login() throws Exception {
         mockMvc.perform(post("/login")
-                        .accept(MediaType.TEXT_HTML)
-                        .contentType(
-                                MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("username", "shauser@example.com")
-                        .param("password", "shauser")
+                .accept(MediaType.TEXT_HTML)
+                .contentType(
+                        MediaType.APPLICATION_FORM_URLENCODED)
+                .param("username", "shauser@example.com")
+                .param("password", "shauser")
         )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/default"))

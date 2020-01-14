@@ -24,25 +24,26 @@ public class SessionConfig {
 
     /**
      * sessionAuthenticationStrategy does not work in JavaConfig
+     *
      * @param sessionRegistry
      * @return
      */
 //    @Bean
-    public SessionAuthenticationStrategy sessionAuthenticationStrategy(SessionRegistry sessionRegistry){
-        return new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry){{
+    public SessionAuthenticationStrategy sessionAuthenticationStrategy(SessionRegistry sessionRegistry) {
+        return new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry) {{
             setMaximumSessions(-1);
         }};
     }
 
-//    @Bean
-    public ConcurrentSessionFilter concurrentSessionFilter(){
+    //    @Bean
+    public ConcurrentSessionFilter concurrentSessionFilter() {
         SimpleRedirectSessionInformationExpiredStrategy expiredSessionStrategy =
                 new SimpleRedirectSessionInformationExpiredStrategy("/login/form?expired");
         return new ConcurrentSessionFilter(sessionRegistry(), expiredSessionStrategy);
     }
 
     @Bean
-    public SessionRegistry sessionRegistry(){
+    public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
 

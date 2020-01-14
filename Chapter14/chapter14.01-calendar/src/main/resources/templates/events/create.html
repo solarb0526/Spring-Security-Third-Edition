@@ -11,39 +11,40 @@
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <!--/*--><!--@thymesVar id="createEventForm" type="com.packtpub.springsecurity.web.model.CreateEventForm"--><!--*/-->
-    <form action="#" th:action="@{/events/new}" th:object="${createEventForm}" method="post" cssClass="form-horizontal">
-        <errors path="*" element="div" cssClass="alert alert-error"/>
+    <!--/*--><!--@thymesVar id="createEventForm" type="com.packtpub.springsecurity.web.model.CreateEventForm"-->
+    <!--*/-->
+    <form action="#" cssClass="form-horizontal" method="post" th:action="@{/events/new}" th:object="${createEventForm}">
+        <errors cssClass="alert alert-error" element="div" path="*"/>
         <fieldset>
             <legend>Event Information</legend>
             <div class="control-group">
                 <label class="control-label" for="attendeeEmail">Attendee Email</label>
                 <div class="controls">
-                    <input class="input-xlarge" th:field="*{attendeeEmail}" id="attendeeEmail"/>
+                    <input class="input-xlarge" id="attendeeEmail" th:field="*{attendeeEmail}"/>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="when">Event Date/Time (yyyy-MM-dd HH:mm)</label>
                 <div class="controls">
-                    <input class="input-xlarge" th:field="*{when}" id="when" />
+                    <input class="input-xlarge" id="when" th:field="*{when}"/>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="summary">Summary</label>
                 <div class="controls">
-                    <input class="input-xlarge" th:field="*{summary}" id="summary"/>
+                    <input class="input-xlarge" id="summary" th:field="*{summary}"/>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="description">Description</label>
                 <div class="controls">
-                    <textarea class="input-xlarge" th:field="*{description}" id="description" rows="5" cols="25"/>
+                    <textarea class="input-xlarge" cols="25" id="description" rows="5" th:field="*{description}"/>
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
                     <input id="submit" type="submit" value="Create"/>
-                    <input id="auto" type="submit" name="auto" value="Auto Populate Form"/>
+                    <input id="auto" name="auto" type="submit" value="Auto Populate Form"/>
                 </div>
             </div>
         </fieldset>

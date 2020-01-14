@@ -9,11 +9,6 @@ import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.social.facebook.connect.FacebookConnectionFactory;
-import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
-import org.springframework.social.twitter.connect.TwitterConnectionFactory;
-import org.springframework.social.github.connect.GitHubConnectionFactory;
-import org.springframework.social.google.connect.GoogleConnectionFactory;
 
 import javax.sql.DataSource;
 
@@ -33,7 +28,6 @@ public class DatabaseSocialConfigurer extends SocialConfigurerAdapter {
     }
 
     /**
-     *
      * @param connectionFactoryLocator
      * @return
      */

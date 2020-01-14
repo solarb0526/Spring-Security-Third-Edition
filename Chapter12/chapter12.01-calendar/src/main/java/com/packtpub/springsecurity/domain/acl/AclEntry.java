@@ -1,13 +1,6 @@
 package com.packtpub.springsecurity.domain.acl;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /*
 create table acl_entry (
@@ -25,33 +18,33 @@ create table acl_entry (
   constraint fk_acl_entry_sid foreign key(sid) references acl_sid(id) );
  */
 @Entity
-@Table(name="acl_entry")
-public class AclEntry{
+@Table(name = "acl_entry")
+public class AclEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="ACL_OBJECT_IDENTITY")
+    @JoinColumn(name = "ACL_OBJECT_IDENTITY")
     private AclObjectIdentity aclObjectIdentity;
 
-    @Column(name="ACE_ORDER")
+    @Column(name = "ACE_ORDER")
     private Integer aceOrder;
 
     @ManyToOne
-    @JoinColumn(name="SID")
+    @JoinColumn(name = "SID")
     private AclSid sid;
 
-    @Column(name="MASK")
+    @Column(name = "MASK")
     private Integer mask;
 
-    @Column(name="GRANTING")
+    @Column(name = "GRANTING")
     private Boolean granting;
 
-    @Column(name="AUDIT_SUCCESS")
+    @Column(name = "AUDIT_SUCCESS")
     private Boolean auditSuccess;
 
-    @Column(name="AUDIT_FAILURE")
+    @Column(name = "AUDIT_FAILURE")
     private Boolean auditFailure;
 
     public Long getId() {

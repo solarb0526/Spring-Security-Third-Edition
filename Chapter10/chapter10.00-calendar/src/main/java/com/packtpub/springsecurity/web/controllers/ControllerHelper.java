@@ -10,15 +10,15 @@ public class ControllerHelper {
     /**
      * Redirect helper
      * Usage:
-     *      ControllerHelper.redirect() -> "/";
-     *
+     * ControllerHelper.redirect() -> "/";
+     * <p>
      * Result:
-     *      "redirect:/"
+     * "redirect:/"
      *
      * @param path for URI
      * @return Redirect URI path
      */
 //    @FunctionalInterface
-    public static Function<String, String> redirect = (path)-> "redirect:" + path;
+    public static Function<String, String> redirect = (path) -> "redirect:" + path;
 
 }

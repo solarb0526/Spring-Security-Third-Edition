@@ -24,7 +24,6 @@ import java.util.Set;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Configuration
 @EnableWebMvc
@@ -33,8 +32,7 @@ import java.util.Set;
         "com.packtpub.springsecurity.web.controllers",
         "com.packtpub.springsecurity.web.model"
 })
-public class WebMvcConfig extends WebMvcConfigurerAdapter
-{
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private ThymeleafViewResolver thymeleafViewResolver;
@@ -56,7 +54,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
 //        result.setUseTrailingSlashMatch(false);
 //        return result;
 //    }
-
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")
@@ -72,7 +69,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
                 .favorPathExtension(true) // .html / .json / .ms
                 .defaultContentType(MediaType.TEXT_HTML) // text/html
                 .mediaTypes(
-                        new HashMap<String, MediaType>(){
+                        new HashMap<String, MediaType>() {
                             {
                                 put("html", MediaType.TEXT_HTML);
                                 put("xml", MediaType.APPLICATION_XML);
@@ -112,7 +109,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
     }
 
     @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 

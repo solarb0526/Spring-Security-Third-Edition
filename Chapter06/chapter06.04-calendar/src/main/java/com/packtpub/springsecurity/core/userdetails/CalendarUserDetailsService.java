@@ -57,9 +57,10 @@ public class CalendarUserDetailsService implements UserDetailsService {
      * </ul>
      *
      * @author Rob Winch
-     *
      */
     private final class CalendarUserDetails extends CalendarUser implements UserDetails {
+        private static final long serialVersionUID = 3384436451564509032L;
+
         CalendarUserDetails(CalendarUser user) {
             setId(user.getId());
             setEmail(user.getEmail());
@@ -97,7 +98,5 @@ public class CalendarUserDetailsService implements UserDetailsService {
         public boolean isEnabled() {
             return true;
         }
-
-        private static final long serialVersionUID = 3384436451564509032L;
     }
 }

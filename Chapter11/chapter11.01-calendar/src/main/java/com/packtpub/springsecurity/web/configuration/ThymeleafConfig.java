@@ -5,15 +5,11 @@ import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
-import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
-
-import java.util.HashSet;
 
 @Configuration
 public class ThymeleafConfig {
@@ -36,7 +32,7 @@ public class ThymeleafConfig {
     @Bean
     @Description("Thymeleaf template engine with Spring integration")
     public SpringTemplateEngine templateEngine(final TemplateResolver templateResolver)
-    throws Exception {
+            throws Exception {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolver(templateResolver);
 

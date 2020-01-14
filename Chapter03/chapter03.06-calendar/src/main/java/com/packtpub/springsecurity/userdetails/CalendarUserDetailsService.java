@@ -19,7 +19,6 @@ import java.util.Collection;
  * converting it into a {@link UserDetails} so that Spring Security can do the username/password comparison for us.
  *
  * @author Rob Winch
- *
  */
 @Component
 public class CalendarUserDetailsService implements UserDetailsService {
@@ -62,9 +61,10 @@ public class CalendarUserDetailsService implements UserDetailsService {
      * </ul>
      *
      * @author Rob Winch
-     *
      */
     private final class CalendarUserDetails extends CalendarUser implements UserDetails {
+        private static final long serialVersionUID = 3384436451564509032L;
+
         CalendarUserDetails(CalendarUser user) {
             setId(user.getId());
             setEmail(user.getEmail());
@@ -102,7 +102,5 @@ public class CalendarUserDetailsService implements UserDetailsService {
         public boolean isEnabled() {
             return true;
         }
-
-        private static final long serialVersionUID = 3384436451564509032L;
     }
 }

@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * A controller that allows for viewing of account information.
  *
  * @author Rob Winch
- *
  */
 @Controller
 public class AccountController {
     @RequestMapping("/accounts/my")
     public String view(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication == null) {
+        if (authentication == null) {
             throw new IllegalStateException("authentication cannot be null. Make sure you are logged in.");
         }
         Object principal = authentication.getPrincipal();

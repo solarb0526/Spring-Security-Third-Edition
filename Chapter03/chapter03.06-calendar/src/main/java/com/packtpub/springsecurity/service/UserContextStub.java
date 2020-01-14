@@ -1,12 +1,8 @@
 package com.packtpub.springsecurity.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import org.apache.commons.lang3.builder.*;
-
 import com.packtpub.springsecurity.dataaccess.CalendarUserDao;
 import com.packtpub.springsecurity.domain.CalendarUser;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Returns the same user for every call to {@link #getCurrentUser()}. This is used prior to adding security, so that the
@@ -44,7 +40,7 @@ public class UserContextStub implements UserContext {
             throw new IllegalArgumentException("user cannot be null");
         }
         Integer currentId = user.getId();
-        if(currentId == null) {
+        if (currentId == null) {
             throw new IllegalArgumentException("user.getId() cannot be null");
         }
         this.currentUserId = currentId;
@@ -52,6 +48,6 @@ public class UserContextStub implements UserContext {
 
     @Override
     public String toString() {
-      return ReflectionToStringBuilder.toString(this);
+        return ReflectionToStringBuilder.toString(this);
     }
 }

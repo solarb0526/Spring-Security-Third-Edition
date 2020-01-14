@@ -39,7 +39,7 @@ public class DataSourceConfig {
     /**
      * Embedded H2 database
      * Connect to running database with the following details:
-     *
+     * <p>
      * URL: jdbc:h2:mem:dataSource
      * Driver Class: org.h2.Driver
      * Username: sa
@@ -68,7 +68,7 @@ public class DataSourceConfig {
 
     @Bean
     @Autowired
-    public JdbcTemplate jdbcOperations(final DataSource dataSource){
+    public JdbcTemplate jdbcOperations(final DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
@@ -92,9 +92,9 @@ public class DataSourceConfig {
     }
 
 
-
     /**
      * DataSource PostConstruct call-back
+     *
      * @throws SQLException
      */
     @PostConstruct
@@ -106,6 +106,7 @@ public class DataSourceConfig {
 
     /**
      * DataSource PreDestroy call-back
+     *
      * @throws SQLException
      */
     @PreDestroy()

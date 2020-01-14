@@ -33,7 +33,7 @@ public class ThymeleafConfig {
     @Bean
     @Description("Thymeleaf template engine with Spring integration")
     public SpringTemplateEngine templateEngine(final TemplateResolver templateResolver)
-    throws Exception {
+            throws Exception {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolver(templateResolver);
 

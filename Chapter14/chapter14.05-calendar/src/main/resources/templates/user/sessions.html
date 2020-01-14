@@ -23,8 +23,10 @@
         </thead>
         <tbody>
         <tr th:if="${sessions.empty}">
-            <td colspan="3" class="msg">No sessions available. This may happen before the SessionRegistry is wired properly
-                or when user's sessions are restored across container restarts. Read the Chapter text for details.</td>
+            <td class="msg" colspan="3">No sessions available. This may happen before the SessionRegistry is wired
+                properly
+                or when user's sessions are restored across container restarts. Read the Chapter text for details.
+            </td>
         </tr>
         <tr th:each="session : ${sessions}">
 
@@ -32,9 +34,9 @@
             <td th:text="${session.sessionId}"></td>
 
             <td>
-                <form action="#" th:action="@{'/user/sessions/{id}'(id=${session.sessionId})}"
-                      th:method="delete" cssClass="form-horizontal">
-                    <input type="submit" value="Delete" class="btn"/>
+                <form action="#" cssClass="form-horizontal"
+                      th:action="@{'/user/sessions/{id}'(id=${session.sessionId})}" th:method="delete">
+                    <input class="btn" type="submit" value="Delete"/>
                 </form>
             </td>
         </tr>

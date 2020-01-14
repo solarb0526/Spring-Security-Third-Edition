@@ -24,7 +24,6 @@ import java.util.List;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Repository
 public class DefaultCalendarService implements CalendarService {
@@ -84,7 +83,7 @@ public class DefaultCalendarService implements CalendarService {
         MutableAcl acl = aclService.createAcl(new ObjectIdentityImpl(event));
         PrincipalSid sid = new PrincipalSid(userContext.getCurrentUser().getEmail());
         acl.setOwner(sid);
-        acl.insertAce(0,  BasePermission.READ, sid, true);
+        acl.insertAce(0, BasePermission.READ, sid, true);
         aclService.updateAcl(acl);
 
         return result;
@@ -122,8 +121,8 @@ public class DefaultCalendarService implements CalendarService {
 
     /**
      * Create a new Signup User
-     * @param user
-     *            the new {@link CalendarUser} to create. The {@link CalendarUser#getId()} must be null.
+     *
+     * @param user the new {@link CalendarUser} to create. The {@link CalendarUser#getId()} must be null.
      * @return
      */
     @Override

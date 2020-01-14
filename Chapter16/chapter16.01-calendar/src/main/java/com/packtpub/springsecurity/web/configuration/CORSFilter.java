@@ -4,25 +4,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.filter.GenericFilterBean;
 
-import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * CORS Filter
- *
+ * <p>
  * This filter is an implementation of W3C's CORS
  * (Cross-Origin Resource Sharing) specification,
  * which is a mechanism that enables cross-origin requests.
- *
+ * <p>
  * Special notes for <b>Access-Control-Allow-Credentials</b>:
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials
- *
  */
 public class CORSFilter extends GenericFilterBean implements Filter {
 
@@ -47,9 +41,9 @@ public class CORSFilter extends GenericFilterBean implements Filter {
         sb.append("---------------\n");
         httpResponse.getHeaderNames()
                 .forEach(name -> {
-                    sb.append(name).append(": ").append(httpResponse.getHeader(name)).append("\n");
-                }
-        );
+                            sb.append(name).append(": ").append(httpResponse.getHeader(name)).append("\n");
+                        }
+                );
         logger.info("********** CORS Configuration Completed **********");
         logger.info(sb.toString());
 
@@ -57,6 +51,7 @@ public class CORSFilter extends GenericFilterBean implements Filter {
     }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 
 } // The End...

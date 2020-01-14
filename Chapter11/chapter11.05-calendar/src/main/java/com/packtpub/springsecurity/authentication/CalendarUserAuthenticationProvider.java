@@ -14,7 +14,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
@@ -51,7 +50,7 @@ public class CalendarUserAuthenticationProvider implements AuthenticationProvide
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         String email = token.getName();
         CalendarUser user = email == null ? null : calendarService.findUserByEmail(email);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username/password");
         }
         // Database Password already encrypted:
@@ -59,7 +58,7 @@ public class CalendarUserAuthenticationProvider implements AuthenticationProvide
 
         boolean passwordsMatch = passwordEncoder.matches(token.getCredentials().toString(), password);
 
-        if(!passwordsMatch) {
+        if (!passwordsMatch) {
             throw new BadCredentialsException("Invalid username/password");
         }
         Collection<? extends GrantedAuthority> authorities = CalendarUserAuthorityUtils.createAuthorities(user);

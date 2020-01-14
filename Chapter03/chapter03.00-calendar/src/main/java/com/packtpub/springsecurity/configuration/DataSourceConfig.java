@@ -8,19 +8,11 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
@@ -65,11 +57,12 @@ public class DataSourceConfig {
     /**
      * Access the H2 Console:
      * http://localhost:8080/admin/h2/
+     *
      * @return
      */
     @Bean
-    public ServletRegistrationBean h2servletRegistration(){
-        ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());
+    public ServletRegistrationBean h2servletRegistration() {
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
         registrationBean.addUrlMappings("/admin/h2/*");
         return registrationBean;
 
@@ -107,9 +100,9 @@ public class DataSourceConfig {
     }*/
 
 
-
     /**
      * DataSource PostConstruct call-back
+     *
      * @throws SQLException
      */
     @PostConstruct
@@ -121,6 +114,7 @@ public class DataSourceConfig {
 
     /**
      * DataSource PreDestroy call-back
+     *
      * @throws SQLException
      */
     @PreDestroy()

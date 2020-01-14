@@ -1,12 +1,5 @@
 package com.packtpub.springsecurity.dataaccess;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
 import com.packtpub.springsecurity.domain.acl.AclClass;
 import com.packtpub.springsecurity.domain.acl.AclEntry;
 import com.packtpub.springsecurity.domain.acl.AclObjectIdentity;
@@ -16,6 +9,12 @@ import com.packtpub.springsecurity.repository.RoleRepository;
 import org.springframework.security.acls.model.ObjectIdentity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * TODO: Need to add spring-data repositories
@@ -42,6 +41,7 @@ public class JpaAclDao implements AclDao {
     /**
      * TODO: Need to convert to:
      * <pre><T> TypedQuery<T> createQuery(CriteriaQuery<T> criteriaQuery);</pre>
+     *
      * @param identifier
      * @param type
      * @return
@@ -105,9 +105,9 @@ public class JpaAclDao implements AclDao {
     @Transactional
     public void deleteEntries(AclObjectIdentity objectIdentity) {
         objectIdentity = entityManager.find(AclObjectIdentity.class, objectIdentity.getId());
-        if(objectIdentity.getEntries()!=null) {
-            for(AclEntry entry:objectIdentity.getEntries()) {
-                entityManager.remove((AclEntry)entry);
+        if (objectIdentity.getEntries() != null) {
+            for (AclEntry entry : objectIdentity.getEntries()) {
+                entityManager.remove((AclEntry) entry);
             }
         }
 
@@ -122,7 +122,7 @@ public class JpaAclDao implements AclDao {
     @Override
     @Transactional
     public void createEntries(List<AclEntry> entries) {
-        for(AclEntry entry:entries) {
+        for (AclEntry entry : entries) {
             entityManager.persist(entry);
         }
 
@@ -141,7 +141,7 @@ public class JpaAclDao implements AclDao {
 
         query.setParameter("sid", principal);
         List<AclSid> results = query.getResultList();
-        if(results.size()>0) {
+        if (results.size() > 0) {
             return results.get(0);
         }
         return null;

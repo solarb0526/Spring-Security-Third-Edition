@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 
 /**
  * Spring Security Config Class
+ *
  * @see {@link ResourceServerConfigurerAdapter}
  * @since chapter16.00
  */

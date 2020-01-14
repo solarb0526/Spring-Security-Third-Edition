@@ -22,10 +22,10 @@ version = '4.3.3-SNAPSHOT'
 dependencies {
 
     // Database:
-	compile('org.springframework.boot:spring-boot-starter-jdbc')
-	
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
+
     // Security:
-	compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-security')
 
     // Web
     compile('org.springframework.boot:spring-boot-starter-web')
@@ -38,7 +38,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-configuration-processor')
 
     // Testing
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
 
 }

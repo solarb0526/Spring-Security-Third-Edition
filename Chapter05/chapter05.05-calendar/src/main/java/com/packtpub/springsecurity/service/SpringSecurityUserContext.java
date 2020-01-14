@@ -1,6 +1,6 @@
 package com.packtpub.springsecurity.service;
 
-import com.packtpub.springsecurity.configuration.SecurityConfig;
+import com.packtpub.springsecurity.domain.CalendarUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +13,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import com.packtpub.springsecurity.domain.CalendarUser;
-
 /**
  * An implementation of {@link UserContext} that looks up the {@link CalendarUser} using the Spring Security's
  * {@link Authentication} by principal name.
  *
  * @author Rob Winch
- *
  */
 @Component
 public class SpringSecurityUserContext implements UserContext {
@@ -32,7 +29,7 @@ public class SpringSecurityUserContext implements UserContext {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SpringSecurityUserContext(CalendarService calendarService,UserDetailsService userDetailsService) {
+    public SpringSecurityUserContext(CalendarService calendarService, UserDetailsService userDetailsService) {
         if (calendarService == null) {
             throw new IllegalArgumentException("calendarService cannot be null");
         }
@@ -56,7 +53,7 @@ public class SpringSecurityUserContext implements UserContext {
             return null;
         }
 
-        User user = (User)authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
         String email = user.getUsername();
 
 //        CalendarUser user = (CalendarUser)authentication.getPrincipal();

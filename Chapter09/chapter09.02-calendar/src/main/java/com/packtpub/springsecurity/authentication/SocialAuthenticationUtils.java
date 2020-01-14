@@ -2,14 +2,10 @@ package com.packtpub.springsecurity.authentication;
 
 import com.packtpub.springsecurity.core.authority.CalendarUserAuthorityUtils;
 import com.packtpub.springsecurity.domain.CalendarUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UserProfile;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
@@ -33,7 +29,7 @@ public class SocialAuthenticationUtils {
 
     }
 
-    public static CalendarUser createCalendarUserFromProvider(Connection<?> connection){
+    public static CalendarUser createCalendarUserFromProvider(Connection<?> connection) {
 
         // TODO: There is a defect with Facebook:
         // org.springframework.social.UncategorizedApiException: (#12) bio field is
@@ -55,13 +51,11 @@ public class SocialAuthenticationUtils {
 
         CalendarUser user = new CalendarUser();
 
-        if(profile.getEmail() != null){
+        if (profile.getEmail() != null) {
             user.setEmail(profile.getEmail());
-        }
-        else if(profile.getUsername() != null){
+        } else if (profile.getUsername() != null) {
             user.setEmail(profile.getUsername());
-        }
-        else {
+        } else {
             user.setEmail(connection.getDisplayName());
         }
 

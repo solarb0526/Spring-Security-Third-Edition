@@ -10,17 +10,18 @@ buildscript {
 
     repositories {
         //mavenLocal()
-        jcenter()
-        maven { url("https://plugins.gradle.org/m2/") }
+//        jcenter()
+        maven { url("http://unidocu.unipost.co.kr/nexus/repository/public/") }
+//        maven { url("https://plugins.gradle.org/m2/") }
     }
     dependencies {
-        classpath ("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath ("io.spring.gradle:dependency-management-plugin:${dependencyManagementPluginVersion}")
-        classpath ("com.diffplug.spotless:spotless-plugin-gradle:${spotlessPluginGradleVersion}")
-        classpath ("com.netflix.nebula:gradle-lint-plugin:${gradleLintPluginVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${dependencyManagementPluginVersion}")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:${spotlessPluginGradleVersion}")
+        classpath("com.netflix.nebula:gradle-lint-plugin:${gradleLintPluginVersion}")
 
-        classpath ("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarqubeGradlePluginVersion}")
-        classpath ("com.gradle:build-scan-plugin:1.10.2")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarqubeGradlePluginVersion}")
+        classpath("com.gradle:build-scan-plugin:1.10.2")
     }
 }
 
@@ -48,7 +49,6 @@ allprojects {
 
 //    apply from: "${rootDir}/config/sonarqube-multiproject.gradle"
 //    apply from: "${rootDir}/config/sonar.gradle"
-
 
 
     /**
@@ -90,14 +90,16 @@ allprojects {
 
     repositories {
         //mavenLocal()
-        jcenter()
-        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url("http://unidocu.unipost.co.kr/nexus/repository/public/") }
+        maven { url("http://unidocu.unipost.co.kr/nexus/repository/maven-central/") }
+//        jcenter()
+//        maven { url "https://plugins.gradle.org/m2/" }
 
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url "https://repo.spring.io/libs-milestone" }
+//        maven { url "https://repo.spring.io/milestone" }
+//        maven { url "https://repo.spring.io/libs-milestone" }
 
-        maven { url "https://repo.spring.io/libs-snapshot" }
-        maven { url "https://repo.spring.io/snapshot" }
+//        maven { url "https://repo.spring.io/libs-snapshot" }
+//        maven { url "https://repo.spring.io/snapshot" }
 
     }
 
@@ -108,7 +110,6 @@ allprojects {
     task wrapper(type: Wrapper) {
         gradleVersion = "${gradleVersion}"
     }
-
 
 
 } // allprojects
@@ -144,12 +145,12 @@ subprojects {
     dependencies {
 
         //-----------------------------------------------------------------------//
-        compile ("org.aspectj:aspectjweaver")
+        compile("org.aspectj:aspectjweaver")
 
 
         //-----------------------------------------------------------------------//
         // In-memory database
-        compile ("com.h2database:h2")
+        compile("com.h2database:h2")
         // Used for Swing GUI client
 //        runtime ("org.hsqldb:hsqldb")
 
@@ -161,17 +162,17 @@ subprojects {
 
         //-----------------------------------------------------------------------//
         // Selenium / WebDriver
-        testCompile ("org.seleniumhq.selenium:selenium-api")
-        testCompile ("org.seleniumhq.selenium:selenium-chrome-driver")
-        testCompile ("org.seleniumhq.selenium:selenium-firefox-driver")
+        testCompile("org.seleniumhq.selenium:selenium-api")
+        testCompile("org.seleniumhq.selenium:selenium-chrome-driver")
+        testCompile("org.seleniumhq.selenium:selenium-firefox-driver")
 
-        testCompile ("org.seleniumhq.selenium:selenium-support")
+        testCompile("org.seleniumhq.selenium:selenium-support")
 
-        testCompile ("org.seleniumhq.selenium:selenium-java", {
+        testCompile("org.seleniumhq.selenium:selenium-java", {
             exclude group: "net.sourceforge.htmlunit", module: "htmlunit"
         })
 
-        testCompile ("net.sourceforge.htmlunit:htmlunit:latest.release")
+        testCompile("net.sourceforge.htmlunit:htmlunit:latest.release")
         // net.sourceforge.htmlunit:htmlunit:2.9
 
         // This has been dormant since 2016:
@@ -186,36 +187,36 @@ subprojects {
         compile "org.thymeleaf:thymeleaf"
         compile "org.thymeleaf:thymeleaf-spring4"
 
-        compile ("org.thymeleaf.extras:thymeleaf-extras-conditionalcomments")
-        compile ("org.thymeleaf.extras:thymeleaf-extras-java8time")
-        compile ("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
-        compile ("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+        compile("org.thymeleaf.extras:thymeleaf-extras-conditionalcomments")
+        compile("org.thymeleaf.extras:thymeleaf-extras-java8time")
+        compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
+        compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
 
         //-----------------------------------------------------------------------//
         // Utils:
-        compile ("org.yaml:snakeyaml")
-        compile ("org.apache.commons:commons-lang3")
+        compile("org.yaml:snakeyaml")
+        compile("org.apache.commons:commons-lang3")
         // Prefer Java8 time instead of Joda Time:
 //        compile ("joda-time:joda-time")
         //compile("com.google.guava:guava:${guavaVersion}")
 //        compile ("io.logz.log4j2:logzio-log4j2-appender:1.0.5")
 
-        compile ("io.logz.logback:logzio-logback-appender:1.0.11")
-        compile ("ch.qos.logback:logback-classic")
-        compile ("org.slf4j:jul-to-slf4j")
-        compile ("org.slf4j:log4j-over-slf4j")
+        compile("io.logz.logback:logzio-logback-appender:1.0.11")
+        compile("ch.qos.logback:logback-classic")
+        compile("org.slf4j:jul-to-slf4j")
+        compile("org.slf4j:log4j-over-slf4j")
 
         //-----------------------------------------------------------------------//
         //-- WebJars:
         // @see http://www.webjars.org/documentation#springmvc
-        compile ("org.webjars:bootstrap:${webjarsBootstrapVersion}")
-        compile ("org.webjars:jquery:${webjarsJqueryVersion}")
-        compile ("org.webjars:webjars-locator:${webjarsLocatorVersion}")
-        compile ("org.webjars:requirejs:${webjarsRequireJsVersion}")
+        compile("org.webjars:bootstrap:${webjarsBootstrapVersion}")
+        compile("org.webjars:jquery:${webjarsJqueryVersion}")
+        compile("org.webjars:webjars-locator:${webjarsLocatorVersion}")
+        compile("org.webjars:requirejs:${webjarsRequireJsVersion}")
 
 
         // JSON Support
-        runtime ("com.fasterxml.jackson.core:jackson-databind")
+        runtime("com.fasterxml.jackson.core:jackson-databind")
 
         //-----------------------------------------------------------------------//
     } // dependencies
@@ -300,7 +301,7 @@ subprojects {
 
     jar {
         baseName = "${rootProject.name}"
-        version =  "${project.version}"
+        version = "${project.version}"
         manifest {
             attributes(
                     "Main-Class": "com.packtpub.springsecurity.CalendarApplication"
@@ -317,8 +318,6 @@ subprojects {
 //        delete rootProject.buildDir
     }
 */
-
-
 
 
 } // subprojects
@@ -439,9 +438,6 @@ buildScan {
   recipes "git-status", "travis-ci", "disk-usage", "gc-stats"
   recipe "git-commit", baseUrl: "https://github.com/ben-manes/caffeine/tree"
 }*/
-
-
-
 
 
 //---------------------------------------------------------------------------//

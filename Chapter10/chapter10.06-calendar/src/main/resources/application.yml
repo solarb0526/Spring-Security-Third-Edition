@@ -5,16 +5,16 @@
 debug: false
 
 spring:
-#  resource:
-#    chain:
-#      enabled: true
+  #  resource:
+  #    chain:
+  #      enabled: true
 
   ## Thymeleaf configuration (see ThymeleafConfig.java)
-#  thymeleaf:
-#    cache: false
-#    mode: HTML5
-#  resources:
-#    cache-period: 0
+  #  thymeleaf:
+  #    cache: false
+  #    mode: HTML5
+  #  resources:
+  #    cache-period: 0
 
   ## H2 Servlet setting
   h2:

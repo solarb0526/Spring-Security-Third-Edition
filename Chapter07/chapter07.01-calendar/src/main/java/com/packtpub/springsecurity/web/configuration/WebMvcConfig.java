@@ -26,12 +26,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
         "com.packtpub.springsecurity.web.controllers",
         "com.packtpub.springsecurity.web.model"
 })
-public class WebMvcConfig extends WebMvcConfigurerAdapter
-{
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/" };
+            "classpath:/static/", "classpath:/public/"};
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {

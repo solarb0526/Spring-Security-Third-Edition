@@ -1,10 +1,10 @@
 package com.packtpub.springsecurity.authentication.encoding;
 
+import com.packtpub.springsecurity.crypto.password.CryptoSha256PasswordEncoderMain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
-import com.packtpub.springsecurity.crypto.password.CryptoSha256PasswordEncoderMain;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 import java.util.Arrays;
 
@@ -39,10 +39,9 @@ public class Sha256PasswordEncoderMain {
 
         if (args.length == 1) {
             logger.info(encode(args[0]));
-        }
-        else {
+        } else {
             logger.info("Encoding passwords: {}", Arrays.toString(passwords));
-            for(String psswd: passwords){
+            for (String psswd : passwords) {
                 logger.info("[{}]", encode(psswd));
             }
         }

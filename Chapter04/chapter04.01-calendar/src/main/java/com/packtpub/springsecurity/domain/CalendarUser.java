@@ -13,15 +13,14 @@ import java.security.Principal;
  * Security, leverage new Spring Security modules, or even swap out security implementations) you can do so easily.
  *
  * @author Rob Winch
- *
  */
 public class CalendarUser implements Principal, Serializable {
+    private static final long serialVersionUID = 8433999509932007961L;
     private Integer id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-
 
     /**
      * Gets the email address for this user. When authenticating against this data directly, this is also used as the
@@ -32,6 +31,7 @@ public class CalendarUser implements Principal, Serializable {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -44,6 +44,7 @@ public class CalendarUser implements Principal, Serializable {
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -56,6 +57,7 @@ public class CalendarUser implements Principal, Serializable {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -68,6 +70,7 @@ public class CalendarUser implements Principal, Serializable {
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -82,14 +85,15 @@ public class CalendarUser implements Principal, Serializable {
     public String getPassword() {
         return password;
     }
+
+
+    // --- convenience methods ---
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-
-
-
-    // --- convenience methods ---
+    // --- override Object ---
 
     /**
      * Gets the full name in a formatted fashion. Note in a real application a formatter may be more appropriate, but in
@@ -101,8 +105,6 @@ public class CalendarUser implements Principal, Serializable {
     public String getName() {
         return getEmail();
     }
-
-    // --- override Object ---
 
     @Override
     public int hashCode() {
@@ -130,8 +132,6 @@ public class CalendarUser implements Principal, Serializable {
             return false;
         return true;
     }
-
-    private static final long serialVersionUID = 8433999509932007961L;
 
     @Override
     public String toString() {

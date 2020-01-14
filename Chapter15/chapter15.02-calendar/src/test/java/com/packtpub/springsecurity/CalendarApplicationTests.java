@@ -24,7 +24,8 @@ public class CalendarApplicationTests {
     MockMvc mockMvc;
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
 
     /*@Test
     @WithAnonymousUser

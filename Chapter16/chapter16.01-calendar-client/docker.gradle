@@ -3,8 +3,8 @@
  */
 
 // import task classes
-import com.bmuschko.gradle.docker.tasks.image.*
 import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
 
 apply plugin: "application"
 
@@ -21,13 +21,13 @@ def projectTag = "FOOBAR"
 def jarTag = "jbcpcalendar-client"
 
 buildscript {
-    ext{}
+    ext {}
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:gradle-processes:latest.release'
-        classpath( 'com.bmuschko:gradle-docker-plugin:latest.release' )
+        classpath('com.bmuschko:gradle-docker-plugin:latest.release')
     }
 }
 
@@ -74,22 +74,22 @@ docker logs jbcpcalendar-client --tail="0" --follow
 
 dockerDistTar {
 
-    projectTag = (project.path).substring((project.path).lastIndexOf(':')+1)
+    projectTag = (project.path).substring((project.path).lastIndexOf(':') + 1)
 
-    environmentVariable ('projectTag', "${projectTag}")
-    instruction {"ADD app-lib/${jarTag}-${version}.jar /${jarTag}.jar"}
+    environmentVariable('projectTag', "${projectTag}")
+    instruction { "ADD app-lib/${jarTag}-${version}.jar /${jarTag}.jar" }
 //    instruction {"RUN mv ${projectTag}/bin/${projectTag} ${projectTag}/bin/${projectTag}.sh"}
-    instruction {"RUN rm -rf ${projectTag}"}
+    instruction { "RUN rm -rf ${projectTag}" }
 
 //    instruction {'RUN ls -la ./chapter*/bin/'}
-    instruction {"RUN sh -c 'touch ./${jarTag}.jar'"}
-    instruction {'RUN ls -la'}
+    instruction { "RUN sh -c 'touch ./${jarTag}.jar'" }
+    instruction { 'RUN ls -la' }
 
 //    instruction {"ENTRYPOINT ./${projectTag}/bin/${projectTag}.sh"}
-    instruction {"ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar ./${jarTag}.jar"}
-    environmentVariable ('JAVA_OPTS', '-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap')
-    environmentVariable ('OAUTH_URL_TEST', "\"http://MUST GET ACTUAL IP:8080\"")
-    environmentVariable ('OAUTH_URL', "\"http://\$(ifconfig en0 | awk '/ *inet /{print \$2}'):8080\"")
+    instruction { "ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar ./${jarTag}.jar" }
+    environmentVariable('JAVA_OPTS', '-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap')
+    environmentVariable('OAUTH_URL_TEST', "\"http://MUST GET ACTUAL IP:8080\"")
+    environmentVariable('OAUTH_URL', "\"http://\$(ifconfig en0 | awk '/ *inet /{print \$2}'):8080\"")
 
 }
 

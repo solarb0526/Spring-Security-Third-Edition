@@ -10,16 +10,14 @@ import org.springframework.security.acls.model.Permission;
  * can have a permission named ADMIN_READ.
  *
  * @author Rob Winch
- *
  */
 public class CustomPermission extends BasePermission {
 
     public static final Permission ADMIN_READ = new CustomPermission(1 << 5, 'M'); // 32
+    private static final long serialVersionUID = -7695655824830259000L;
 
     public CustomPermission(int mask, char code) {
         super(mask, code);
     }
-
-    private static final long serialVersionUID = -7695655824830259000L;
 
 } // The end...

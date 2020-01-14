@@ -14,7 +14,10 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -25,7 +28,6 @@ import java.util.*;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Configuration
 @EnableWebMvc
@@ -34,8 +36,7 @@ import java.util.*;
         "com.packtpub.springsecurity.web.controllers",
         "com.packtpub.springsecurity.web.model"
 })
-public class WebMvcConfig extends WebMvcConfigurerAdapter
-{
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private ThymeleafViewResolver thymeleafViewResolver;
@@ -72,7 +73,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
                 .favorPathExtension(true) // .html / .json / .ms
                 .defaultContentType(MediaType.TEXT_HTML) // text/html
                 .mediaTypes(
-                        new HashMap<String, MediaType>(){
+                        new HashMap<String, MediaType>() {
                             {
                                 put("html", MediaType.TEXT_HTML);
                                 put("xml", MediaType.APPLICATION_XML);
@@ -137,7 +138,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
     }
 
     @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 

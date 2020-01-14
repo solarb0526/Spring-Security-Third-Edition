@@ -1,17 +1,11 @@
 package com.packtpub.springsecurity;
 
-import java.util.regex.Pattern;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
-
-import static org.junit.Assert.*;
-
 import static org.hamcrest.CoreMatchers.*;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import static org.junit.Assert.*;
 
 public class WebDriverTest {
 
@@ -20,7 +14,7 @@ public class WebDriverTest {
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
-//    @Before
+    //    @Before
     public void setUp() throws Exception {
 //        driver = new ChromeDriver();
         driver = new FirefoxDriver();
@@ -34,7 +28,7 @@ public class WebDriverTest {
 
     }
 
-//    @Test
+    //    @Test
     public void testWebDriver() throws Exception {
         driver.get(baseUrl + "/events/");
 
@@ -44,8 +38,7 @@ public class WebDriverTest {
     }
 
 
-
-//    @After
+    //    @After
     public void tearDown() throws Exception {
         driver.quit();
         String verificationErrorString = verificationErrors.toString();

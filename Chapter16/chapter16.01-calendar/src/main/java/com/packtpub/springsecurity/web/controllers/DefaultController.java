@@ -1,22 +1,14 @@
 package com.packtpub.springsecurity.web.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.*;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.security.Principal;
 
 /**
@@ -71,7 +63,6 @@ import java.security.Principal;
  * </pre>
  *
  * @author Rob Winch
- *
  */
 @RestController
 public class DefaultController {
@@ -90,7 +81,7 @@ public class DefaultController {
     public void defaultAfterLogin(Principal principal,
                                   final HttpServletRequest request,
                                   final HttpServletResponse response)
-    throws IOException{
+            throws IOException {
         logger.info("Principal: {}", principal);
 
         if (request.isUserInRole("ROLE_ADMIN")) {

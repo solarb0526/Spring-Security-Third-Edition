@@ -19,7 +19,6 @@ import java.util.List;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Repository
 public class DefaultCalendarService implements CalendarService {

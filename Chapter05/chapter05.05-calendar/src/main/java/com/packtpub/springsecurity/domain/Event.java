@@ -20,10 +20,9 @@ import java.util.Calendar;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
-@Document(collection="events")
-public class Event implements Persistable<Integer>, Serializable{
+@Document(collection = "events")
+public class Event implements Persistable<Integer>, Serializable {
 
     @Id
     private Integer id;
@@ -40,11 +39,15 @@ public class Event implements Persistable<Integer>, Serializable{
     private CalendarUser owner;
     @DBRef
     private CalendarUser attendee;
+    private Boolean persisted = Boolean.FALSE;
 
-    public Event() {}
+    public Event() {
+    }
+
 
     /**
      * Event Constructor
+     *
      * @param id
      * @param summary
      * @param description
@@ -67,7 +70,6 @@ public class Event implements Persistable<Integer>, Serializable{
         this.attendee = attendee;
     }
 
-
     /**
      * The identifier for the {@link Event}. Must be null when creating a new {@link Event}, otherwise non-null.
      *
@@ -76,68 +78,75 @@ public class Event implements Persistable<Integer>, Serializable{
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
      * The summary of the event.
+     *
      * @return
      */
     public String getSummary() {
         return summary;
     }
+
     public void setSummary(String summary) {
         this.summary = summary;
     }
 
-
     /**
      * The detailed description of the event.
+     *
      * @return
      */
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
      * When this event is happening.
+     *
      * @return
      */
     public Calendar getWhen() {
         return when;
     }
+
     public void setWhen(Calendar when) {
         this.when = when;
     }
 
     /**
      * The owner (who created the Event)
+     *
      * @return
      */
     public CalendarUser getOwner() {
         return owner;
     }
+
     public void setOwner(CalendarUser owner) {
         this.owner = owner;
     }
 
     /**
      * The user that was invited to the event.
+     *
      * @return
      */
     public CalendarUser getAttendee() {
         return attendee;
     }
+
     public void setAttendee(CalendarUser attendee) {
         this.attendee = attendee;
     }
-
-
-    private Boolean persisted = Boolean.FALSE;
 
     @Override
     public boolean isNew() {

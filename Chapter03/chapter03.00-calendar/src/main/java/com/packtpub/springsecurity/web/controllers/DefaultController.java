@@ -58,7 +58,6 @@ import javax.servlet.http.HttpServletRequest;
  * </pre>
  *
  * @author Rob Winch
- *
  */
 @Controller
 public class DefaultController {

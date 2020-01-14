@@ -52,6 +52,6 @@ dependencies {
     // Required for JSR-250 based security:
     // JSR-250 Annotations
     //OLD: compile ('javax.annotation:jsr250-api:1.0')
-    compile ("javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}")
+    compile("javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}")
 
 } // The End...

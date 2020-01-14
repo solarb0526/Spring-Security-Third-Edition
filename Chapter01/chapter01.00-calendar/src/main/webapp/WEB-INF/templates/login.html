@@ -5,16 +5,16 @@
 </head>
 <body>
 
-    <h3> P.I.D. Login </h3>
-    <p th:if="${param.error}">
-        Bad Credentials: ${param.error}
-    </p>
+<h3> P.I.D. Login </h3>
+<p th:if="${param.error}">
+    Bad Credentials: ${param.error}
+</p>
 
-    <form th:action="@{/j_spring_security_check}" method="POST">
-        User Name : <input type="text" name="j_username"/> <br/><br/>
-        Password: <input type="password" name="j_password"/> <br/><br/>
-        <input type="submit" value="Login"/>
-    </form>
+<form method="POST" th:action="@{/j_spring_security_check}">
+    User Name : <input name="j_username" type="text"/> <br/><br/>
+    Password: <input name="j_password" type="password"/> <br/><br/>
+    <input type="submit" value="Login"/>
+</form>
 
 </body>
 </html>

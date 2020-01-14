@@ -1,21 +1,12 @@
 package com.packtpub.springsecurity.web.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.Ordered;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-
-import java.util.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * <p>
@@ -26,7 +17,6 @@ import java.util.*;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Configuration
 @EnableWebMvc
@@ -35,12 +25,11 @@ import java.util.*;
         "com.packtpub.springsecurity.web.controllers",
         "com.packtpub.springsecurity.web.model"
 })
-public class WebMvcConfig extends WebMvcConfigurerAdapter
-{
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/" };
+            "classpath:/static/", "classpath:/public/"};
 
 //    @Autowired
 //    private ThymeleafViewResolver thymeleafViewResolver;
@@ -61,7 +50,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
 //        result.setUseTrailingSlashMatch(false);
 //        return result;
 //    }
-
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")

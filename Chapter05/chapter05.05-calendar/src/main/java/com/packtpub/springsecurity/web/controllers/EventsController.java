@@ -1,11 +1,10 @@
 package com.packtpub.springsecurity.web.controllers;
 
-import java.util.Calendar;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.validation.Valid;
-
-import org.bson.types.ObjectId;
+import com.packtpub.springsecurity.domain.CalendarUser;
+import com.packtpub.springsecurity.domain.Event;
+import com.packtpub.springsecurity.service.CalendarService;
+import com.packtpub.springsecurity.service.UserContext;
+import com.packtpub.springsecurity.web.model.CreateEventForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,11 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.packtpub.springsecurity.domain.CalendarUser;
-import com.packtpub.springsecurity.domain.Event;
-import com.packtpub.springsecurity.service.CalendarService;
-import com.packtpub.springsecurity.service.UserContext;
-import com.packtpub.springsecurity.web.model.CreateEventForm;
+import javax.validation.Valid;
+import java.util.Calendar;
 
 @Controller
 @RequestMapping("/events")
@@ -82,7 +78,7 @@ public class EventsController {
 
     @PostMapping(value = "/new")
     public String createEvent(@Valid CreateEventForm createEventForm, BindingResult result,
-            RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "events/create";
         }

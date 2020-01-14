@@ -2,12 +2,8 @@ package com.packtpub.springsecurity.authentication;
 
 import com.packtpub.springsecurity.core.authority.CalendarUserAuthorityUtils;
 import com.packtpub.springsecurity.domain.CalendarUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UserProfile;
 
@@ -52,19 +48,17 @@ public class SocialAuthenticationUtils {
 
     }
 
-    public static CalendarUser createCalendarUserFromProvider(Connection<?> connection){
+    public static CalendarUser createCalendarUserFromProvider(Connection<?> connection) {
         // TODO: FIXME: Need to put this into a Utility:
         UserProfile profile = connection.fetchUserProfile();
 
         CalendarUser user = new CalendarUser();
 
-        if(profile.getEmail() != null){
+        if (profile.getEmail() != null) {
             user.setEmail(profile.getEmail());
-        }
-        else if(profile.getUsername() != null){
+        } else if (profile.getUsername() != null) {
             user.setEmail(profile.getUsername());
-        }
-        else {
+        } else {
             user.setEmail(connection.getDisplayName());
         }
 

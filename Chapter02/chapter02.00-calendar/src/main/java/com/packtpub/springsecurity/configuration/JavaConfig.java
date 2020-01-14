@@ -1,7 +1,10 @@
 package com.packtpub.springsecurity.configuration;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 
@@ -22,6 +25,7 @@ public class JavaConfig {
     /**
      * Note: If you want to use @PropertySource, you must create a static
      * PropertySourcesPlaceholderConfigurer with the @Bean as seen here.
+     *
      * @return PropertySourcesPlaceholderConfigurer
      * @throws java.io.IOException
      */

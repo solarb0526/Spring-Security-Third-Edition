@@ -4,14 +4,14 @@
  * @author Mick Knutson
  */
 buildscript {
-	ext {}
-	repositories {
+    ext {}
+    repositories {
 //        jcenter()
         maven { url "https://plugins.gradle.org/m2/" }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'org.springframework.boot'
@@ -36,7 +36,7 @@ dependencies {
     compile("com.unboundid:unboundid-ldapsdk")
 
     // Security:
-	compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-security')
 
 
     // Web:

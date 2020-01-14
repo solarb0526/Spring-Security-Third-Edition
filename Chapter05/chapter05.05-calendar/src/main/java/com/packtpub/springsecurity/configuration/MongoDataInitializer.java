@@ -25,15 +25,22 @@ public class MongoDataInitializer {
 
     private static final Logger logger = LoggerFactory
             .getLogger(MongoDataInitializer.class);
-
+    CalendarUser user, admin, user2;
+    Role user_role, admin_role;
     @Autowired
     private RoleRepository roleRepository;
-
     @Autowired
     private CalendarUserRepository calendarUserRepository;
-
     @Autowired
     private EventRepository eventRepository;
+
+    // CalendarUsers
+    {
+        user = new CalendarUser(0, "user1@example.com", "$2a$04$qr7RWyqOnWWC1nwotUW1nOe1RD5.mKJVHK16WZy6v49pymu1WDHmi", "User", "1");
+        admin = new CalendarUser(1, "admin1@example.com", "$2a$04$0CF/Gsquxlel3fWq5Ic/ZOGDCaXbMfXYiXsviTNMQofWRXhvJH3IK", "Admin", "1");
+        user2 = new CalendarUser(2, "user2@example.com", "$2a$04$PiVhNPAxunf0Q4IMbVeNIuH4M4ecySWHihyrclxW..PLArjLbg8CC", "User2", "2");
+
+    }
 
     @PostConstruct
     public void setUp() {
@@ -53,24 +60,12 @@ public class MongoDataInitializer {
         logger.info("*******************************************************");
     }
 
-    CalendarUser user, admin, user2;
-
-    // CalendarUsers
-    {
-        user = new CalendarUser(0, "user1@example.com","$2a$04$qr7RWyqOnWWC1nwotUW1nOe1RD5.mKJVHK16WZy6v49pymu1WDHmi","User","1");
-        admin = new CalendarUser(1,"admin1@example.com","$2a$04$0CF/Gsquxlel3fWq5Ic/ZOGDCaXbMfXYiXsviTNMQofWRXhvJH3IK","Admin","1");
-        user2 = new CalendarUser(2,"user2@example.com","$2a$04$PiVhNPAxunf0Q4IMbVeNIuH4M4ecySWHihyrclxW..PLArjLbg8CC","User2","2");
-
-    }
-
-    Role user_role, admin_role;
-
     /**
      * -- ROLES --
      * insert into role(id, name) values (0, "ROLE_USER");
      * insert into role(id, name) values (1, "ROLE_ADMIN");
      */
-    private void seedRoles(){
+    private void seedRoles() {
         user_role = new Role(0, "ROLE_USER");
         user_role = roleRepository.save(user_role);
 
@@ -82,37 +77,37 @@ public class MongoDataInitializer {
     /**
      * Seed initial events
      */
-    private void seedEvents(){
+    private void seedEvents() {
 
         // Event 1
         Event event1 = new Event(
                 100,
                 "Birthday Party",
                 "This is going to be a great birthday",
-                new GregorianCalendar(2017,6,3,6,36,00),
+                new GregorianCalendar(2017, 6, 3, 6, 36, 00),
                 user,
                 admin
-                );
+        );
 
         // Event 2
         Event event2 = new Event(
                 101,
                 "Conference Call",
                 "Call with the client",
-                new GregorianCalendar(2017,11,23,13,00,00),
+                new GregorianCalendar(2017, 11, 23, 13, 00, 00),
                 user2,
                 user
-                );
+        );
 
         // Event 3
         Event event3 = new Event(
                 102,
                 "Vacation",
                 "Paragliding in Greece",
-                new GregorianCalendar(2017,8,14,11,30,00),
+                new GregorianCalendar(2017, 8, 14, 11, 30, 00),
                 admin,
                 user2
-                );
+        );
 
         // save Event
         eventRepository.save(event1);
@@ -126,7 +121,7 @@ public class MongoDataInitializer {
     }
 
 
-    private void seedCalendarUsers(){
+    private void seedCalendarUsers() {
 
 //        user.setRoles(new HashSet<>(Arrays.asList(user_role)));
 //        admin.setRoles(new HashSet<>(Arrays.asList(user_role, admin_role)));

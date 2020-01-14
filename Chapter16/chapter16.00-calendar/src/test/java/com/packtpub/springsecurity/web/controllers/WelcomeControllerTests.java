@@ -9,23 +9,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.test.context.support.WithAnonymousUser;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 /**
- *
  * @author Mick Knutson
- *
  */
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,7 +31,8 @@ public class WelcomeControllerTests {
     private CalendarUserAuthenticationProvider authenticationProvider;
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
 
     /*@Test
     @WithAnonymousUser
@@ -76,10 +67,7 @@ public class WelcomeControllerTests {
     }*/
 
 
-
-
-
-    private Authentication userAuth(){
+    private Authentication userAuth() {
         String username = "user1@example.com";
         String password = "user1";
 
@@ -88,7 +76,7 @@ public class WelcomeControllerTests {
         return authenticationProvider.authenticate(authRequest);
     }
 
-    private Authentication adminAuth(){
+    private Authentication adminAuth() {
         String username = "admin@example.com";
         String password = "admin";
 

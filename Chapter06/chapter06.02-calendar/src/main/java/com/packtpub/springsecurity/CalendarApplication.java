@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-@SpringBootApplication(scanBasePackages={
+@SpringBootApplication(scanBasePackages = {
         "com.packtpub.springsecurity",
         "com.packtpub.springsecurity.configuration",
         "com.packtpub.springsecurity.domain",
@@ -17,12 +17,12 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 @EntityScan("com.packtpub.springsecurity.domain")
 public class CalendarApplication extends SpringBootServletInitializer {
 
+    public static void main(String[] args) {
+        SpringApplication.run(CalendarApplication.class, args);
+    }
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(CalendarApplication.class);
     }
-
-	public static void main(String[] args) {
-		SpringApplication.run(CalendarApplication.class, args);
-	}
 }

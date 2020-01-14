@@ -1,5 +1,6 @@
 package com.packtpub.springsecurity.service;
 
+import com.packtpub.springsecurity.domain.CalendarUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -10,14 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import com.packtpub.springsecurity.domain.CalendarUser;
-
 /**
  * An implementation of {@link UserContext} that looks up the {@link CalendarUser} using the Spring Security's
  * {@link Authentication} by principal name.
  *
  * @author Rob Winch
- *
  */
 @Component
 public class SpringSecurityUserContext implements UserContext {
@@ -25,7 +23,7 @@ public class SpringSecurityUserContext implements UserContext {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SpringSecurityUserContext(CalendarService calendarService,UserDetailsService userDetailsService) {
+    public SpringSecurityUserContext(CalendarService calendarService, UserDetailsService userDetailsService) {
         if (calendarService == null) {
             throw new IllegalArgumentException("calendarService cannot be null");
         }
@@ -49,7 +47,7 @@ public class SpringSecurityUserContext implements UserContext {
             return null;
         }
 
-        User user = (User)authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
         String email = user.getUsername();
 //        String email = user.getEmail();
         if (email == null) {
@@ -70,7 +68,7 @@ public class SpringSecurityUserContext implements UserContext {
         }
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-                user.getPassword(),userDetails.getAuthorities());
+                user.getPassword(), userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

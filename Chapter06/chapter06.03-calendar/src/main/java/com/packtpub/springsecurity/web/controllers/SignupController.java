@@ -42,14 +42,14 @@ public class SignupController {
         return "signup/form";
     }
 
-    @RequestMapping(value="/signup/new",method=RequestMethod.POST)
+    @RequestMapping(value = "/signup/new", method = RequestMethod.POST)
     public String signup(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return "signup/form";
         }
 
         String email = signupForm.getEmail();
-        if(calendarService.findUserByEmail(email) != null) {
+        if (calendarService.findUserByEmail(email) != null) {
             result.rejectValue("email", "errors.signup.email", "Email address is already in use.");
             return "signup/form";
         }

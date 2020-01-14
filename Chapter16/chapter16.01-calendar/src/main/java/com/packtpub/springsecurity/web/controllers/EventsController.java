@@ -1,9 +1,7 @@
 package com.packtpub.springsecurity.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.packtpub.springsecurity.configuration.SecurityConfig;
 import com.packtpub.springsecurity.domain.CalendarUser;
 import com.packtpub.springsecurity.domain.Event;
 import com.packtpub.springsecurity.service.CalendarService;
@@ -13,12 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.*;
 
 @RestController
 @RequestMapping("/events")
@@ -54,13 +49,13 @@ public class EventsController {
     /**
      * We add this method for demonstrating incorporating method parameters with Spring Security's @PreAuthorize based
      * security.
-     *
+     * <p>
      * http://localhost:8080/events/my/0/
      *
      * @param userId
      * @return
      */
-    @GetMapping(path= "/my/{userId}")
+    @GetMapping(path = "/my/{userId}")
     public Map<String, List<Event>> userEvents(@PathVariable int userId) {
         CalendarUser user = calendarService.getUser(userId);
         return myEvents(user);
@@ -78,6 +73,7 @@ public class EventsController {
     /**
      * http://localhost:8080/events/my/
      * FIXME: timestamp error
+     *
      * @return
      */
     @GetMapping("/my")
@@ -96,7 +92,7 @@ public class EventsController {
 
     @GetMapping("/{eventId}")
     public String show(@PathVariable int eventId)
-    throws JsonProcessingException {
+            throws JsonProcessingException {
         Event event = calendarService.getEvent(eventId);
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(event);
@@ -129,8 +125,8 @@ public class EventsController {
 
     @PostMapping(value = "/new")
     public Map<String, List<?>> createEvent(@Valid CreateEventForm createEventForm,
-                              BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes) {
+                                            BindingResult bindingResult,
+                                            RedirectAttributes redirectAttributes) {
 
         Map<String, List<?>> result = new HashMap<>();
 

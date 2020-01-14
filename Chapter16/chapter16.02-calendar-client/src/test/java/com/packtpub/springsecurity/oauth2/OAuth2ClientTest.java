@@ -14,14 +14,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
@@ -35,32 +33,16 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations = {
         "classpath:test.yml",
-        "classpath:application.yml" })
+        "classpath:application.yml"})
 public class OAuth2ClientTest {
 
     private static final Logger logger = LoggerFactory
             .getLogger(SecurityConfig.class);
 
-    @Value("${oauth.resource:https://localhost:8443}")
-    private String baseUrl;
-
-    @Value("${oauth.token:https://localhost:8443/oauth/token}")
-    private String tokenUrl;
-
-    @Value("${oauth.resource.id:microservice-test}")
-    private String resourceId;
-
-    @Value("${oauth.resource.client.id:oauthClient1}")
-    private String resourceClientId;
-
-    @Value("${oauth.resource.client.secret:oauthClient1Password}")
-    private String resourceClientSecret;
-
-
     static {
         //for localhost testing only
         javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
-                new javax.net.ssl.HostnameVerifier(){
+                new javax.net.ssl.HostnameVerifier() {
 
                     public boolean verify(String hostname,
                                           javax.net.ssl.SSLSession sslSession) {
@@ -73,36 +55,48 @@ public class OAuth2ClientTest {
 //        HttpsURLConnection.setDefaultHostnameVerifier ((hostname, session) -> true);
     }
 
+    @Value("${oauth.resource:https://localhost:8443}")
+    private String baseUrl;
+    @Value("${oauth.token:https://localhost:8443/oauth/token}")
+    private String tokenUrl;
+    @Value("${oauth.resource.id:microservice-test}")
+    private String resourceId;
+    @Value("${oauth.resource.client.id:oauthClient1}")
+    private String resourceClientId;
+    @Value("${oauth.resource.client.secret:oauthClient1Password}")
+    private String resourceClientSecret;
+
     @Before
     public void beforeEachTest() {
         // Nothing yet...
     }
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
 
-//    @Test
+    //    @Test
     public void testConnectDirectlyToResourceServer() throws Exception {
         OAuth2RestTemplate template = template();
 
-        logger.info(" CALLING: " + baseUrl+"/api");
-        String result = template.getForObject(baseUrl+"/api", String.class);
+        logger.info(" CALLING: " + baseUrl + "/api");
+        String result = template.getForObject(baseUrl + "/api", String.class);
         logger.info(" RESULT: " + result);
 
         assertEquals("{Hello API}", result);
 
-        logger.info(" CALLING: " + baseUrl+"/events/101/");
-        result = template.getForObject(baseUrl+"/events/101/", String.class);
+        logger.info(" CALLING: " + baseUrl + "/events/101/");
+        result = template.getForObject(baseUrl + "/events/101/", String.class);
         logger.info(" RESULT: " + result);
 //        assertEquals("{[\"id\":101,\"summary\":\"Conference Call\",\"description\":\"Call with the client\",\"when\":1514059200000]}", result);
 //
-        logger.info(" CALLING: " + baseUrl+"/events/my/");
-        result = template.getForObject(baseUrl+"/events/my/", String.class);
+        logger.info(" CALLING: " + baseUrl + "/events/my/");
+        result = template.getForObject(baseUrl + "/events/my/", String.class);
         logger.info(" RESULT: " + result);
         assertEquals("{Hello API}", result);
     }
 
-//    @Test
+    //    @Test
     public void execute_post_to_tokenUrl()
             throws ClientProtocolException, IOException {
 
@@ -117,7 +111,7 @@ public class OAuth2ClientTest {
         assertThat(response.getStatusCode().value(), equalTo(200));
     }
 
-    private OAuth2RestTemplate template(){
+    private OAuth2RestTemplate template() {
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
         resource.setAccessTokenUri(tokenUrl);
         resource.setId(resourceId);
@@ -140,7 +134,7 @@ public class OAuth2ClientTest {
         return template;
     }
 
-    private HttpComponentsClientHttpRequestFactory requestFactory(){
+    private HttpComponentsClientHttpRequestFactory requestFactory() {
 
         CloseableHttpClient httpClient
                 = HttpClients.custom()

@@ -17,9 +17,8 @@ import java.util.List;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
+ * <p>
  * TODO: Need to update 03.00 and 03.01 to NOT expose ‘UserDetailsManager’
- *
  */
 @Repository
 public class DefaultCalendarService implements CalendarService {

@@ -16,7 +16,6 @@ import java.util.Calendar;
  * @author Rob Winch
  * @author Mick Knutson
  * @since chapter 01.00
- *
  */
 public class CreateEventForm {
 

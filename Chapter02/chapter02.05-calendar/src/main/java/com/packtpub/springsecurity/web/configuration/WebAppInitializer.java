@@ -24,17 +24,17 @@ public class WebAppInitializer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { JavaConfig.class };
+        return new Class[]{JavaConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { WebMvcConfig.class };
+        return new Class[]{WebMvcConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] { "/" }; // or *.html
+        return new String[]{"/"}; // or *.html
     }
 
     @Override

@@ -1,15 +1,11 @@
 package com.packtpub.springsecurity.configuration;
 
 import com.packtpub.springsecurity.core.userdetails.CalendarUserDetailsService;
-import com.packtpub.springsecurity.service.UserDetailsServiceImpl;
-import org.jasig.cas.client.session.SingleSignOutFilter;
-import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
 import org.jasig.cas.client.validation.Cas30ProxyTicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.cas.ServiceProperties;
 import org.springframework.security.cas.authentication.CasAuthenticationProvider;
@@ -25,50 +21,43 @@ import org.springframework.security.core.userdetails.UserDetailsByNameServiceWra
 public class CasConfig {
 
 
-    static{
+    @Value("#{systemProperties['cas.server']}")
+    private static String casServer;
+    @Value("#{systemProperties['cas.service']}")
+    private static String casService;
+
+    static {
         System.setProperty("cas.server", "https://localhost:9443/cas");
         System.setProperty("cas.server.login", "https://localhost:9443/cas/login");
         System.setProperty("cas.calendar.service", "https://localhost:8443");
         System.setProperty("cas.calendar.service.login", "https://localhost:8443/login");
     }
 
-    @Value("#{systemProperties['cas.server']}")
-    private static String casServer;
-
-    @Value("#{systemProperties['cas.service']}")
-    private static String casService;
-
     @Value("#{systemProperties['cas.server.login']}")
     private String casServerLogin;
 
     @Value("#{systemProperties['cas.server.login']}")
     private String calendarServiceLogin;
-
-
-    @Bean
-    public ServiceProperties serviceProperties(){
-        return new ServiceProperties(){{
-            setService(calendarServiceLogin);
-        }};
-    }
-
     @Autowired
     private CalendarUserDetailsService calendarUserDetailsService;
-
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserDetailsByNameServiceWrapper userDetailsByNameServiceWrapper;
 
 //    @Autowired
 //    private Cas20ProxyTicketValidator ticketValidator;
 
-    @Autowired
-    private UserDetailsByNameServiceWrapper userDetailsByNameServiceWrapper;
-
+    @Bean
+    public ServiceProperties serviceProperties() {
+        return new ServiceProperties() {{
+            setService(calendarServiceLogin);
+        }};
+    }
 
     @Bean
     public CasAuthenticationEntryPoint casAuthenticationEntryPoint()
-    throws Exception
-    {
+            throws Exception {
         CasAuthenticationEntryPoint entryPoint = new CasAuthenticationEntryPoint();
         entryPoint.setServiceProperties(serviceProperties());
         entryPoint.setLoginUrl(casServerLogin);
@@ -85,7 +74,6 @@ public class CasConfig {
     }
 
 
-
     @Bean
     public CasAuthenticationProvider casAuthenticationProvider() {
         CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
@@ -98,10 +86,9 @@ public class CasConfig {
 
 
     @Bean
-    public Cas30ProxyTicketValidator ticketValidator(){
+    public Cas30ProxyTicketValidator ticketValidator() {
         return new Cas30ProxyTicketValidator(casServer);
     }
-
 
 
     /** Single point logout filter */

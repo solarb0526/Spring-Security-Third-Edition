@@ -1,21 +1,10 @@
 package com.packtpub.springsecurity.domain.acl;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import org.springframework.security.acls.model.ObjectIdentity;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /*
 create table acl_object_identity (
@@ -31,31 +20,31 @@ create table acl_object_identity (
   constraint fk_acl_obj_owner foreign key(owner_sid)references acl_sid(id) );
  */
 @Entity
-@Table(name="acl_object_identity")
-public class AclObjectIdentity implements ObjectIdentity{
+@Table(name = "acl_object_identity")
+public class AclObjectIdentity implements ObjectIdentity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="OBJECT_ID_CLASS")
+    @JoinColumn(name = "OBJECT_ID_CLASS")
     private AclClass objIdClass;
 
-    @Column(name="OBJECT_ID_IDENTITY")
+    @Column(name = "OBJECT_ID_IDENTITY")
     private Long objIdIdentity;
 
     @ManyToOne
-    @JoinColumn(name="PARENT_OBJECT")
+    @JoinColumn(name = "PARENT_OBJECT")
     private AclObjectIdentity parentObject;
 
     @ManyToOne
-    @JoinColumn(name="OWNER_SID")
+    @JoinColumn(name = "OWNER_SID")
     private AclSid owner;
 
-    @Column(name="ENTRIES_INHERITING")
+    @Column(name = "ENTRIES_INHERITING")
     private Boolean entriesInheriting;
 
-    @OneToMany(mappedBy="aclObjectIdentity",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "aclObjectIdentity", fetch = FetchType.EAGER)
     private List<AclEntry> aclEntries;
 
     public List<AclEntry> getAclEntries() {
@@ -67,7 +56,7 @@ public class AclObjectIdentity implements ObjectIdentity{
     }
 
     public List<AclEntry> getEntries() {
-        if(aclEntries!=null) {
+        if (aclEntries != null) {
             return aclEntries;
         }
         return null;

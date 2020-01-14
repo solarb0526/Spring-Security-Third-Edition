@@ -10,12 +10,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.Calendar;
 
 @Controller
@@ -43,7 +41,7 @@ public class EventsController {
      * @param userId
      * @return
      */
-    @RequestMapping(value= "/my", params="userId")
+    @RequestMapping(value = "/my", params = "userId")
     public ModelAndView userEvents(@RequestParam int userId) {
         CalendarUser user = calendarService.getUser(userId);
         return myEvents(user);
@@ -58,7 +56,7 @@ public class EventsController {
 
     @GetMapping("/my")
     public ModelAndView myEvents(@AuthenticationPrincipal UsernamePasswordAuthenticationToken upat) {
-        CalendarUser currentUser = (CalendarUser)upat.getPrincipal();
+        CalendarUser currentUser = (CalendarUser) upat.getPrincipal();
 
         return myEvents(currentUser);
 //        Integer currentUserId = currentUser.getId();
@@ -103,7 +101,7 @@ public class EventsController {
 
     @PostMapping(value = "/new")
     public String createEvent(@Valid CreateEventForm createEventForm, BindingResult result,
-            RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "events/create";
         }

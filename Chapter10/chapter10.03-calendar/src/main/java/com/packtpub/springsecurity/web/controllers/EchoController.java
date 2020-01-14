@@ -1,7 +1,5 @@
 package com.packtpub.springsecurity.web.controllers;
 
-import java.io.UnsupportedEncodingException;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.cas.authentication.CasAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Demonstrates how to use a Proxy Ticket to call a service. This client will call the Calendar applications My Events
@@ -20,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
  * </p>
  *
  * @author Rob Winch
- *
  */
 @Controller
 public class EchoController {
@@ -38,11 +37,11 @@ public class EchoController {
         final String proxyTicket = token.getAssertion().getPrincipal().getProxyTicketFor(targetUrl);
 
         // Make a remote call using the proxy ticket
-        return restClient.getForObject(targetUrl+"?ticket={pt}", String.class, proxyTicket);
+        return restClient.getForObject(targetUrl + "?ticket={pt}", String.class, proxyTicket);
     }
 
     @Value("#{environment['cas.service']}")
     public void setTargetHost(String targetHost) {
-        this.targetUrl = "https://"+targetHost+"/events/my";
+        this.targetUrl = "https://" + targetHost + "/events/my";
     }
 }

@@ -1,12 +1,11 @@
 package com.packtpub.springsecurity.core.authority;
 
-import java.util.Collection;
-import java.util.List;
-
+import com.packtpub.springsecurity.domain.CalendarUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import com.packtpub.springsecurity.domain.CalendarUser;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * A utility class used for creating the {@link GrantedAuthority}'s given a {@link CalendarUser}. In a real solution
@@ -14,12 +13,14 @@ import com.packtpub.springsecurity.domain.CalendarUser;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 public final class CalendarUserAuthorityUtils {
     private static final List<GrantedAuthority> ADMIN_ROLES = AuthorityUtils.createAuthorityList("ROLE_ADMINfoo",
             "ROLE_USERfoo");
     private static final List<GrantedAuthority> USER_ROLES = AuthorityUtils.createAuthorityList("ROLE_USERfoo");
+
+    private CalendarUserAuthorityUtils() {
+    }
 
     public static Collection<? extends GrantedAuthority> createAuthorities(CalendarUser calendarUser) {
         String username = calendarUser.getEmail();
@@ -27,9 +28,6 @@ public final class CalendarUserAuthorityUtils {
             return ADMIN_ROLES;
         }
         return USER_ROLES;
-    }
-
-    private CalendarUserAuthorityUtils() {
     }
 
 }

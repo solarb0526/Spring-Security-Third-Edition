@@ -1,7 +1,6 @@
 package com.packtpub.springsecurity.oauth2;
 
 import com.packtpub.springsecurity.CalendarApplication;
-import com.packtpub.springsecurity.configuration.SecurityConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,15 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.test.context.support.WithAnonymousUser;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,10 +24,7 @@ import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.startsWith;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @DirtiesContext
 @RunWith(SpringRunner.class)
@@ -44,19 +36,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @TestPropertySource(locations = {
         "classpath:test.yml",
-        "classpath:application.yml" })
+        "classpath:application.yml"})
 public class OAuth2ClientTest {
 
     private static final Logger logger = LoggerFactory
             .getLogger(OAuth2ClientTest.class);
-
-    @LocalServerPort
-    private int port;
-
     @Autowired
     MockMvc mockMvc;
-
-
+    @LocalServerPort
+    private int port;
     @Value("${oauth.resource:http://localhost:8080}")
     private String baseUrl;
 
@@ -86,7 +74,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/";
+        String url = baseUrl + "/";
         String expected = "{'message': 'welcome to the JBCP Calendar Application'}";
 
         logger.info(" CALLING: {}", url);
@@ -102,7 +90,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/api";
+        String url = baseUrl + "/api";
         String expected = "{'message': 'welcome to the JBCP Calendar Application API'}";
 
         logger.info(" CALLING: {}", url);
@@ -113,12 +101,12 @@ public class OAuth2ClientTest {
 
     }
 
-//    @Test
+    //    @Test
     public void test_signup_user1() throws Exception {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/signup/new";
+        String url = baseUrl + "/signup/new";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -129,12 +117,12 @@ public class OAuth2ClientTest {
 
     }
 
-//    @Test
+    //    @Test
     public void test_post_signup_user1() throws Exception {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/signup/new";
+        String url = baseUrl + "/signup/new";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -150,12 +138,12 @@ public class OAuth2ClientTest {
     }
 
 
-//    @Test
+    //    @Test
     public void test_Events_user1() throws Exception {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/events/my/0";
+        String url = baseUrl + "/events/my/0";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -171,7 +159,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/events/my";
+        String url = baseUrl + "/events/my";
         String expected = "{\"currentUser\":[{\"id\":100,\"summary\":\"Birthday Party\",\"description\":\"This is going to be a great birthday\",\"when\":";
 
         logger.info(" CALLING: {}", url);
@@ -188,7 +176,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template("admin1");
 
-        String url = baseUrl+"/events/my";
+        String url = baseUrl + "/events/my";
         String expected = "{\"currentUser\":[{\"id\":102,\"summary\":\"Vacation\",\"description\":\"Paragliding in Greece\",\"when\":";
 
         logger.info(" CALLING: {}", url);
@@ -205,7 +193,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/events/101";
+        String url = baseUrl + "/events/101";
         String expected = "{\"id\":101,\"summary\":\"Conference Call\",\"description\":\"Call with the client\",\"when\":";
 
         logger.info(" CALLING: {}", url);
@@ -216,12 +204,12 @@ public class OAuth2ClientTest {
 
     }
 
-//    @Test
+    //    @Test
     public void test_new_create_new_EventFormAutoPopulate() throws Exception {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/events/new?auto";
+        String url = baseUrl + "/events/new?auto";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -233,12 +221,12 @@ public class OAuth2ClientTest {
 
     }
 
-//    @Test
+    //    @Test
     public void test_createEvent_user1() throws Exception {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/events/new";
+        String url = baseUrl + "/events/new";
         String expected = "foobar";
 
         logger.info(" CALLING: {}", url);
@@ -254,7 +242,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template("user1");
 
-        String url = baseUrl+"/default";
+        String url = baseUrl + "/default";
         String expected = "{'message': 'welcome to the JBCP Calendar Application'}";
 
         logger.info(" CALLING: {}", url);
@@ -274,7 +262,7 @@ public class OAuth2ClientTest {
 
         OAuth2RestTemplate template = template("admin1");
 
-        String url = baseUrl+"/default";
+        String url = baseUrl + "/default";
         String expected = "{'message': 'welcome to the JBCP Calendar Application'}";
 
         logger.info(" CALLING: {}", url);
@@ -287,7 +275,7 @@ public class OAuth2ClientTest {
 
     //-----------------------------------------------------------------------//
 
-    private OAuth2RestTemplate template(String user){
+    private OAuth2RestTemplate template(String user) {
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
         resource.setAccessTokenUri(tokenUrl);
         resource.setId(resourceId);
@@ -304,17 +292,17 @@ public class OAuth2ClientTest {
     }
 
     private void setResourceUser(ResourceOwnerPasswordResourceDetails resource,
-                                 String user){
-        if("admin1".equalsIgnoreCase(user)){
+                                 String user) {
+        if ("admin1".equalsIgnoreCase(user)) {
             resource.setUsername("admin1@example.com");
             resource.setPassword("admin1");
-        } else if("user1".equalsIgnoreCase(user)) {
+        } else if ("user1".equalsIgnoreCase(user)) {
             resource.setUsername("user1@example.com");
             resource.setPassword("user1");
         }
     }
 
-    private void printToken(OAuth2AccessToken token){
+    private void printToken(OAuth2AccessToken token) {
         logger.info("-------------------------------------------------------");
         logger.info("TokenType: {}", token.getTokenType());
         logger.info("Value: {}", token.getValue());
@@ -325,7 +313,6 @@ public class OAuth2ClientTest {
         logger.info("RefreshToken: {}", token.getRefreshToken());
         logger.info("-------------------------------------------------------");
     }
-
 
 
 } // The End...

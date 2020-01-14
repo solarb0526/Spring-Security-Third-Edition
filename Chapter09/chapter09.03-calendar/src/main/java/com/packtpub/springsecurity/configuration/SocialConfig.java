@@ -19,6 +19,10 @@ public class SocialConfig {
 
     @Autowired
     private ConnectionFactoryLocator connectionFactoryLocator;
+    @Autowired
+    private UsersConnectionRepository usersConnectionRepository;
+    @Autowired
+    private ProviderConnectionSignup providerConnectionSignup;
 
     @Bean
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -26,12 +30,6 @@ public class SocialConfig {
         // https://github.com/spring-projects/spring-social/blob/master/spring-social-config/src/main/java/org/springframework/social/config/annotation/SocialConfiguration.java#L87
         return new DatabaseSocialConfigurer(dataSource);
     }
-
-    @Autowired
-    private UsersConnectionRepository usersConnectionRepository;
-
-    @Autowired
-    private ProviderConnectionSignup providerConnectionSignup;
 
     @Bean
     public SignInAdapter authSignInAdapter() {

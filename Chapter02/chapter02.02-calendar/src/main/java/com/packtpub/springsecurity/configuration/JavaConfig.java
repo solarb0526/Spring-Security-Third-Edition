@@ -24,6 +24,7 @@ public class JavaConfig {
     /**
      * Note: If you want to use @PropertySource, you must create a static
      * PropertySourcesPlaceholderConfigurer with the @Bean as seen here.
+     *
      * @return PropertySourcesPlaceholderConfigurer
      * @throws java.io.IOException
      */

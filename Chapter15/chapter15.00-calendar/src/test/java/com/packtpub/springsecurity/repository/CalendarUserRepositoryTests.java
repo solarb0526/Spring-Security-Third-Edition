@@ -18,21 +18,21 @@ public class CalendarUserRepositoryTests {
     @Autowired
     private CalendarUserRepository repository;
 
-	@Test
-	public void validateUser_User() {
+    @Test
+    public void validateUser_User() {
         String username = "user1@example.com";
         CalendarUser user = repository.findByEmail(username);
         assertThat(user.getEmail()).isEqualTo(username);
         assertThat(user.getRoles().size()).isEqualTo(1);
 //        assertThat(user.getFirstName()).as("check %s's username", user.getEmail()).isEqualTo("foo@bar.com");
-	}
+    }
 
-	@Test
-	public void validateUser_Admin() {
-	    String username = "admin1@example.com";
+    @Test
+    public void validateUser_Admin() {
+        String username = "admin1@example.com";
         CalendarUser user = repository.findByEmail(username);
         assertThat(user.getEmail()).isEqualTo(username);
         assertThat(user.getRoles().size()).isEqualTo(2);
-	}
+    }
 
 }

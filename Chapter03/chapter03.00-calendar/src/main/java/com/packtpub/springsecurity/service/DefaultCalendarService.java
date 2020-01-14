@@ -13,7 +13,6 @@ import java.util.List;
  * A default implementation of {@link CalendarService} that delegates to {@link EventDao} and {@link CalendarUserDao}.
  *
  * @author Rob Winch
- *
  */
 @Repository
 public class DefaultCalendarService implements CalendarService {

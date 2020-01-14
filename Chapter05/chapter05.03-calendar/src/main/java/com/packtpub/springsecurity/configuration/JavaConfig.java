@@ -1,6 +1,7 @@
 package com.packtpub.springsecurity.configuration;
 
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author Mick Knutson

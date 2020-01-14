@@ -1,22 +1,19 @@
 package com.packtpub.springsecurity.web.model;
 
-import java.util.Calendar;
-
-import javax.validation.constraints.NotNull;
-
+import com.packtpub.springsecurity.domain.Event;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.packtpub.springsecurity.domain.Event;
+import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 
 /**
  * A form object that is used for creating a new {@link Event}. Using a different object is one way of preventing
  * malicious users from filling out field that they should not (i.e. fill out a different owner field).
  *
  * @author Rob Winch
- *
  */
 public class CreateEventForm {
 

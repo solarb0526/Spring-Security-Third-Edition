@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 /**
@@ -18,7 +17,6 @@ import java.util.List;
  *
  * @author Rob Winch
  * @author Mick Knutson
- *
  */
 @Repository
 public class DefaultCalendarService implements CalendarService {
@@ -63,7 +61,7 @@ public class DefaultCalendarService implements CalendarService {
         return eventDao.findForUser(userId);
     }
 
-//    @RolesAllowed({"ROLE_ADMIN"})
+    //    @RolesAllowed({"ROLE_ADMIN"})
     @Override
     public List<Event> getEvents() {
         return eventDao.getEvents();
@@ -86,8 +84,8 @@ public class DefaultCalendarService implements CalendarService {
 
     /**
      * Create a new Signup User
-     * @param user
-     *            the new {@link CalendarUser} to create. The {@link CalendarUser#getId()} must be null.
+     *
+     * @param user the new {@link CalendarUser} to create. The {@link CalendarUser#getId()} must be null.
      * @return
      */
     @Override

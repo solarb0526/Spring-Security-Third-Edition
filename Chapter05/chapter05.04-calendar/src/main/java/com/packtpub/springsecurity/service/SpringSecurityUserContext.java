@@ -8,7 +8,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
@@ -16,11 +15,10 @@ import org.springframework.stereotype.Component;
 /**
  * An implementation of {@link UserContext} that looks up the {@link CalendarUser} using the Spring Security's
  * {@link Authentication} by principal name.
- *
+ * <p>
  * TODO: How and when does this get called?
  *
  * @author Rob Winch
- *
  */
 @Component
 public class SpringSecurityUserContext implements UserContext {
@@ -57,7 +55,7 @@ public class SpringSecurityUserContext implements UserContext {
             return null;
         }
 
-        CalendarUser user = (CalendarUser)authentication.getPrincipal();
+        CalendarUser user = (CalendarUser) authentication.getPrincipal();
         String email = user.getEmail();
         if (email == null) {
             return null;

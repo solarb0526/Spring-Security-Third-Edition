@@ -1,8 +1,6 @@
 package com.packtpub.springsecurity.web.controllers;
 
-import com.packtpub.springsecurity.CalendarStubs;
 import com.packtpub.springsecurity.core.userdetails.CalendarUserDetailsService;
-import com.packtpub.springsecurity.domain.Event;
 import com.packtpub.springsecurity.service.CalendarService;
 import com.packtpub.springsecurity.service.UserContext;
 import org.junit.Test;
@@ -10,18 +8,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Calendar;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 /**
- *
  * @author Mick Knutson
- *
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(EventsControllerTests.class)
@@ -72,7 +63,7 @@ public class EventsControllerMockTests {
 //    }
 
     @Test
-    public void noops(){
+    public void noops() {
     }
 
     /*

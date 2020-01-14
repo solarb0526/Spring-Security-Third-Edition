@@ -4,11 +4,9 @@ import com.packtpub.springsecurity.service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,8 +20,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.RememberMeServices;
@@ -34,6 +30,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 /**
  * Spring Security Config Class
+ *
  * @see {@link WebSecurityConfigurerAdapter}
  * @since chapter08.00
  */
@@ -74,24 +71,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Configure AuthenticationManager.
-     *
+     * <p>
      * NOTE:
      * Due to a known limitation with JavaConfig:
      * <a href="https://jira.spring.io/browse/SPR-13779">
-     *     https://jira.spring.io/browse/SPR-13779</a>
-     *
+     * https://jira.spring.io/browse/SPR-13779</a>
+     * <p>
      * We cannot use the following to expose a {@link UserDetailsManager}
      * <pre>
      *     http.authorizeRequests()
      * </pre>
-     *
+     * <p>
      * In order to expose {@link UserDetailsManager} as a bean, we must create  @Bean
      *
+     * @param auth AuthenticationManagerBuilder
+     * @throws Exception Authentication exception
      * @see {@link super.userDetailsService()}
      * @see {@link com.packtpub.springsecurity.service.DefaultCalendarService}
-     *
-     * @param auth       AuthenticationManagerBuilder
-     * @throws Exception Authentication exception
      */
     @Override
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -115,10 +111,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * BCryptPasswordEncoder password encoder
+     *
      * @return
      */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(4);
     }
 
@@ -134,7 +131,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *      <logout />
      *  </http>
      * </pre>
-     *
+     * <p>
      * Which is equivalent to the following JavaConfig:
      *
      * <pre>
@@ -145,9 +142,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *
      * @param http HttpSecurity configuration.
      * @throws Exception Authentication configuration exception
-     *
      * @see <a href="http://docs.spring.io/spring-security/site/migrate/current/3-to-4/html5/migrate-3-to-4-jc.html">
-     *     Spring Security 3 to 4 migration</a>
+     * Spring Security 3 to 4 migration</a>
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -211,33 +207,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public Http403ForbiddenEntryPoint forbiddenEntryPoint(){
+    public Http403ForbiddenEntryPoint forbiddenEntryPoint() {
         return new Http403ForbiddenEntryPoint();
     }
 
     @Bean
-    public X509AuthenticationFilter x509Filter(){
-        return new X509AuthenticationFilter(){{
+    public X509AuthenticationFilter x509Filter() {
+        return new X509AuthenticationFilter() {{
             setAuthenticationManager(authenticationManager);
         }};
     }
 
     @Bean
-    public PreAuthenticatedAuthenticationProvider preAuthAuthenticationProvider(final AuthenticationUserDetailsService authenticationUserDetailsService){
-        return new PreAuthenticatedAuthenticationProvider(){{
+    public PreAuthenticatedAuthenticationProvider preAuthAuthenticationProvider(final AuthenticationUserDetailsService authenticationUserDetailsService) {
+        return new PreAuthenticatedAuthenticationProvider() {{
             setPreAuthenticatedUserDetailsService(authenticationUserDetailsService);
         }};
     }
 
     @Bean
-    public UserDetailsByNameServiceWrapper authenticationUserDetailsService(final UserDetailsService userDetailsService){
-        return new UserDetailsByNameServiceWrapper(){{
+    public UserDetailsByNameServiceWrapper authenticationUserDetailsService(final UserDetailsService userDetailsService) {
+        return new UserDetailsByNameServiceWrapper() {{
             setUserDetailsService(userDetailsService);
         }};
     }
 
     @Bean
-    public RememberMeServices rememberMeServices(PersistentTokenRepository ptr){
+    public RememberMeServices rememberMeServices(PersistentTokenRepository ptr) {
         PersistentTokenBasedRememberMeServices rememberMeServices =
                 new PersistentTokenBasedRememberMeServices(
                         "jbcpCalendar",

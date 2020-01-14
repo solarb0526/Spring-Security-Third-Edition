@@ -39,7 +39,7 @@ public class UserContextStub implements UserContext {
             throw new IllegalArgumentException("user cannot be null");
         }
         Integer currentId = user.getId();
-        if(currentId == null) {
+        if (currentId == null) {
             throw new IllegalArgumentException("user.getId() cannot be null");
         }
         this.currentUserId = currentId;

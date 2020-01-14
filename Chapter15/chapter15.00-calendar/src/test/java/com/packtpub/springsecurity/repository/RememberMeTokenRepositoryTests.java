@@ -22,10 +22,10 @@ public class RememberMeTokenRepositoryTests {
     Iterable<PersistentLogin> findByLastUsedAfter(Date expiration);
 
      */
-	@Test
-	public void validateUser_User() {
+    @Test
+    public void validateUser_User() {
 //        PersistentLogin login = repository.findBySeries("");
 //        assertThat(login.getUsername()).isEqualTo("user1@example.com");
-	}
+    }
 
 } // The End...

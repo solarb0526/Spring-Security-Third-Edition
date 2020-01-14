@@ -9,7 +9,6 @@ import org.springframework.security.web.access.WebInvocationPrivilegeEvaluator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
  * This displays the welcome screen that shows what will be happening in this chapter.
  *
  * @author Rob Winch
- *
  */
 @Controller
 public class WelcomeController {
@@ -37,9 +35,8 @@ public class WelcomeController {
      * Populates a {@link HttpServletRequest} attribute named usernameContainsUser for any URL processed by this
      * controller. The result is based upon if the username contains "user".
      *
-     * @param authentication
-     *            Contains the current {@link Authentication} object. This is a more simple way of obtaining the
-     *            Authentication from {@link SecurityContextHolder#getContext()}.
+     * @param authentication Contains the current {@link Authentication} object. This is a more simple way of obtaining the
+     *                       Authentication from {@link SecurityContextHolder#getContext()}.
      * @return
      */
     @ModelAttribute("showCreateLink")
@@ -54,9 +51,8 @@ public class WelcomeController {
      * The result is based upon if the user has access to the URL /admin/. This demonstrates if you are not using JSP
      * tags how you can leverage the http.authorizeRequests() mappings.
      *
-     * @param authentication
-     *            Contains the current {@link Authentication} object. This is a more simple way of obtaining the
-     *            Authentication from {@link SecurityContextHolder#getContext()}.
+     * @param authentication Contains the current {@link Authentication} object. This is a more simple way of obtaining the
+     *                       Authentication from {@link SecurityContextHolder#getContext()}.
      * @return
      */
     @ModelAttribute("showAdminLink")

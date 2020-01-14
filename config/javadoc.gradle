@@ -10,7 +10,7 @@ task androidJavadocs(type: Javadoc) {
 
     options {
         links "http://docs.oracle.com/javase/8/docs/api/"
-        linksOffline "http://d.android.com/reference","${android.sdkDirectory}/docs/reference"
+        linksOffline "http://d.android.com/reference", "${android.sdkDirectory}/docs/reference"
     }
     exclude '**/BuildConfig.java'
     exclude '**/R.java'
@@ -22,7 +22,6 @@ afterEvaluate {
         variant.javaCompile.classpath.files
     })
 }
-
 
 
 task javadoc(type: Javadoc,

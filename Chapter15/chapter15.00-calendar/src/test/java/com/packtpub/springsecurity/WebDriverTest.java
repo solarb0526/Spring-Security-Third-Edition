@@ -1,32 +1,22 @@
 package com.packtpub.springsecurity;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
-import org.junit.*;
-
-import static org.junit.Assert.*;
-
-import static org.hamcrest.CoreMatchers.*;
-
 import org.junit.runner.RunWith;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.LocalServerPort;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 /**
  * http://toolsqa.com/selenium-webdriver/how-to-use-geckodriver/
  * https://sites.google.com/a/chromium.org/chromedriver/home
- *
+ * <p>
  * http://www.automationtestinghub.com/selenium-3-0-launch-firefox-with-geckodriver/
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,20 +25,52 @@ import org.springframework.test.context.junit4.SpringRunner;
 //@AutoConfigureMockMvc
 public class WebDriverTest {
 
-    @LocalServerPort
-    private int port;
+    private static String baseDir = "./build/reports/";
 
 //    @Value("${server.contextPath}")
 //    private String contextPath;
-
+    @LocalServerPort
+    private int port;
     private WebDriver driver;
-    private static String baseDir = "./build/reports/";
-
     private String baseUrl;
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
-//    @Before
+    public static String captureScreenshot(WebDriver driver,
+                                           String screenshotName)
+            throws IOException {
+
+        try {
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            File source = ts.getScreenshotAs(OutputType.FILE);
+            String dest = baseDir + screenshotName + ".png";
+            File destination = new File(dest);
+            FileUtils.copyFile(source, destination);
+            return dest;
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+    }
+
+    public static void takeSnapShot(WebDriver webdriver,
+                                    String fileWithPath)
+            throws Exception {
+
+        // Convert web driver object to TakeScreenshot
+        TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
+
+        //Call getScreenshotAs method to create image file
+        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+
+        //Move image file to new destination
+        File DestFile = new File(baseDir + fileWithPath);
+
+        //Copy file at destination
+        FileUtils.copyFile(SrcFile, DestFile);
+
+    }
+
+    //    @Before
     public void setUp()
             throws Exception {
 
@@ -64,18 +86,22 @@ public class WebDriverTest {
     }
 
     @Test
-    public void noop() throws Exception {}
+    public void noop() throws Exception {
+    }
+    //-----------------------------------------------------------------------//
 
-//    @Test
+    //    @Test
     public void testWebDriver() throws Exception {
         driver.get(baseUrl + "/login");
 //        driver.wait(10_000L);
-        this.captureScreenshot(driver, "login") ;
+        this.captureScreenshot(driver, "login");
 
         driver.findElement(By.name("username")).sendKeys("admin1@example.com");
         driver.findElement(By.name("password")).sendKeys("admin1");
         driver.findElement(By.name("submit")).click();
     }
+
+    //-----------------------------------------------------------------------//
 
     //-----------------------------------------------------------------------//
     //    @After
@@ -85,42 +111,6 @@ public class WebDriverTest {
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
         }
-    }
-    //-----------------------------------------------------------------------//
-
-    public static String captureScreenshot(WebDriver driver,
-                                           String screenshotName)
-    throws IOException{
-
-        try {
-            TakesScreenshot ts = (TakesScreenshot)driver;
-            File source = ts.getScreenshotAs(OutputType.FILE);
-            String dest = baseDir + screenshotName + ".png";
-            File destination = new File(dest);
-            FileUtils.copyFile(source, destination);
-            return dest;
-        }
-        catch (IOException e) {return e.getMessage();}
-    }
-
-    //-----------------------------------------------------------------------//
-
-    public static void takeSnapShot(WebDriver webdriver,
-                                    String fileWithPath)
-            throws Exception{
-
-        // Convert web driver object to TakeScreenshot
-        TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
-
-        //Call getScreenshotAs method to create image file
-        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-
-        //Move image file to new destination
-        File DestFile=new File(baseDir + fileWithPath);
-
-        //Copy file at destination
-        FileUtils.copyFile(SrcFile, DestFile);
-
     }
     //-----------------------------------------------------------------------//
 

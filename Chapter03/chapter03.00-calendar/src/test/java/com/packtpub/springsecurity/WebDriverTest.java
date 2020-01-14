@@ -1,17 +1,14 @@
 package com.packtpub.springsecurity;
 
-import java.util.regex.Pattern;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
-
-import static org.junit.Assert.*;
-
-import static org.hamcrest.CoreMatchers.*;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import static org.junit.Assert.fail;
 
 public class WebDriverTest {
 
@@ -37,7 +34,6 @@ public class WebDriverTest {
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.name("submit")).click();
     }
-
 
 
     @After

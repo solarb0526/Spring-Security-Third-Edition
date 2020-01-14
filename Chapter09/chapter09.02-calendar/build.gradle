@@ -27,7 +27,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
 
     // Security:
-	compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-security")
     testCompile("org.springframework.security:spring-security-test")
 
     // Web
@@ -41,7 +41,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-configuration-processor")
 
     // Testing
-	testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
 
     // Spring Social:
     compile("org.springframework.boot:spring-boot-starter-social-facebook")

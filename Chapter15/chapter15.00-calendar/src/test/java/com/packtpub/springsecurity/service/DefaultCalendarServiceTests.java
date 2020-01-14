@@ -17,8 +17,8 @@ public class DefaultCalendarServiceTests {
     @Autowired
     private UserDetailsService userDetailsService;
 
-	@Test
-	public void validateUser_User() {
+    @Test
+    public void validateUser_User() {
         String username = "user1@example.com";
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -26,8 +26,8 @@ public class DefaultCalendarServiceTests {
         assertThat(userDetails.getAuthorities().size()).isEqualTo(1);
     }
 
-	@Test
-	public void validateUser_Admin() {
+    @Test
+    public void validateUser_Admin() {
         String username = "admin1@example.com";
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);

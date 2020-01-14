@@ -1,6 +1,5 @@
 package com.packtpub.springsecurity.repository;
 
-import com.packtpub.springsecurity.domain.CalendarUser;
 import com.packtpub.springsecurity.domain.Role;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,20 +16,20 @@ public class RoleRepositoryTests {
     @Autowired
     private RoleRepository repository;
 
-	@Test
-	public void validateUser_User() {
+    @Test
+    public void validateUser_User() {
         Role user = repository.findOne(0);
         assertThat(user.getId()).isEqualTo(0);
         assertThat(user.getName()).isEqualTo("ROLE_USER");
         assertThat(user.getUsers().size()).isEqualTo(2);
-	}
+    }
 
-	@Test
-	public void validateUser_Admin() {
+    @Test
+    public void validateUser_Admin() {
         Role user = repository.findOne(1);
         assertThat(user.getId()).isEqualTo(1);
         assertThat(user.getName()).isEqualTo("ROLE_ADMIN");
         assertThat(user.getUsers().size()).isEqualTo(1);
-	}
+    }
 
 } // The End...

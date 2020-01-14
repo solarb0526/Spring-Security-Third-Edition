@@ -7,7 +7,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -20,6 +19,7 @@ import java.security.cert.X509Certificate;
 
 /**
  * Spring Security Config Class
+ *
  * @since chapter17.00
  */
 @Configuration

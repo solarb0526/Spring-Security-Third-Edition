@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="container">
 
@@ -9,7 +9,7 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" th:href="@{/}">myCalendar</a>
                 </div>
-                <div id="navbar" class="collapse navbar-collapse">
+                <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a id="navWelcomeLink" th:href="@{/}">Welcome</a></li>
                         <li><a id="navEventsLink" th:href="@{/events/}">All Events</a></li>
@@ -24,7 +24,7 @@
             </div>
         </nav>
     </div>
-    <div th:if="${param.message != null}" class="alert alert-success">
+    <div class="alert alert-success" th:if="${param.message != null}">
         <span th:text="${message}"></span>
     </div>
 </div>

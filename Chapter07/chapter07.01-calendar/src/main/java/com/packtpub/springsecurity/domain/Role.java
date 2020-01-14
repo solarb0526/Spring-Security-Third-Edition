@@ -7,12 +7,11 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- *
  * @author Mick Knutson
  */
 @Entity
 @Table(name = "role")
-public class Role  implements Serializable {
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +24,7 @@ public class Role  implements Serializable {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -32,6 +32,7 @@ public class Role  implements Serializable {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -39,6 +40,7 @@ public class Role  implements Serializable {
     public Set<CalendarUser> getUsers() {
         return users;
     }
+
     public void setUsers(Set<CalendarUser> users) {
         this.users = users;
     }

@@ -13,7 +13,6 @@ import java.util.Calendar;
  * malicious users from filling out field that they should not (i.e. fill out a different owner field).
  *
  * @author Rob Winch
- *
  */
 public class CreateEventForm {
     @NotEmpty(message = "Attendee Email is required")

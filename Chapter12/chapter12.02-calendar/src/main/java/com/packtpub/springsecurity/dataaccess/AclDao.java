@@ -1,13 +1,13 @@
 package com.packtpub.springsecurity.dataaccess;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.packtpub.springsecurity.domain.acl.AclClass;
 import com.packtpub.springsecurity.domain.acl.AclEntry;
 import com.packtpub.springsecurity.domain.acl.AclObjectIdentity;
 import com.packtpub.springsecurity.domain.acl.AclSid;
 import org.springframework.security.acls.model.ObjectIdentity;
+
+import java.io.Serializable;
+import java.util.List;
 
 public interface AclDao {
 

@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- *
  * @author Mick Knutson
  * @since chapter 04.04
  */
@@ -27,6 +26,7 @@ public class DataSourceConfig {
 
     /**
      * Custom H2 implementation for our {@link EmbeddedDatabase}
+     *
      * @return
      */
     @Bean
@@ -51,6 +51,7 @@ public class DataSourceConfig {
 
     /**
      * DataSource PostConstruct call-back
+     *
      * @throws SQLException
      */
     @PostConstruct
@@ -61,6 +62,7 @@ public class DataSourceConfig {
 
     /**
      * DataSource PreDestroy call-back
+     *
      * @throws SQLException
      */
     @PreDestroy()
