@@ -21,7 +21,7 @@ apply plugin: "com.bmuschko.tomcat"
 apply plugin: "com.bmuschko.tomcat-base"
 
 // Spring Security 4, for chapter 2, version 0
-version = "4.2.2-SNAPSHOT"
+version = "4.3.0-SNAPSHOT"
 
 dependencyManagement {
     imports {
