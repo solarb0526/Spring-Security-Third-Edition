@@ -28,9 +28,7 @@ public class ErrorController {
 
         sb.append((throwable != null && throwable.getMessage() != null ? throwable.getMessage() : "Unknown error"));
 
-        if (throwable != null && throwable.getCause() != null) {
-            sb.append("\n\nroot cause: ").append(throwable.getCause());
-        }
+        sb.append(", root cause: ").append((throwable != null && throwable.getCause() != null ? throwable.getCause() : "Unknown cause"));
         model.addAttribute("error", sb.toString());
 
         ModelAndView mav = new ModelAndView();

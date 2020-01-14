@@ -1,27 +1,58 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<!--
-<c:set var="pageTitle" value="Calendar User Signup" scope="request"/>
-<jsp:include page="../includes/header.jsp"/>
-<form:form action="./new" method="post" modelAttribute="signupForm">
-    <form:errors path="*" element="div" cssClass="alert alert-error"/>
-    <fieldset>
-        <legend>User Information</legend>
-        <label for="firstName">First Name</label>
-        <form:input path="firstName" id="firstName"/>
-        <label for="lastName">Last Name</label>
-        <form:input path="lastName" id="lastName"/>
-        <label for="email">Email (Username)</label>
-        <form:input path="email" id="email"/>
-        <label for="password">Password</label>
-        <form:password path="password" id="password"/>
-        <div>
-            <input id="submit" class="btn" type="submit" value="Create Account"/>
-        </div>
-    </fieldset>
-</form:form>
-<jsp:include page="../includes/footer.jsp"/>-->
+<head>
+    <title id="pageTitle">Create Event</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <!--/*/ <th:block th:include="fragments/messages :: messages"></th:block> /*/-->
+
+    <!--/*--><!--@thymesVar id="signupForm" type="com.packtpub.springsecurity.web.model.SignupForm"--><!--*/-->
+    <form action="#" cssClass="form-horizontal" method="post" th:action="@{/signup/new}" th:object="${signupForm}">
+        <errors cssClass="alert alert-error" element="div" path="*"/>
+        <fieldset>
+            <legend>User Information</legend>
+
+            <div class="control-group">
+                <label class="control-label" for="firstName">First Name</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="firstName" th:field="*{firstName}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="lastName">Last Name</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="lastName" th:field="*{lastName}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="email">Email (Username)</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="email" th:field="*{email}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+                <div class="controls">
+                    <input class="input-xlarge" id="password" th:field="*{password}" type="password"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="btn" id="submit" type="submit" value="Create Account"/>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+
+<!--/*/ <th:block th:include="fragments/footer :: foot"></th:block> /*/-->
+
+</body>
+</html>

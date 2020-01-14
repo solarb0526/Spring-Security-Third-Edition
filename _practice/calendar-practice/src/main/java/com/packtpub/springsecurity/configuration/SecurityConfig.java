@@ -19,7 +19,6 @@ import org.springframework.security.provisioning.UserDetailsManager;
  * Spring Security Config Class
  *
  * @see {@link WebSecurityConfigurerAdapter}
- * @since chapter03.00
  */
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -46,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @param auth AuthenticationManagerBuilder
      * @throws Exception Authentication exception
      * @see {userDetailsService()}
+     * @see {@link com.packtpub.springsecurity.service.DefaultCalendarService}
      */
     @Override
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -142,11 +142,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * This is the equivalent to:
-     * <pre>
-     *     <http pattern="/resources/**" security="none"/>
-     *     <http pattern="/css/**" security="none"/>
-     *     <http pattern="/webjars/**" security="none"/>
-     * </pre>
+     * <pre><http pattern="/resources/**" security="none"/></pre>
      *
      * @param web
      * @throws Exception
@@ -155,7 +151,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/resources/**")
-                .antMatchers("/css/**")
                 .antMatchers("/webjars/**")
         ;
     }

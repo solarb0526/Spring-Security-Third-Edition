@@ -2,10 +2,12 @@ package com.packtpub.springsecurity.service;
 
 import com.packtpub.springsecurity.domain.CalendarUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +24,7 @@ public class SpringSecurityUserContext implements UserContext {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SpringSecurityUserContext(final CalendarService calendarService,
-                                     final UserDetailsService userDetailsService) {
+    public SpringSecurityUserContext(CalendarService calendarService, UserDetailsService userDetailsService) {
         if (calendarService == null) {
             throw new IllegalArgumentException("calendarService cannot be null");
         }
@@ -41,21 +42,19 @@ public class SpringSecurityUserContext implements UserContext {
      */
     @Override
     public CalendarUser getCurrentUser() {
-
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
-
         if (authentication == null) {
             return null;
         }
 
         User user = (User) authentication.getPrincipal();
         String email = user.getUsername();
+//        String email = user.getEmail();
 
         if (email == null) {
             return null;
         }
-
         CalendarUser result = calendarService.findUserByEmail(email);
         if (result == null) {
             throw new IllegalStateException(
@@ -66,6 +65,12 @@ public class SpringSecurityUserContext implements UserContext {
 
     @Override
     public void setCurrentUser(CalendarUser user) {
-        throw new UnsupportedOperationException();
+        if (user == null) {
+            throw new IllegalArgumentException("user cannot be null");
+        }
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
+                user.getPassword(), userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

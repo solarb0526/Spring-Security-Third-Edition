@@ -30,6 +30,8 @@
                         <li>&nbsp;|&nbsp;</li>
                     </ul>
                     <ul class="nav navbar-nav pull-right" sec:authorize=" ! isAuthenticated()">
+                        <li><a class="btn btn-default" id="navSignupLink" role="button"
+                               th:href="@{/signup/form}">Signup</a></li>
                         <li><a class="btn btn-default" id="navLoginLink" role="button"
                                th:href="@{/login/form}">Login</a></li>
                         <li>&nbsp;|&nbsp;</li>

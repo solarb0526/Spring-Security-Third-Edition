@@ -4,9 +4,11 @@ import com.packtpub.springsecurity.dataaccess.CalendarUserDao;
 import com.packtpub.springsecurity.dataaccess.EventDao;
 import com.packtpub.springsecurity.domain.CalendarUser;
 import com.packtpub.springsecurity.domain.Event;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Repository;
 
@@ -17,19 +19,12 @@ import java.util.List;
  *
  * @author Rob Winch
  * @author Mick Knutson
- * <p>
- * TODO: Need to update 03.00 and 03.01 to NOT expose ‘UserDetailsManager’
  */
 @Repository
 public class DefaultCalendarService implements CalendarService {
-
-    private static final Logger logger = LoggerFactory
-            .getLogger(DefaultCalendarService.class);
-
     private final EventDao eventDao;
     private final CalendarUserDao userDao;
-
-    private UserDetailsManager userDetailsManager;
+    private final UserDetailsManager userDetailsManager;
 
     @Autowired
     public DefaultCalendarService(final EventDao eventDao,
@@ -44,7 +39,6 @@ public class DefaultCalendarService implements CalendarService {
         if (userDetailsManager == null) {
             throw new IllegalArgumentException("userDetailsManager cannot be null");
         }
-
         this.eventDao = eventDao;
         this.userDao = userDao;
         this.userDetailsManager = userDetailsManager;
@@ -79,6 +73,10 @@ public class DefaultCalendarService implements CalendarService {
     }
 
     public int createUser(final CalendarUser user) {
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+        UserDetails userDetails = new User(user.getEmail(), user.getPassword(), authorities);
+        userDetailsManager.createUser(userDetails);
+
         return userDao.createUser(user);
     }
 }

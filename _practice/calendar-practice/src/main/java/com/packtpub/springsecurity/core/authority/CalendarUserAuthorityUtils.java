@@ -15,9 +15,9 @@ import java.util.List;
  * @author Mick Knutson
  */
 public final class CalendarUserAuthorityUtils {
-    private static final List<GrantedAuthority> ADMIN_ROLES = AuthorityUtils.createAuthorityList("ROLE_ADMINfoo",
-            "ROLE_USERfoo");
-    private static final List<GrantedAuthority> USER_ROLES = AuthorityUtils.createAuthorityList("ROLE_USERfoo");
+    private static final List<GrantedAuthority> ADMIN_ROLES = AuthorityUtils.createAuthorityList("ROLE_ADMIN",
+            "ROLE_USER");
+    private static final List<GrantedAuthority> USER_ROLES = AuthorityUtils.createAuthorityList("ROLE_USER");
 
     private CalendarUserAuthorityUtils() {
     }
