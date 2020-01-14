@@ -16,7 +16,7 @@ public class SecurityWebAppInitializer
 
     /**
      * Don't initialize the filter directly, the Spring WebApplicationInitializer
-     * parent will take care of the initialization.
+     * will take care of the initialization.
      */
     public SecurityWebAppInitializer() {
         super();

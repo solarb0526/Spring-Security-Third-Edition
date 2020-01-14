@@ -1,19 +1,17 @@
 package com.packtpub.springsecurity.configuration;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 
 @Configuration
-//@Import({SecurityConfig.class, DataSourceConfig.class})
+@Import({SecurityConfig.class, DataSourceConfig.class})
 @ComponentScan(basePackages =
         {
+                "com.packtpub.springsecurity.configuration",
                 "com.packtpub.springsecurity.dataaccess",
                 "com.packtpub.springsecurity.domain",
                 "com.packtpub.springsecurity.service"

@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @see WebSecurityConfigurerAdapter
  */
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity //(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory
@@ -69,7 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout()
 
                 // CSRF is enabled by default, with Java Config
-                .and().csrf().disable();
+                .and().csrf().disable()
+        ;
     }
 
 

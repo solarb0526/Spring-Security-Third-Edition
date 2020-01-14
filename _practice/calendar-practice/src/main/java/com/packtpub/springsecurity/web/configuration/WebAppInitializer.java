@@ -1,9 +1,9 @@
 package com.packtpub.springsecurity.web.configuration;
 
-import com.packtpub.springsecurity.configuration.DataSourceConfig;
 import com.packtpub.springsecurity.configuration.JavaConfig;
-import com.packtpub.springsecurity.configuration.SecurityConfig;
-import org.springframework.web.WebApplicationInitializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
@@ -11,23 +11,20 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 /**
- * Replaces web.xml in Servlet v.3.0+
- * This class replaces the web.xml in Servlet v3.0+
- * with a {@link javax.servlet.ServletContainerInitializer},
- * which is the preferred approach to Servlet v3.0+ initialization.
- * <p>
- * Spring Mvc provides {@link WebApplicationInitializer} interface leverage this mechanism.
- * In Spring Mvc the preferred approach is to extend
- * {@link AbstractAnnotationConfigDispatcherServletInitializer}
+ * Replaces web.xml.txt in Servlet v.3.0+
  *
  * @see
  */
+@Order(1)
 public class WebAppInitializer
         extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+    private static final Logger logger = LoggerFactory
+            .getLogger(WebAppInitializer.class);
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{JavaConfig.class, SecurityConfig.class, DataSourceConfig.class};
+        return new Class[]{JavaConfig.class};
     }
 
     @Override
@@ -37,7 +34,7 @@ public class WebAppInitializer
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/*"};
+        return new String[]{"/"}; // or *.html
     }
 
     @Override
