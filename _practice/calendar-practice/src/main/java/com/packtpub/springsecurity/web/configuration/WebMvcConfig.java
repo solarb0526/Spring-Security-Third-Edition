@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.Ordered;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -125,6 +126,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
         registry.addViewController("/login/form")
                 .setViewName("login");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
     // i18N support

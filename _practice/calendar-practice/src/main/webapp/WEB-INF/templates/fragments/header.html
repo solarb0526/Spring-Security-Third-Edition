@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="container">
 
@@ -24,7 +24,11 @@
             </div>
         </nav>
     </div>
+    <div class="alert alert-success" th:if="${param.message != null}">
+        <span th:text="${message}"></span>
+    </div>
 </div>
+
 
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -41,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * HTTP Security configuration
-     * <p>
-     * <http auto-config="true"> is equivalent to:
+     *
+     * <pre><http auto-config="true"></pre> is equivalent to:
      * <pre>
      *  <http>
      *      <form-login />
@@ -68,6 +69,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/").hasAnyRole("ANONYMOUS", "USER")
+                .antMatchers("/login/*").hasAnyRole("ANONYMOUS", "USER")
+                .antMatchers("/logout/*").hasAnyRole("ANONYMOUS", "USER")
+                .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/events/").hasRole("ADMIN")
                 .antMatchers("/**").hasRole("USER")
 
                 .and().formLogin()
@@ -76,13 +83,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login/form?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
+                .permitAll()
                 .and().logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/login/form?logout")
+                .permitAll()
                 .and().httpBasic()
+                .and().anonymous()
                 // CSRF is enabled by default, with Java Config
                 .and().csrf().disable()
         ;
+    }
+
+    /**
+     * This is the equivalent to:
+     * <pre><http pattern="/resources/**" security="none"/></pre>
+     *
+     * @param web
+     * @throws Exception
+     */
+    @Override
+    public void configure(final WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/resources/**");
     }
 
     @Bean

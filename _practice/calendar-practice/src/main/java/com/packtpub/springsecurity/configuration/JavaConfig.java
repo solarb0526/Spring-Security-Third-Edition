@@ -12,7 +12,6 @@ import java.io.IOException;
 @Import({SecurityConfig.class, DataSourceConfig.class})
 @ComponentScan(basePackages =
         {
-                "com.packtpub.springsecurity.configuration",
                 "com.packtpub.springsecurity.dataaccess",
                 "com.packtpub.springsecurity.domain",
                 "com.packtpub.springsecurity.service"

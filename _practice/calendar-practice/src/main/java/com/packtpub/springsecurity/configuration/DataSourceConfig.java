@@ -111,9 +111,25 @@ public class DataSourceConfig {
      */
     @PreDestroy()
     public void dataSourceDestroy() throws SQLException {
+
+//        SQLException sqlException = null;
+//
+//        try {
+//            applicationContext.getBean(DataSource.class)
+//                    .getConnection()
+//                    .close();
+//        } catch (SQLException e){
+//            sqlException = e;
+//            e.printStackTrace();
+//        }
+
         if (database != null) {
             database.shutdown();
         }
+
+//        if(sqlException != null){
+//            throw sqlException;
+//        }
     }
 
 } // The End...
