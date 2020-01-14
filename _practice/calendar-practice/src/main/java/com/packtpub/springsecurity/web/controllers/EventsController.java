@@ -21,6 +21,7 @@ import java.util.Calendar;
 @Controller
 @RequestMapping("/events")
 public class EventsController {
+
     private final CalendarService calendarService;
     private final UserContext userContext;
 

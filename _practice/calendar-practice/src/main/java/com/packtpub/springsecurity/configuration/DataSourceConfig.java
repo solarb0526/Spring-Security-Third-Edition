@@ -111,7 +111,6 @@ public class DataSourceConfig {
      */
     @PreDestroy()
     public void dataSourceDestroy() throws SQLException {
-
         if (database != null) {
             database.shutdown();
         }

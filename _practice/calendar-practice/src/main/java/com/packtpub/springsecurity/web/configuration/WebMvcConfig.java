@@ -60,7 +60,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        super.addResourceHandlers(registry);
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/")
                 .setCachePeriod(31_556_926)
@@ -120,6 +119,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.viewResolver(thymeleafViewResolver);
     }
 
+    @Override
+    public void addViewControllers(final ViewControllerRegistry registry) {
+        super.addViewControllers(registry);
+
+        registry.addViewController("/login/form")
+                .setViewName("login");
+    }
 
     // i18N support
     @Bean

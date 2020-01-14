@@ -1,8 +1,10 @@
-package com.packtpub.springsecurity.configuration;
+package com.packtpub.springsecurity.web.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,7 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @see WebSecurityConfigurerAdapter
  */
 @Configuration
-@EnableWebSecurity //(debug = true)
+@EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory
@@ -29,9 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.inMemoryAuthentication().withUser("user1@example.com").password("user1").roles("USER");
-
-        logger.info("***** Password for user 'user1@example.com' is 'user1'");
+        auth.inMemoryAuthentication()
+                .withUser("user").password("user").roles("USER")
+                .and().withUser("admin").password("admin").roles("ADMIN")
+                .and().withUser("user1@example.com").password("user1").roles("USER")
+                .and().withUser("admin1@example.com").password("admin1").roles("USER", "ADMIN")
+        ;
     }
 
     /**
@@ -63,15 +68,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/**").access("hasRole('USER')")
-                .and().formLogin()
-                .and().httpBasic()
-                .and().logout()
+                .antMatchers("/**").hasRole("USER")
 
+                .and().formLogin()
+                .loginPage("/login/form")
+                .loginProcessingUrl("/login")
+                .failureUrl("/login/form?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .and().httpBasic()
                 // CSRF is enabled by default, with Java Config
                 .and().csrf().disable()
         ;
     }
 
-
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean()
+            throws Exception {
+        return super.authenticationManagerBean();
+    }
 } // The End...
