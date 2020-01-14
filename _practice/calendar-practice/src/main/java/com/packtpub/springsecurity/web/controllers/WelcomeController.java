@@ -1,7 +1,7 @@
 package com.packtpub.springsecurity.web.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * This displays the welcome screen that shows what will be happening in this chapter.
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class WelcomeController {
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String welcome() {
         return "index";
     }

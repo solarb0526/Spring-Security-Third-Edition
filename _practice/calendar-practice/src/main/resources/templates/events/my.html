@@ -11,9 +11,9 @@
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <div class="alert alert-success" th:if="${message != null}">
+    <!--<div th:if="${message != null}" class="alert alert-success">
         <span th:text="${message}"></span>
-    </div>
+    </div>-->
 
     <p id="description">
         Below you can find the events for
@@ -32,7 +32,7 @@
         </thead>
         <tbody>
         <tr th:if="${events.empty}">
-            <td class="msg" colspan="2">No events.</td>
+            <td class="msg" colspan="4">No events.</td>
         </tr>
         <tr th:each="event : ${events}">
 

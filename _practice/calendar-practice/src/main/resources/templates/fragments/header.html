@@ -17,6 +17,7 @@
                         <li><a id="navCreateEventLink" th:href="@{/events/form}">Create Event</a></li>
                         <li><a id="navH2Link" target="_blank" th:href="@{/admin/h2}">H2</a></li>
                     </ul>
+
                     <ul class="nav navbar-nav pull-right" sec:authorize="isAuthenticated()">
                         <li>
                             <p class="navbar-text">Welcome
@@ -36,12 +37,17 @@
                 </div>
             </div>
         </nav>
-    </div>
-    <div class="alert alert-success" th:if="${param.message != null}">
-        <span th:text="${message}"></span>
+
+        <!-- Standard messages -->
+        <div class="alert alert-success" th:if="${#vars['message'] != null}">
+            <span th:text="${#vars['message']}"></span>
+        </div>
+        <div class="alert alert-danger" th:if="${#vars['error'] != null}">
+            <span th:text="${#vars['error']}"></span>
+        </div>
+
     </div>
 </div>
-
 
 </body>
 </html>

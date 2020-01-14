@@ -15,6 +15,7 @@ import java.util.Calendar;
  * @author Rob Winch
  */
 public class CreateEventForm {
+
     @NotEmpty(message = "Attendee Email is required")
     @Email(message = "Attendee Email must be a valid email")
     private String attendeeEmail;

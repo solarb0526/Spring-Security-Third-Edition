@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.packtpub.springsecurity.web.controllers.ControllerHelper.redirect;
+
 /**
  * <p>
  * A controller used to demonstrate how to display a different page depending on the user's role after login. The idea
@@ -64,9 +66,9 @@ public class DefaultController {
 
     @RequestMapping("/default")
     public String defaultAfterLogin(HttpServletRequest request) {
-        if (request.isUserInRole("ADMIN")) {
-            return "redirect:/events/";
+        if (request.isUserInRole("ROLE_ADMIN")) {
+            return redirect.apply("/events/");
         }
-        return "redirect:/";
+        return redirect.apply("/");
     }
 }

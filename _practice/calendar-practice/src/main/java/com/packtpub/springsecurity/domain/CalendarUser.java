@@ -3,6 +3,7 @@ package com.packtpub.springsecurity.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
+import java.security.Principal;
 
 /**
  * {@link CalendarUser} is this applications notion of a user. It is good to use your own objects to interact with a
@@ -10,8 +11,10 @@ import java.io.Serializable;
  * Security, leverage new Spring Security modules, or even swap out security implementations) you can do so easily.
  *
  * @author Rob Winch
+ * @author Mick Knutson
  */
-public class CalendarUser implements Serializable {
+public class CalendarUser implements Principal, Serializable {
+
     private static final long serialVersionUID = 8433999509932007961L;
     private Integer id;
     private String firstName;
@@ -99,7 +102,7 @@ public class CalendarUser implements Serializable {
      */
     @JsonIgnore
     public String getName() {
-        return getLastName() + ", " + getFirstName();
+        return getEmail();
     }
 
     @Override

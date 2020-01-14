@@ -8,10 +8,7 @@ import com.packtpub.springsecurity.web.model.CreateEventForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,12 +28,12 @@ public class EventsController {
         this.userContext = userContext;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public ModelAndView events() {
         return new ModelAndView("events/list", "events", calendarService.getEvents());
     }
 
-    @RequestMapping("/my")
+    @GetMapping("/my")
     public ModelAndView myEvents() {
         CalendarUser currentUser = userContext.getCurrentUser();
         Integer currentUserId = currentUser.getId();
@@ -45,13 +42,13 @@ public class EventsController {
         return result;
     }
 
-    @RequestMapping("/{eventId}")
+    @GetMapping("/{eventId}")
     public ModelAndView show(@PathVariable int eventId) {
         Event event = calendarService.getEvent(eventId);
         return new ModelAndView("events/show", "event", event);
     }
 
-    @RequestMapping("/form")
+    @GetMapping("/form")
     public String createEventForm(@ModelAttribute CreateEventForm createEventForm) {
         return "events/create";
     }
@@ -63,7 +60,7 @@ public class EventsController {
      * @param createEventForm
      * @return
      */
-    @RequestMapping(value = "/new", params = "auto")
+    @PostMapping(value = "/new", params = "auto")
     public String createEventFormAutoPopulate(@ModelAttribute CreateEventForm createEventForm) {
         // provide default values to make user submission easier
         createEventForm.setSummary("A new event....");
@@ -79,7 +76,7 @@ public class EventsController {
         return "events/create";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @PostMapping(value = "/new")
     public String createEvent(@Valid CreateEventForm createEventForm, BindingResult result,
                               RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {

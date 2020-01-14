@@ -1,4 +1,4 @@
-package com.packtpub.springsecurity.web.configuration;
+package com.packtpub.springsecurity.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,14 +10,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 /**
  * Spring Security Config Class
  *
- * @see WebSecurityConfigurerAdapter
+ * @see {@link WebSecurityConfigurerAdapter}
+ * @since chapter03.00
  */
 @Configuration
-@EnableWebSecurity(debug = false)
+@EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory
@@ -25,13 +30,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Configure AuthenticationManager with inMemory credentials.
+     * <p>
+     * NOTE:
+     * Due to a known limitation with JavaConfig:
+     * <a href="https://jira.spring.io/browse/SPR-13779">
+     * https://jira.spring.io/browse/SPR-13779</a>
+     * <p>
+     * We cannot use the following to expose a {@link UserDetailsManager}
+     * <pre>
+     *     http.authorizeRequests()
+     * </pre>
+     * <p>
+     * In order to expose {@link UserDetailsManager} as a bean, we must create  @Bean
      *
      * @param auth AuthenticationManagerBuilder
      * @throws Exception Authentication exception
+     * @see {userDetailsService()}
      */
     @Override
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
-
         auth.inMemoryAuthentication()
                 .withUser("user").password("user").roles("USER")
                 .and().withUser("admin").password("admin").roles("USER", "ADMIN")
@@ -39,6 +56,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().withUser("admin1@example.com").password("admin1").roles("USER", "ADMIN")
         ;
     }
+
+
+    /**
+     * The parent method from {@link WebSecurityConfigurerAdapter} (public UserDetailsService userDetailsService())
+     * originally returns a {@link UserDetailsService}, but this needs to be a {@link UserDetailsManager}
+     * UserDetailsManager vs UserDetailsService
+     */
+    @Bean
+    @Override
+    public UserDetailsManager userDetailsService() {
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(User.withUsername("user").password("password").roles("USER").build());
+        manager.createUser(User.withUsername("admin").password("admin").roles("USER", "ADMIN").build());
+        manager.createUser(User.withUsername("user1@example.com").password("user1").roles("USER").build());
+        manager.createUser(User.withUsername("admin1@example.com").password("admin1").roles("USER", "ADMIN").build());
+        return manager;
+    }
+
 
     /**
      * HTTP Security configuration
@@ -68,15 +103,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
-                .antMatchers("/webjars/**").permitAll()
-
-                // H2 console:
+                // FIXME: TODO: Allow anyone to use H2 (NOTE: NOT FOR PRODUCTION USE EVER !!! )
                 .antMatchers("/admin/h2/**").permitAll()
 
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/*").permitAll()
                 .antMatchers("/logout").permitAll()
+                .antMatchers("/signup/*").permitAll()
                 .antMatchers("/errors/**").permitAll()
                 .antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/events/").hasRole("ADMIN")
@@ -98,24 +131,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login/form?logout")
                 .permitAll()
 
-                .and().httpBasic()
-
                 .and().anonymous()
 
                 // CSRF is enabled by default, with Java Config
-                .and().csrf().disable()
-        ;
+                .and().csrf().disable();
 
-//        http.authorizeRequests().antMatchers("/").permitAll()
-//                .and().authorizeRequests().antMatchers("/admin/h2/**").permitAll();
-//        http.csrf().disable();
-
+        // Enable <frameset> in order to use H2 web console
         http.headers().frameOptions().disable();
     }
 
     /**
      * This is the equivalent to:
-     * <pre><http pattern="/resources/**" security="none"/></pre>
+     * <pre>
+     *     <http pattern="/resources/**" security="none"/>
+     *     <http pattern="/css/**" security="none"/>
+     *     <http pattern="/webjars/**" security="none"/>
+     * </pre>
      *
      * @param web
      * @throws Exception
@@ -123,7 +154,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/resources/**");
+                .antMatchers("/resources/**")
+                .antMatchers("/css/**")
+                .antMatchers("/webjars/**")
+        ;
     }
 
     @Bean
@@ -132,4 +166,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         return super.authenticationManagerBean();
     }
+
+
 } // The End...
