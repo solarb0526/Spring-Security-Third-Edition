@@ -100,9 +100,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/events/").hasRole("ADMIN")
                 .antMatchers("/**").hasRole("USER")
 
-                .and().exceptionHandling()
-                .accessDeniedPage("/errors/403")
-                .authenticationEntryPoint(loginUrlAuthenticationEntryPoint())
+                .and().exceptionHandling().accessDeniedPage("/errors/403")
+
+                .and().formLogin()
+                .loginPage("/login/form")
+                .loginProcessingUrl("/login")
+                .failureUrl("/login/form?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/default", true)
+                .permitAll()
 
                 .and().logout()
                 .logoutUrl("/logout")
@@ -153,8 +160,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DomainUsernamePasswordAuthenticationFilter domainUsernamePasswordAuthenticationFilter()
             throws Exception {
-        DomainUsernamePasswordAuthenticationFilter dupaf = new DomainUsernamePasswordAuthenticationFilter(
-                super.authenticationManagerBean());
+        DomainUsernamePasswordAuthenticationFilter dupaf = new DomainUsernamePasswordAuthenticationFilter();
+        dupaf.setAuthenticationManager(super.authenticationManagerBean());
         dupaf.setFilterProcessesUrl("/login");
         dupaf.setUsernameParameter("username");
         dupaf.setPasswordParameter("password");

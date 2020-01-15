@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+
+    <div th:fragment="messages">
+        <!-- Standard messages -->
+        <!--<div th:class="${#vars['error'] != null} ? 'alert alert-danger' : 'alert alert-success'">-->
+        <div class="alert alert-success" th:if="${#vars['message'] != null}" th:unless="${#vars['error'] != null}">
+            <span th:text="${#vars['message']}"></span>
+        </div>
+        <div class="alert alert-danger" th:if="${#vars['error'] != null}">
+            <span th:text="${#vars['error']}"></span>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
