@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import({SecurityConfig.class, DataSourceConfig.class})
-
 public class JavaConfig {
 
 } // The end...
