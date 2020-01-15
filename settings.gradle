@@ -44,7 +44,7 @@ include 'chapter03:chapter03.02-calendar'
 include 'chapter03:chapter03.03-calendar'
 include 'chapter03:chapter03.04-calendar'
 include 'chapter03:chapter03.05-calendar'
-//include 'chapter03:chapter03.06-calendar'
+include 'chapter03:chapter03.06-calendar'
 
 //---------------------------------------------------------------------------//
 // Chapter 4: JDBC-based Authentication
