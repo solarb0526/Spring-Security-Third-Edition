@@ -1,10 +1,10 @@
 package com.packtpub.springsecurity.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.io.Serializable;
 import java.security.Principal;
+
 
 /**
  * {@link CalendarUser} is this applications notion of a user. It is good to use your own objects to interact with a
@@ -12,10 +12,8 @@ import java.security.Principal;
  * Security, leverage new Spring Security modules, or even swap out security implementations) you can do so easily.
  *
  * @author Rob Winch
- * @author Mick Knutson
  */
 public class CalendarUser implements Principal, Serializable {
-
     private static final long serialVersionUID = 8433999509932007961L;
     private Integer id;
     private String firstName;
@@ -87,7 +85,6 @@ public class CalendarUser implements Principal, Serializable {
         return password;
     }
 
-
     // --- convenience methods ---
 
     public void setPassword(String password) {
@@ -109,7 +106,6 @@ public class CalendarUser implements Principal, Serializable {
 
     @Override
     public int hashCode() {
-        //return HashCodeBuilder.reflectionHashCode(this);
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -118,7 +114,6 @@ public class CalendarUser implements Principal, Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        //return EqualsBuilder.reflectionEquals(this, obj);
         if (this == obj)
             return true;
         if (obj == null)
@@ -133,10 +128,4 @@ public class CalendarUser implements Principal, Serializable {
             return false;
         return true;
     }
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this);
-    }
-
-} // The End...
+}

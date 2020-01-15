@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,8 +29,7 @@ public class CalendarUserDetailsService implements UserDetailsService {
     private final CalendarUserDao calendarUserDao;
 
     @Autowired
-    public CalendarUserDetailsService(final CalendarUserDao calendarUserDao) {
-
+    public CalendarUserDetailsService(CalendarUserDao calendarUserDao) {
         if (calendarUserDao == null) {
             throw new IllegalArgumentException("calendarUserDao cannot be null");
         }
@@ -48,7 +46,61 @@ public class CalendarUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username/password.");
         }
-        Collection<? extends GrantedAuthority> authorities = CalendarUserAuthorityUtils.createAuthorities(user);
-        return new User(user.getEmail(), user.getPassword(), authorities);
+        return new CalendarUserDetails(user);
+    }
+
+    /**
+     * There are advantages to creating a class that extends {@link CalendarUser}, our domain notion of a user, and
+     * implements {@link UserDetails}, Spring Security's notion of a user.
+     * <ul>
+     * <li>First we can obtain all the custom information in the {@link CalendarUser}</li>
+     * <li>Second, we can use this service to integrate with Spring Security in other ways (i.e. when implementing
+     * Spring Security's <a
+     * href="http://static.springsource.org/spring-security/site/docs/3.1.x/reference/remember-me.html">Remember-Me
+     * Authentication</a></li>
+     * </ul>
+     *
+     * @author Rob Winch
+     */
+    private final class CalendarUserDetails extends CalendarUser implements UserDetails {
+        private static final long serialVersionUID = 3384436451564509032L;
+
+        CalendarUserDetails(CalendarUser user) {
+            setId(user.getId());
+            setEmail(user.getEmail());
+            setFirstName(user.getFirstName());
+            setLastName(user.getLastName());
+            setPassword(user.getPassword());
+        }
+
+        @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return CalendarUserAuthorityUtils.createAuthorities(this);
+        }
+
+        @Override
+        public String getUsername() {
+            return getEmail();
+        }
+
+        @Override
+        public boolean isAccountNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isAccountNonLocked() {
+            return true;
+        }
+
+        @Override
+        public boolean isCredentialsNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return true;
+        }
     }
 }
